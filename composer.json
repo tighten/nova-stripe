@@ -1,6 +1,6 @@
 {
     "name": "tightenco/nova-stripe",
-    "description": "A Laravel Nova tool.",
+    "description": "A tool to create a quick Stripe seller dashboard in your Nova apps",
     "keywords": [
         "laravel",
         "nova"
