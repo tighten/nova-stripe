@@ -6,6 +6,10 @@ Looking to manage your users' Stripe subscriptions with [Laravel Cashier](https:
 
 **This package is in alpha and under very active development, but check out the to-do section below for features we plan to add soon!**
 
+![Dashboard index page](charges-index.png);
+
+![Charge detail page](charges-detail.png);
+
 ### Installation Instructions
 
 Install via [Composer](https://getcomposer.org/):
