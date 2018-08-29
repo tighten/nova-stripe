@@ -76,7 +76,7 @@ export default {
             initialLoading: true,
             loading: false,
             hasMore: false,
-            page: 1
+            page: 1,
         }
     },
 

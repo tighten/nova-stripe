@@ -3,6 +3,7 @@
 namespace Tightenco\NovaStripe\Clients;
 
 use Exception;
+use Stripe\Balance;
 use Stripe\Charge;
 
 class StripeClient
@@ -29,6 +30,15 @@ class StripeClient
     {
         try {
             return Charge::all($options, ['api_key' => $this->apiKey]);
+        } catch(Exception $e) {
+
+        }
+    }
+
+    public function getBalance()
+    {
+        try {
+            return Balance::retrieve(['api_key' => $this->apiKey]);
         } catch(Exception $e) {
 
         }

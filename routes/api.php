@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/stripe/charges', \Tightenco\NovaStripe\Http\StripeChargesController::class . '@index');
+Route::get('/stripe/balance', \Tightenco\NovaStripe\Http\StripeBalanceController::class . '@index');
