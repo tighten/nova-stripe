@@ -26,4 +26,9 @@ class StripeChargesController extends Controller
 
         return response()->json(['charges' => $charges]);
     }
+
+    public function show($id)
+    {
+        return response()->json(['charge' => (new StripeClient)->getCharge($id)]);
+    }
 }

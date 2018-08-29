@@ -4,7 +4,13 @@ Nova.booting((Vue, router) => {
         {
             name: 'nova-stripe',
             path: '/nova-stripe',
-            component: require('./views/StripeIndex'),
+            component: require('./views/Index'),
+        },
+        {
+            name: 'charge-detail',
+            path: '/nova-stripe/charge/:chargeId',
+            component: require('./views/Detail'),
+            props: true,
         },
     ])
 })

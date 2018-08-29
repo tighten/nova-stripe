@@ -30,7 +30,16 @@ class StripeClient
     {
         try {
             return Charge::all($options, ['api_key' => $this->apiKey]);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
+
+        }
+    }
+
+    public function getCharge($id)
+    {
+        try {
+            return Charge::retrieve($id, ['api_key' => $this->apiKey]);
+        } catch (Exception $e) {
 
         }
     }
@@ -39,7 +48,7 @@ class StripeClient
     {
         try {
             return Balance::retrieve(['api_key' => $this->apiKey]);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
 
         }
     }

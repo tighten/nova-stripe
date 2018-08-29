@@ -12,7 +12,7 @@
                 <tr>
                     <th class="text-left">
                       <span class="inline-flex items-center">
-                         Payment ID
+                         Charge ID
                       </span>
                     </th>
                     <th class="text-left">
@@ -25,6 +25,11 @@
                          Created
                       </span>
                     </th>
+                    <th class="text-left">
+                      <span class="inline-flex items-center">
+                         Status
+                      </span>
+                    </th>
                     <th>&nbsp;<!-- View --></th>
                 </tr>
                 </thead>
@@ -34,11 +39,12 @@
                     <td>{{ charge.id }}</td>
                     <td>{{ (charge.amount  / 100).toFixed(2) }} {{ charge.currency }}</td>
                     <td>{{ charge.created | date }}</td>
+                    <td>{{ charge.status }}</td>
                     <td>
                         <span>
                             <router-link
                                     class="cursor-pointer text-70 hover:text-primary mr-3"
-                                    :to="{ name: 'detail', params: {
+                                    :to="{ name: 'charge-detail', params: {
                                         chargeId: charge.id
                                     }}"
                                     :title="__('View')"

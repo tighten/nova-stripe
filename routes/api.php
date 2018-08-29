@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Tightenco\NovaStripe\Http\StripeBalanceController;
+use Tightenco\NovaStripe\Http\StripeChargesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/stripe/charges', \Tightenco\NovaStripe\Http\StripeChargesController::class . '@index');
-Route::get('/stripe/balance', \Tightenco\NovaStripe\Http\StripeBalanceController::class . '@index');
+Route::get('/stripe/charges', StripeChargesController::class . '@index');
+Route::get('/stripe/charges/{id}', StripeChargesController::class . '@show');
+Route::get('/stripe/balance', StripeBalanceController::class . '@index');
