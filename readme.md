@@ -1,6 +1,6 @@
 # Laravel Nova Stripe Dashboard
 
-This package makes it easy to see high-level information about your [Stripe](https://stripe.com/) balance and charges in a Nova dashboard.
+This package makes it easy to see high-level information about your application's [Stripe](https://stripe.com/) balance and charges in a Nova dashboard.
 
 Looking to manage your users' Stripe subscriptions with [Laravel Cashier](https://github.com/laravel/cashier)? Check out [Nova Cashier Manager](https://novapackages.com/packages/themsaid/nova-cashier-manager).
 

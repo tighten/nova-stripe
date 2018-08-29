@@ -1,9 +1,16 @@
 {
     "name": "tightenco/nova-stripe",
-    "description": "A tool to create a quick Stripe seller dashboard in your Nova apps",
+    "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
     "keywords": [
         "laravel",
-        "nova"
+        "nova",
+        "stripe"
+    ],
+    "authors": [
+        {
+            "name": "Samantha Geitz",
+            "email": "samantha@tighten.co"
+        }
     ],
     "license": "MIT",
     "require": {
