@@ -3,14 +3,14 @@
         <nav v-if="charges.length > 0" class="flex">
             <!-- Previous Link -->
             <button
-                    :disabled="!hasPreviousPages"
+                    :disabled="!hasPrevious"
                     class="btn btn-link py-3 px-4"
                     :class="{
-                    'text-primary dim': hasPreviousPages,
-                    'text-80 opacity-50': !hasPreviousPages,
+                    'text-primary dim': hasPrevious,
+                    'text-80 opacity-50 cursor-not-allowed': !hasPrevious,
                 }"
                     rel="prev"
-                    @click.prevent="selectPreviousPage()"
+                    @click.prevent="previousPage()"
                     dusk="previous"
             >
                 {{__('Previous')}}
@@ -18,14 +18,14 @@
 
             <!-- Next Link -->
             <button
-                    :disabled="!hasMorePages"
+                    :disabled="!hasMore"
                     class="ml-auto btn btn-link py-3 px-4"
                     :class="{
-                    'text-primary dim': hasMorePages,
-                    'text-80 opacity-50': !hasMorePages,
+                    'text-primary dim': hasMore,
+                    'text-80 opacity-50 cursor-not-allowed': !hasMore,
                 }"
                     rel="next"
-                    @click.prevent="selectNextPage()"
+                    @click.prevent="nextPage()"
                     dusk="next"
             >
                 {{__('Next')}}
@@ -36,37 +36,21 @@
 
 <script>
     export default {
-        props: ['charges'],
+        props: ['charges', 'hasMore', 'hasPrevious'],
 
         methods: {
             /**
              * Select the previous page.
              */
-            selectPreviousPage() {
+            previousPage() {
                 this.$emit('previous')
             },
 
             /**
              * Select the next page.
              */
-            selectNextPage() {
+            nextPage() {
                 this.$emit('next')
-            },
-        },
-
-        computed: {
-            /**
-             * Determine if prior pages are available.
-             */
-            hasPreviousPages: function() {
-                return Boolean(this.charges && this.charges.has_more)
-            },
-
-            /**
-             * Determine if more pages are available.
-             */
-            hasMorePages: function() {
-                return Boolean(this.charges && this.charges_has_more)
             },
         },
     }

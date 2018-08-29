@@ -1,6 +1,6 @@
 <template>
     <loading-view :loading="initialLoading">
-        <div class="card relative">
+        <loading-card :loading="loading" class="card relative">
             <table
                     v-if="charges.length > 0"
                     class="table w-full"
@@ -51,8 +51,14 @@
                 </tbody>
             </table>
 
-            <charges-pagination-links charges="this.charges"></charges-pagination-links>
-        </div>
+            <charges-pagination-links
+                    :charges="charges"
+                    :hasMore="hasMore"
+                    :hasPrevious="hasPrevious"
+                    @previous="previousPage"
+                    @next="nextPage"
+            ></charges-pagination-links>
+        </loading-card>
     </loading-view>
 </template>
 
@@ -68,18 +74,51 @@ export default {
         return {
             charges: {},
             initialLoading: true,
+            loading: false,
+            hasMore: false,
+            page: 1
         }
     },
 
     methods: {
         moment: moment,
 
-        listCharges() {
-            Nova.request().get('/nova-vendor/nova-stripe/stripe/charges')
+        listCharges(params) {
+            Nova.request().get('/nova-vendor/nova-stripe/stripe/charges', { params })
                 .then((response) => {
                     this.charges = response.data.charges.data
+                    this.hasMore = response.data.charges.has_more
                     this.initialLoading = false
-                });
+                    this.loading = false
+                })
+        },
+
+        nextPage() {
+            this.loading = true
+
+            this.listCharges({
+                'starting_after': this.charges[this.charges.length - 1].id
+            })
+
+            this.page++
+        },
+
+        previousPage() {
+            this.loading = true
+
+            this.listCharges({
+                'ending_before': this.charges[0].id
+            })
+
+            if (this.hasPrevious) {
+                this.page--
+            }
+        }
+    },
+
+    computed: {
+        hasPrevious() {
+            return this.page > 1
         }
     },
 
