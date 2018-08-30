@@ -5,7 +5,7 @@
 
             <div v-for="available in balance.available">
                 <p class="text-xl">
-                    {{ (available.amount / 100).toFixed(2) }} {{ available.currency }}
+                    {{ available.currency | money(available.amount) }}
                 </p>
             </div>
         </div>
@@ -15,7 +15,7 @@
 
             <div v-for="pending in balance.pending">
                 <p class="text-xl">
-                    {{ (pending.amount / 100).toFixed(2) }} {{ pending.currency }}
+                    {{ pending.currency | money(pending.amount) }}
                 </p>
             </div>
         </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import money from '../utils/moneyFormat';
+
 export default {
     data() {
         return {
@@ -44,5 +46,9 @@ export default {
     created() {
         this.getBalance()
     },
+
+    filters: {
+        money
+    }
 }
 </script>

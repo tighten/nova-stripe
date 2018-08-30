@@ -72,7 +72,7 @@ public function tools()
 
 - [ ] Add some PHPUnit tests
 - [ ] Add some Dusk tests
-- [ ] Better handling of currencies (probably one DRY method to parse `$25.00 USD` instead of `(2500 / 1000).toFixed(2) usd`)
+- [ X ] Better handling of currency symbols
 - [ ] Break navbar item into any applicable sub-items (Charges, Customers, etc.)
 
 ### Possible Beta To-Dos

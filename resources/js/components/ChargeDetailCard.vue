@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ChargeDetailItem from './ChargeDetailItem.vue';
+import ChargeDetailItem from './ChargeDetailItem.vue'
 
 export default {
     components: {
@@ -28,13 +28,16 @@ export default {
     data() {
         return {
             initialLoading: true,
-            charge: {},
+            charge: {
+                amount: 0,
+                currency: ''
+            },
         }
     },
 
     computed: {
         amount() {
-            return (this.charge.amount / 100).toFixed(2) + ' ' + this.charge.currency;
+            return `${ (this.charge.amount / 100).toFixed(2) } ${ this.charge.currency.toUpperCase() }`
         },
 
         date() {
