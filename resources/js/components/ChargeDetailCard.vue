@@ -1,45 +1,56 @@
 <template>
-    <loading-card :loading="initialLoading" class="flex flex-wrap py-8 mb-8 w-full">
-        <charge-detail-item :label="'ID'" :value="charge.id"></charge-detail-item>
-        <charge-detail-item :label="'Amount'" :value="amount"></charge-detail-item>
-        <charge-detail-item :label="'Status'" :value="charge.status"></charge-detail-item>
-        <charge-detail-item :label="'Created'" :value="date"></charge-detail-item>
-        <charge-detail-item :label="'Metadata'" :value="charge.metadata"></charge-detail-item>
-        <charge-detail-item :label="'Livemode'" :value="charge.livemode"></charge-detail-item>
-        <charge-detail-item :label="'Captured'" :value="charge.captured"></charge-detail-item>
-        <charge-detail-item :label="'Paid'" :value="charge.paid"></charge-detail-item>
-        <charge-detail-item :label="'Refunded'" :value="charge.refunded"></charge-detail-item>
-        <charge-detail-item :label="'Dispute'" :value="charge.dispute"></charge-detail-item>
-        <charge-detail-item :label="'Fraud Details'" :value="charge.fraud_details"></charge-detail-item>
-        <charge-detail-item :label="'Transfer Group'" :value="charge.transfer_group"></charge-detail-item>
+    <loading-card :loading="initialLoading" class="mb-6 py-3 px-6">
+        <detail-text-field :field="{name: 'ID', value: charge.id}"></detail-text-field>
+        <detail-text-field :field="{name: 'Amount', value: amount }"></detail-text-field>
+        <detail-text-field :field="{name: 'Fee', value: fee }"></detail-text-field>
+        <detail-text-field :field="{name: 'Net', value: net }"></detail-text-field>
+        <detail-text-field :field="{name: 'Status', value: charge.status }"></detail-text-field>
+        <detail-text-field :field="{name: 'Created', value: date }"></detail-text-field>
+        <detail-text-field :field="{name: 'Metadata', value: charge.metadata }"></detail-text-field>
+        <detail-boolean-field :field="{name: 'Livemode', value: charge.livemode}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: 'Captured', value: charge.captured}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: 'Paid', value: charge.paid}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: 'Refunded', value: charge.refunded}"></detail-boolean-field>
+        <detail-text-field :field="{name: 'Dispute', value: charge.dispute }"></detail-text-field>
+        <detail-text-field :field="{name: 'Fraud Details', value: charge.fraud_details }"></detail-text-field>
+        <detail-text-field :field="{name: 'Transfer Group', value: charge.transfer_group }"></detail-text-field>
     </loading-card>
 </template>
 
 <script>
-import ChargeDetailItem from './ChargeDetailItem.vue';
-
 export default {
-    components: {
-        'charge-detail-item': ChargeDetailItem
-    },
-
     props: ['chargeId'],
 
     data() {
         return {
             initialLoading: true,
-            charge: {},
+            charge: {
+                amount: 0,
+                currency: ''
+            },
         }
     },
 
     computed: {
         amount() {
-            return (this.charge.amount / 100).toFixed(2) + ' ' + this.charge.currency;
+            return this.formatMoney(this.charge.amount, this.charge.currency)
+        },
+
+        fee() {
+            return this.formatMoney(this.charge.balance_transaction.fee, this.charge.balance_transaction.currency)
+        },
+
+        net() {
+            if (! this.charge.balance_transaction) {
+                return 0
+            }
+
+            return this.formatMoney((this.charge.amount - this.charge.balance_transaction.fee), this.charge.currency)
         },
 
         date() {
             return moment.unix(this.charge.created).format('YYYY/MM/DD h:mm:ss a')
-        }
+        },
     },
 
     methods: {
@@ -51,6 +62,10 @@ export default {
                     this.charge = response.data.charge
                     this.initialLoading = false
                 })
+        },
+
+        formatMoney(amount, currency) {
+            return `${ (amount / 100).toFixed(2) } ${ currency.toUpperCase() }`
         },
     },
 

@@ -37,7 +37,7 @@
                 <tbody v-for="charge in charges">
                 <tr>
                     <td>{{ charge.id }}</td>
-                    <td>{{ (charge.amount  / 100).toFixed(2) }} {{ charge.currency }}</td>
+                    <td>{{ charge.currency | money(charge.amount) }}</td>
                     <td>{{ charge.created | date }}</td>
                     <td>{{ charge.status }}</td>
                     <td>
@@ -70,6 +70,7 @@
 
 <script>
 import ChargesPaginationLinks from './ChargesPaginationLinks.vue';
+import money from '../utils/moneyFormat';
 
 export default {
     components: {
@@ -102,9 +103,7 @@ export default {
         nextPage() {
             this.loading = true
 
-            this.listCharges({
-                'starting_after': this.charges[this.charges.length - 1].id
-            })
+            this.listCharges({ 'starting_after': this.charges[this.charges.length - 1].id })
 
             this.page++
         },
@@ -112,9 +111,7 @@ export default {
         previousPage() {
             this.loading = true
 
-            this.listCharges({
-                'ending_before': this.charges[0].id
-            })
+            this.listCharges({ 'ending_before': this.charges[0].id })
 
             if (this.hasPrevious) {
                 this.page--
@@ -131,7 +128,9 @@ export default {
     filters: {
         date(date) {
             return moment.unix(date).format('YYYY/MM/DD h:mm:ss a')
-        }
+        },
+
+        money
     },
 
     created() {

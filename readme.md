@@ -47,7 +47,7 @@ public function tools()
 
 #### Charges Index
 
-- [ ] Improve balance card design (including handling array of amounts in multiple currencies)
+- [X] Improve balance card design
 - [ ] Add ability to filter by livemode
 - [ ] Add ability to filter by status
 - [ ] Add ability to sort fields
@@ -56,12 +56,12 @@ public function tools()
 
 #### Charge Detail
 
-- [ ] Calculate Stripe processing fee / net amount
+- [X] Calculate Stripe processing fee / net amount
 - [ ] Add "Refund" button
-- [ ] Better handling of booleans (green dot like regular Nova Boolean)
+- [X] Better handling of booleans (green dot like regular Nova Boolean)
 - [ ] Labels for statuses
 - [ ] Handle Metadata more like a Textarea field
-- [ ] Look for ways to refactor to use existing Nova fields if possible
+- [X] Refactor to use existing Nova fields instead of a bespoke one
 
 #### Customers
 
@@ -72,7 +72,7 @@ public function tools()
 
 - [ ] Add some PHPUnit tests
 - [ ] Add some Dusk tests
-- [ ] Better handling of currencies (probably one DRY method to parse `$25.00 USD` instead of `(2500 / 1000).toFixed(2) usd`)
+- [X] Better handling of currency symbols
 - [ ] Break navbar item into any applicable sub-items (Charges, Customers, etc.)
 
 ### Possible Beta To-Dos
