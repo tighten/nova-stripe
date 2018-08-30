@@ -47,7 +47,7 @@ public function tools()
 
 #### Charges Index
 
-- [ X ] Improve balance card design
+- [X] Improve balance card design
 - [ ] Add ability to filter by livemode
 - [ ] Add ability to filter by status
 - [ ] Add ability to sort fields
@@ -56,12 +56,12 @@ public function tools()
 
 #### Charge Detail
 
-- [ X ] Calculate Stripe processing fee / net amount
+- [X] Calculate Stripe processing fee / net amount
 - [ ] Add "Refund" button
-- [ X ] Better handling of booleans (green dot like regular Nova Boolean)
+- [X] Better handling of booleans (green dot like regular Nova Boolean)
 - [ ] Labels for statuses
 - [ ] Handle Metadata more like a Textarea field
-- [ X ] Refactor to use existing Nova fields instead of a bespoke one
+- [X] Refactor to use existing Nova fields instead of a bespoke one
 
 #### Customers
 
@@ -72,7 +72,7 @@ public function tools()
 
 - [ ] Add some PHPUnit tests
 - [ ] Add some Dusk tests
-- [ X ] Better handling of currency symbols
+- [X] Better handling of currency symbols
 - [ ] Break navbar item into any applicable sub-items (Charges, Customers, etc.)
 
 ### Possible Beta To-Dos
