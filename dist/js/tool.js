@@ -2865,8 +2865,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChargeDetailItem_vue__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChargeDetailItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChargeDetailItem_vue__);
 //
 //
 //
@@ -2886,31 +2884,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        'charge-detail-item': __WEBPACK_IMPORTED_MODULE_0__ChargeDetailItem_vue___default.a
-    },
-
     props: ['chargeId'],
 
     data: function data() {
@@ -2925,12 +2900,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     computed: {
+        amount: function amount() {
+            return this.formatMoney(this.charge.amount, this.charge.currency);
+        },
+        fee: function fee() {
+            return this.formatMoney(this.charge.balance_transaction.fee, this.charge.balance_transaction.currency);
+        },
         net: function net() {
             if (!this.charge.balance_transaction) {
                 return 0;
             }
 
-            return ((this.charge.amount - this.charge.balance_transaction.fee) / 100).toFixed(2) + ' ' + this.charge.currency.toUpperCase();
+            return this.formatMoney(this.charge.amount - this.charge.balance_transaction.fee, this.charge.currency);
         },
         date: function date() {
             return moment.unix(this.charge.created).format('YYYY/MM/DD h:mm:ss a');
@@ -2947,11 +2928,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.charge = response.data.charge;
                 _this.initialLoading = false;
             });
-        }
-    },
-
-    filters: {
-        money: function money(amount, currency) {
+        },
+        formatMoney: function formatMoney(amount, currency) {
             return (amount / 100).toFixed(2) + ' ' + currency.toUpperCase();
         }
     },
@@ -2962,114 +2940,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(28)
-/* template */
-var __vue_template__ = __webpack_require__(29)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/ChargeDetailItem.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-06d90b43", Component.options)
-  } else {
-    hotAPI.reload("data-v-06d90b43", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['label', 'value']
-});
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "flex border-b border-40 mb-6 py-3 px-6 w-full" },
-    [
-      _c("div", { staticClass: "w-1/4 py-4" }, [
-        _c("h4", { staticClass: "font-normal text-80" }, [
-          _vm._v("\n            " + _vm._s(_vm.label) + "\n        ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-3/4 py-4" }, [
-        _vm.value
-          ? _c("p", { staticClass: "text-90" }, [_vm._v(_vm._s(_vm.value))])
-          : _c("p", [_vm._v("—")])
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-06d90b43", module.exports)
-  }
-}
-
-/***/ }),
+/* 27 */,
+/* 28 */,
+/* 29 */,
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3079,101 +2952,66 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "loading-card",
-    {
-      staticClass: "flex flex-wrap py-8 mb-8 w-full",
-      attrs: { loading: _vm.initialLoading }
-    },
+    { staticClass: "mb-6 py-3 px-6", attrs: { loading: _vm.initialLoading } },
     [
-      _c("charge-detail-item", {
-        attrs: { label: "ID", value: _vm.charge.id }
+      _c("detail-text-field", {
+        attrs: { field: { name: "ID", value: _vm.charge.id } }
       }),
       _vm._v(" "),
-      _c("charge-detail-item", {
+      _c("detail-text-field", {
+        attrs: { field: { name: "Amount", value: _vm.amount } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Fee", value: _vm.fee } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Net", value: _vm.net } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Status", value: _vm.charge.status } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Created", value: _vm.date } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Metadata", value: _vm.charge.metadata } }
+      }),
+      _vm._v(" "),
+      _c("detail-boolean-field", {
+        attrs: { field: { name: "Livemode", value: _vm.charge.livemode } }
+      }),
+      _vm._v(" "),
+      _c("detail-boolean-field", {
+        attrs: { field: { name: "Captured", value: _vm.charge.captured } }
+      }),
+      _vm._v(" "),
+      _c("detail-boolean-field", {
+        attrs: { field: { name: "Paid", value: _vm.charge.paid } }
+      }),
+      _vm._v(" "),
+      _c("detail-boolean-field", {
+        attrs: { field: { name: "Refunded", value: _vm.charge.refunded } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Dispute", value: _vm.charge.dispute } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
         attrs: {
-          label: "Amount",
-          value: _vm._f("money")(_vm.charge.amount, _vm.charge.currency)
+          field: { name: "Fraud Details", value: _vm.charge.fraud_details }
         }
       }),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "flex border-b border-40 mb-6 py-3 px-6 w-full" },
-        [
-          _c("div", { staticClass: "w-1/4 py-4" }, [
-            _c("h4", { staticClass: "font-normal text-80" }, [
-              _vm._v("\n                Fees\n            ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-3/4 py-4" }, [
-            _vm.charge.balance_transaction &&
-            _vm.charge.balance_transaction.fee_details.length > 0
-              ? _c(
-                  "div",
-                  { staticClass: "text-90" },
-                  _vm._l(_vm.charge.balance_transaction.fee_details, function(
-                    fee
-                  ) {
-                    return _c("div", [
-                      _c("p", [
-                        _vm._v(
-                          _vm._s(_vm._f("money")(fee.amount, fee.currency)) +
-                            " "
-                        ),
-                        _c(
-                          "span",
-                          { staticClass: "text-sm text-80 ml-2 mb-4" },
-                          [_vm._v("(" + _vm._s(fee.description) + ")")]
-                        )
-                      ])
-                    ])
-                  })
-                )
-              : _c("p", [_vm._v("—")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("charge-detail-item", { attrs: { label: "Net", value: _vm.net } }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Status", value: _vm.charge.status }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Created", value: _vm.date }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Metadata", value: _vm.charge.metadata }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Livemode", value: _vm.charge.livemode }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Captured", value: _vm.charge.captured }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Paid", value: _vm.charge.paid }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Refunded", value: _vm.charge.refunded }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Dispute", value: _vm.charge.dispute }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Fraud Details", value: _vm.charge.fraud_details }
-      }),
-      _vm._v(" "),
-      _c("charge-detail-item", {
-        attrs: { label: "Transfer Group", value: _vm.charge.transfer_group }
+      _c("detail-text-field", {
+        attrs: {
+          field: { name: "Transfer Group", value: _vm.charge.transfer_group }
+        }
       })
     ],
     1
@@ -3200,7 +3038,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("heading", { staticClass: "mb-6" }, [_vm._v("Charge Detail")]),
+      _c("heading", { staticClass: "mb-6" }, [_vm._v("Charge Details")]),
       _vm._v(" "),
       _c("charge-detail-card", { attrs: { "charge-id": _vm.chargeId } })
     ],

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <heading class="mb-6">Charge Detail</heading>
+        <heading class="mb-6">Charge Details</heading>
 
         <charge-detail-card :charge-id="chargeId"></charge-detail-card>
     </div>

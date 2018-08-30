@@ -1,47 +1,24 @@
 <template>
-    <loading-card :loading="initialLoading" class="flex flex-wrap py-8 mb-8 w-full">
-        <charge-detail-item :label="'ID'" :value="charge.id"></charge-detail-item>
-        <charge-detail-item :label="'Amount'" :value="charge.amount | money(charge.currency)"></charge-detail-item>
-
-        <div class="flex border-b border-40 mb-6 py-3 px-6 w-full">
-            <div class="w-1/4 py-4">
-                <h4 class="font-normal text-80">
-                    Fees
-                </h4>
-            </div>
-
-            <div class="w-3/4 py-4">
-                <div v-if="charge.balance_transaction && charge.balance_transaction.fee_details.length > 0" class="text-90">
-                    <div v-for="fee in charge.balance_transaction.fee_details">
-                        <p>{{ fee.amount | money(fee.currency) }} <span class="text-sm text-80 ml-2 mb-4">({{ fee.description }})</span></p>
-                    </div>
-                </div>
-                <p v-else>&mdash;</p>
-            </div>
-        </div>
-
-        <charge-detail-item :label="'Net'" :value="net"></charge-detail-item>
-        <charge-detail-item :label="'Status'" :value="charge.status"></charge-detail-item>
-        <charge-detail-item :label="'Created'" :value="date"></charge-detail-item>
-        <charge-detail-item :label="'Metadata'" :value="charge.metadata"></charge-detail-item>
-        <charge-detail-item :label="'Livemode'" :value="charge.livemode"></charge-detail-item>
-        <charge-detail-item :label="'Captured'" :value="charge.captured"></charge-detail-item>
-        <charge-detail-item :label="'Paid'" :value="charge.paid"></charge-detail-item>
-        <charge-detail-item :label="'Refunded'" :value="charge.refunded"></charge-detail-item>
-        <charge-detail-item :label="'Dispute'" :value="charge.dispute"></charge-detail-item>
-        <charge-detail-item :label="'Fraud Details'" :value="charge.fraud_details"></charge-detail-item>
-        <charge-detail-item :label="'Transfer Group'" :value="charge.transfer_group"></charge-detail-item>
+    <loading-card :loading="initialLoading" class="mb-6 py-3 px-6">
+        <detail-text-field :field="{name: 'ID', value: charge.id}"></detail-text-field>
+        <detail-text-field :field="{name: 'Amount', value: amount }"></detail-text-field>
+        <detail-text-field :field="{name: 'Fee', value: fee }"></detail-text-field>
+        <detail-text-field :field="{name: 'Net', value: net }"></detail-text-field>
+        <detail-text-field :field="{name: 'Status', value: charge.status }"></detail-text-field>
+        <detail-text-field :field="{name: 'Created', value: date }"></detail-text-field>
+        <detail-text-field :field="{name: 'Metadata', value: charge.metadata }"></detail-text-field>
+        <detail-boolean-field :field="{name: 'Livemode', value: charge.livemode}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: 'Captured', value: charge.captured}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: 'Paid', value: charge.paid}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: 'Refunded', value: charge.refunded}"></detail-boolean-field>
+        <detail-text-field :field="{name: 'Dispute', value: charge.dispute }"></detail-text-field>
+        <detail-text-field :field="{name: 'Fraud Details', value: charge.fraud_details }"></detail-text-field>
+        <detail-text-field :field="{name: 'Transfer Group', value: charge.transfer_group }"></detail-text-field>
     </loading-card>
 </template>
 
 <script>
-import ChargeDetailItem from './ChargeDetailItem.vue'
-
 export default {
-    components: {
-        'charge-detail-item': ChargeDetailItem
-    },
-
     props: ['chargeId'],
 
     data() {
@@ -55,17 +32,25 @@ export default {
     },
 
     computed: {
+        amount() {
+            return this.formatMoney(this.charge.amount, this.charge.currency)
+        },
+
+        fee() {
+            return this.formatMoney(this.charge.balance_transaction.fee, this.charge.balance_transaction.currency)
+        },
+
         net() {
             if (! this.charge.balance_transaction) {
                 return 0
             }
 
-            return `${ (( this.charge.amount - this.charge.balance_transaction.fee) / 100).toFixed(2) } ${ this.charge.currency.toUpperCase() }`
+            return this.formatMoney((this.charge.amount - this.charge.balance_transaction.fee), this.charge.currency)
         },
 
         date() {
             return moment.unix(this.charge.created).format('YYYY/MM/DD h:mm:ss a')
-        }
+        },
     },
 
     methods: {
@@ -78,12 +63,10 @@ export default {
                     this.initialLoading = false
                 })
         },
-    },
 
-    filters: {
-        money(amount, currency) {
+        formatMoney(amount, currency) {
             return `${ (amount / 100).toFixed(2) } ${ currency.toUpperCase() }`
-        }
+        },
     },
 
     created() {
