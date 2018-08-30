@@ -2061,13 +2061,13 @@ var render = function() {
         "div",
         { staticClass: "w-1/2" },
         [
-          _c("p", { staticClass: "text-sm uppercase mb-2" }, [
-            _vm._v("Available")
+          _c("p", { staticClass: "text-sm uppercase mb-2 text-80" }, [
+            _vm._v("Available Balance")
           ]),
           _vm._v(" "),
           _vm._l(_vm.balance.available, function(available) {
             return _c("div", [
-              _c("p", { staticClass: "text-xl" }, [
+              _c("p", { staticClass: "text-2xl" }, [
                 _vm._v(
                   "\n                " +
                     _vm._s(
@@ -2086,13 +2086,13 @@ var render = function() {
         "div",
         { staticClass: "w-1/2" },
         [
-          _c("p", { staticClass: "text-sm uppercase mb-2" }, [
-            _vm._v("Pending")
+          _c("p", { staticClass: "text-sm uppercase mb-2 text-80" }, [
+            _vm._v("Pending Balance")
           ]),
           _vm._v(" "),
           _vm._l(_vm.balance.pending, function(pending) {
             return _c("div", [
-              _c("p", { staticClass: "text-xl" }, [
+              _c("p", { staticClass: "text-2xl" }, [
                 _vm._v(
                   "\n                " +
                     _vm._s(_vm._f("money")(pending.currency, pending.amount)) +
