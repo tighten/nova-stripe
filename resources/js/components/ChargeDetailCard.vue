@@ -1,7 +1,26 @@
 <template>
     <loading-card :loading="initialLoading" class="flex flex-wrap py-8 mb-8 w-full">
         <charge-detail-item :label="'ID'" :value="charge.id"></charge-detail-item>
-        <charge-detail-item :label="'Amount'" :value="amount"></charge-detail-item>
+        <charge-detail-item :label="'Amount'" :value="charge.amount | money(charge.currency)"></charge-detail-item>
+
+        <div class="flex border-b border-40 mb-6 py-3 px-6 w-full">
+            <div class="w-1/4 py-4">
+                <h4 class="font-normal text-80">
+                    Fees
+                </h4>
+            </div>
+
+            <div class="w-3/4 py-4">
+                <div v-if="charge.balance_transaction && charge.balance_transaction.fee_details.length > 0" class="text-90">
+                    <div v-for="fee in charge.balance_transaction.fee_details">
+                        <p>{{ fee.amount | money(fee.currency) }} <span class="text-sm text-80 ml-2 mb-4">({{ fee.description }})</span></p>
+                    </div>
+                </div>
+                <p v-else>&mdash;</p>
+            </div>
+        </div>
+
+        <charge-detail-item :label="'Net'" :value="net"></charge-detail-item>
         <charge-detail-item :label="'Status'" :value="charge.status"></charge-detail-item>
         <charge-detail-item :label="'Created'" :value="date"></charge-detail-item>
         <charge-detail-item :label="'Metadata'" :value="charge.metadata"></charge-detail-item>
@@ -36,8 +55,12 @@ export default {
     },
 
     computed: {
-        amount() {
-            return `${ (this.charge.amount / 100).toFixed(2) } ${ this.charge.currency.toUpperCase() }`
+        net() {
+            if (! this.charge.balance_transaction) {
+                return 0
+            }
+
+            return `${ (( this.charge.amount - this.charge.balance_transaction.fee) / 100).toFixed(2) } ${ this.charge.currency.toUpperCase() }`
         },
 
         date() {
@@ -55,6 +78,12 @@ export default {
                     this.initialLoading = false
                 })
         },
+    },
+
+    filters: {
+        money(amount, currency) {
+            return `${ (amount / 100).toFixed(2) } ${ currency.toUpperCase() }`
+        }
     },
 
     created() {

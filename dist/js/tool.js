@@ -2884,6 +2884,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2906,8 +2925,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     computed: {
-        amount: function amount() {
-            return (this.charge.amount / 100).toFixed(2) + ' ' + this.charge.currency.toUpperCase();
+        net: function net() {
+            if (!this.charge.balance_transaction) {
+                return 0;
+            }
+
+            return ((this.charge.amount - this.charge.balance_transaction.fee) / 100).toFixed(2) + ' ' + this.charge.currency.toUpperCase();
         },
         date: function date() {
             return moment.unix(this.charge.created).format('YYYY/MM/DD h:mm:ss a');
@@ -2924,6 +2947,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.charge = response.data.charge;
                 _this.initialLoading = false;
             });
+        }
+    },
+
+    filters: {
+        money: function money(amount, currency) {
+            return (amount / 100).toFixed(2) + ' ' + currency.toUpperCase();
         }
     },
 
@@ -3060,8 +3089,52 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("charge-detail-item", {
-        attrs: { label: "Amount", value: _vm.amount }
+        attrs: {
+          label: "Amount",
+          value: _vm._f("money")(_vm.charge.amount, _vm.charge.currency)
+        }
       }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex border-b border-40 mb-6 py-3 px-6 w-full" },
+        [
+          _c("div", { staticClass: "w-1/4 py-4" }, [
+            _c("h4", { staticClass: "font-normal text-80" }, [
+              _vm._v("\n                Fees\n            ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-3/4 py-4" }, [
+            _vm.charge.balance_transaction &&
+            _vm.charge.balance_transaction.fee_details.length > 0
+              ? _c(
+                  "div",
+                  { staticClass: "text-90" },
+                  _vm._l(_vm.charge.balance_transaction.fee_details, function(
+                    fee
+                  ) {
+                    return _c("div", [
+                      _c("p", [
+                        _vm._v(
+                          _vm._s(_vm._f("money")(fee.amount, fee.currency)) +
+                            " "
+                        ),
+                        _c(
+                          "span",
+                          { staticClass: "text-sm text-80 ml-2 mb-4" },
+                          [_vm._v("(" + _vm._s(fee.description) + ")")]
+                        )
+                      ])
+                    ])
+                  })
+                )
+              : _c("p", [_vm._v("—")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("charge-detail-item", { attrs: { label: "Net", value: _vm.net } }),
       _vm._v(" "),
       _c("charge-detail-item", {
         attrs: { label: "Status", value: _vm.charge.status }

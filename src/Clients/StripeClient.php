@@ -38,7 +38,7 @@ class StripeClient
     public function getCharge($id)
     {
         try {
-            return Charge::retrieve($id, ['api_key' => $this->apiKey]);
+            return Charge::retrieve(['id' => $id, 'expand' => ['balance_transaction']], ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
 
         }

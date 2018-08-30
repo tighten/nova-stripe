@@ -56,7 +56,7 @@ public function tools()
 
 #### Charge Detail
 
-- [ ] Calculate Stripe processing fee / net amount
+- [ X ] Calculate Stripe processing fee / net amount
 - [ ] Add "Refund" button
 - [ ] Better handling of booleans (green dot like regular Nova Boolean)
 - [ ] Labels for statuses
