@@ -1,6 +1,6 @@
 <template>
     <div>
-        <heading class="mb-6">Stripe Dashboard</heading>
+        <heading class="mb-6">{{ __('Stripe Dashboard') }}</heading>
 
         <balance-card></balance-card>
 

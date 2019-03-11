@@ -1,19 +1,19 @@
 <template>
     <loading-card :loading="initialLoading" class="mb-6 py-3 px-6">
-        <detail-text-field :field="{name: 'ID', value: charge.id}"></detail-text-field>
-        <detail-text-field :field="{name: 'Amount', value: amount }"></detail-text-field>
-        <detail-text-field :field="{name: 'Fee', value: fee }"></detail-text-field>
-        <detail-text-field :field="{name: 'Net', value: net }"></detail-text-field>
-        <detail-text-field :field="{name: 'Status', value: charge.status }"></detail-text-field>
-        <detail-text-field :field="{name: 'Created', value: date }"></detail-text-field>
-        <detail-text-field :field="{name: 'Metadata', value: charge.metadata }"></detail-text-field>
-        <detail-boolean-field :field="{name: 'Livemode', value: charge.livemode}"></detail-boolean-field>
-        <detail-boolean-field :field="{name: 'Captured', value: charge.captured}"></detail-boolean-field>
-        <detail-boolean-field :field="{name: 'Paid', value: charge.paid}"></detail-boolean-field>
-        <detail-boolean-field :field="{name: 'Refunded', value: charge.refunded}"></detail-boolean-field>
-        <detail-text-field :field="{name: 'Dispute', value: charge.dispute }"></detail-text-field>
-        <detail-text-field :field="{name: 'Fraud Details', value: charge.fraud_details }"></detail-text-field>
-        <detail-text-field :field="{name: 'Transfer Group', value: charge.transfer_group }"></detail-text-field>
+        <detail-text-field :field="{name: __('ID'), value: charge.id}"></detail-text-field>
+        <detail-text-field :field="{name: __('Amount'), value: amount }"></detail-text-field>
+        <detail-text-field :field="{name: __('Fee'), value: fee }"></detail-text-field>
+        <detail-text-field :field="{name: __('Net'), value: net }"></detail-text-field>
+        <detail-text-field :field="{name: __('Status'), value: __(charge.status) }"></detail-text-field>
+        <detail-text-field :field="{name: __('Created'), value: date }"></detail-text-field>
+        <detail-text-field :field="{name: __('Metadata'), value: charge.metadata }"></detail-text-field>
+        <detail-boolean-field :field="{name: __('Livemode'), value: charge.livemode}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: __('Captured'), value: charge.captured}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: __('Paid'), value: charge.paid}"></detail-boolean-field>
+        <detail-boolean-field :field="{name: __('Refunded'), value: charge.refunded}"></detail-boolean-field>
+        <detail-text-field :field="{name: __('Dispute'), value: charge.dispute }"></detail-text-field>
+        <detail-text-field :field="{name: __('Fraud Details'), value: charge.fraud_details }"></detail-text-field>
+        <detail-text-field :field="{name: __('Transfer Group'), value: charge.transfer_group }"></detail-text-field>
     </loading-card>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <heading class="mb-6">Charge Details</heading>
+        <heading class="mb-6">{{ __('Charge Details') }}</heading>
 
         <charge-detail-card :charge-id="chargeId"></charge-detail-card>
     </div>

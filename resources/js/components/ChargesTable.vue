@@ -12,22 +12,22 @@
                 <tr>
                     <th class="text-left">
                       <span class="inline-flex items-center">
-                         Charge ID
+                         {{ __('Charge ID') }}
                       </span>
                     </th>
                     <th class="text-left">
                       <span class="inline-flex items-center">
-                         Amount
+                         {{ __('Amount') }}
                       </span>
                     </th>
                     <th class="text-left">
                       <span class="inline-flex items-center">
-                         Created
+                         {{ __('Created') }}
                       </span>
                     </th>
                     <th class="text-left">
                       <span class="inline-flex items-center">
-                         Status
+                         {{ __('Status') }}
                       </span>
                     </th>
                     <th>&nbsp;<!-- View --></th>
@@ -39,7 +39,7 @@
                     <td>{{ charge.id }}</td>
                     <td>{{ charge.currency | money(charge.amount) }}</td>
                     <td>{{ charge.created | date }}</td>
-                    <td>{{ charge.status }}</td>
+                    <td>{{ __(charge.status) }}</td>
                     <td>
                         <span>
                             <router-link
