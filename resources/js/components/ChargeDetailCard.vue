@@ -37,6 +37,10 @@ export default {
         },
 
         fee() {
+            if (! this.charge.balance_transaction) {
+                return 0
+            }
+
             return this.formatMoney(this.charge.balance_transaction.fee, this.charge.balance_transaction.currency)
         },
 
