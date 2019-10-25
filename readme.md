@@ -1,22 +1,37 @@
+
+
+![This package is in beta. Use with caution.](https://d1czrtm2mp3lak.cloudfront.net/items/251A0x0t251a372T3o32/in-beta.png?v=7309e42b)
+
 # Laravel Nova Stripe Dashboard
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tightenco/nova-stripe.svg?style=flat-square)](https://packagist.org/packages/tightenco/nova-stripe)
+[![Build Status](https://img.shields.io/travis/tightenco/nova-stripe/master.svg?style=flat-square)](https://travis-ci.org/tightenco/nova-stripe)
+[![Total Downloads](https://img.shields.io/packagist/dt/tightenco/nova-stripe.svg?style=flat-square)](https://packagist.org/packages/tightenco/nova-stripe)
 
 This package makes it easy to see high-level information about your application's [Stripe](https://stripe.com/) balance and charges in a Nova dashboard.
 
-Looking to manage your users' Stripe subscriptions with [Laravel Cashier](https://github.com/laravel/cashier)? Check out [Nova Cashier Manager](https://novapackages.com/packages/themsaid/nova-cashier-manager).
+If you are interested in managing your users' Stripe subscriptions with [Laravel Cashier](https://github.com/laravel/cashier), check out [Nova Cashier Manager](https://novapackages.com/packages/themsaid/nova-cashier-manager) by [themsaid](https://github.com/themsaid).
 
-**This package is in alpha and under very active development, but check out the to-do section below for features we plan to add soon!**
+## Installation
 
-![Dashboard index page](charges-index.png)
+You can install this package via [Composer](https://getcomposer.org/):
 
-![Charge detail page](charges-detail.png)
+```bash
+$ composer require tightenco/nova-stripe`
+```
 
-### Installation Instructions
+## Usage
 
-Install via [Composer](https://getcomposer.org/):
+Add your Stripe key and secret values to your `.env` file:
 
-`$ composer require tightenco/nova-stripe`
+```
+STRIPE_KEY=
+STRIPE_SECRET=
+```
 
-If you have not already done so, in your `config/services.php` file, set up your Stripe key/secret:
+* https://stripe.com/docs/keys#obtain-api-keys
+
+Add a `stripe` element to your `config/services.php` configuration file:
 
 ```php
 'stripe' => [
@@ -25,14 +40,7 @@ If you have not already done so, in your `config/services.php` file, set up your
 ],
 ```
 
-and add these values to your `.env` file:
-
-```
-STRIPE_KEY=
-STRIPE_SECRET=
-```
-
-From there, you can register your tools in `app/Providers/NovaServiceProvider`:
+Register the `NovaStripe` tool in `app/Providers/NovaServiceProvider`:
 
 ```php
 public function tools()
@@ -43,44 +51,34 @@ public function tools()
 }
 ```
 
-### Alpha To-Dos
+## Features
 
-#### Charges Index
+#### View Stripe charges dashboard
 
-- [X] Improve balance card design
-- [ ] Add ability to filter by livemode
-- [ ] Add ability to filter by status
-- [ ] Add ability to sort fields
-- [ ] Add perPage dropdown
-- [ ] Add ability to search charges
+![Dashboard index page](charges-index.png)
 
-#### Charge Detail
+#### View Stripe charges details
 
-- [X] Calculate Stripe processing fee / net amount
-- [ ] Add "Refund" button
-- [X] Better handling of booleans (green dot like regular Nova Boolean)
-- [ ] Labels for statuses
-- [ ] Handle Metadata more like a Textarea field
-- [X] Refactor to use existing Nova fields instead of a bespoke one
+![Charge detail page](charges-detail.png)
 
-#### Customers
 
-- [ ] Add an index of customers
-- [ ] Add a customer detail page
+## Contributing
 
-#### General Housekeeping
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-- [ ] Add some PHPUnit tests
-- [ ] Add some Dusk tests
-- [X] Better handling of currency symbols
-- [ ] Break navbar item into any applicable sub-items (Charges, Customers, etc.)
+### Security
 
-### Possible Beta To-Dos
+If you discover any security related issues, please email hello@tighten.co instead of using the issue tracker.
 
-- [ ] Add some pretty graphs showing earnings
-- [ ] Investigate creating pseudo-resources (not relying on actual Laravel models) in order to use less custom/hard-coded code
-- [ ] Add ability to update charge
-- [ ] Add Payout information
-- [ ] Add Stripe Connect account management
-- [ ] Build cards / resource tools that can be used in Nova resources (User / Transaction / etc.?)
-- [ ] Better integration with Cashier
+## Credits
+
+- [Samantha Geitz](https://github.com/samanthamichele7)
+- [All Contributors](https://github.com/tightenco/nova-stripe/graphs/contributors)
+
+## Support us
+
+Tighten is a web development firm that works in Laravel, Vue, and React. You can learn more about us on our [web site](https://tighten.co/)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
