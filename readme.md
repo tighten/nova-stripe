@@ -61,7 +61,6 @@ public function tools()
 
 ![Charge detail page](charges-detail.png)
 
-
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
