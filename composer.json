@@ -2,17 +2,18 @@
     "name": "tightenco/nova-stripe",
     "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
     "keywords": [
+        "tightenco",
         "laravel",
         "nova",
         "stripe"
     ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Samantha Geitz",
             "email": "samantha@tighten.co"
         }
     ],
-    "license": "MIT",
     "require": {
         "php": ">=7.1.0",
         "stripe/stripe-php": ">=5.0"
