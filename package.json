@@ -14,6 +14,7 @@
         "laravel-mix": "^1.0"
     },
     "dependencies": {
+        "currency.js": "^1.2.1",
         "vue": "^2.5.0"
     }
 }

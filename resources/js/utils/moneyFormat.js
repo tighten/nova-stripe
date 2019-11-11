@@ -1,9 +1,18 @@
-export default (currency, amount) => {
-    currency = currency.toUpperCase()
+import currency from 'currency.js'
 
-    let symbol = currencies[currency] ? currencies[currency].symbol_native : currency
+export default (currency_code, amount) => {
+    currency_code = currency_code.toUpperCase()
 
-    return `${ symbol }${ (amount / 100).toFixed(2) }`
+    if (! currencies[currency_code]) {
+        return `${currency_code}${(amount / 100).toFixed(2)}`
+    }
+
+    let currency_divisor = '1'.padEnd(currencies[currency_code].decimal_digits + 1, '0');
+
+    return currency((amount / currency_divisor), {
+        precision: currencies[currency_code].decimal_digits,
+        symbol: currencies[currency_code].symbol_native,
+    }).format(true)
 }
 
 const currencies = {
