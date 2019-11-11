@@ -493,13 +493,17 @@ function applyToTag (styleElement, obj) {
 
 /* harmony default export */ __webpack_exports__["a"] = (function (currency_code, amount) {
     currency_code = currency_code.toUpperCase();
-    if (currencies[currency_code]) {
-        return __WEBPACK_IMPORTED_MODULE_0_currency_js___default()(amount, {
-            precision: currencies[currency_code].decimal_digits,
-            symbol: currencies[currency_code].symbol_native
-        }).format(true);
+
+    if (!currencies[currency_code]) {
+        return '' + currency_code + (amount / 100).toFixed(2);
     }
-    return "" + currency_code + (amount / 100).toFixed(2);
+
+    var currency_divisor = '1'.padEnd(currencies[currency_code].decimal_digits + 1, '0');
+
+    return __WEBPACK_IMPORTED_MODULE_0_currency_js___default()(amount / currency_divisor, {
+        precision: currencies[currency_code].decimal_digits,
+        symbol: currencies[currency_code].symbol_native
+    }).format(true);
 });
 
 var currencies = {
