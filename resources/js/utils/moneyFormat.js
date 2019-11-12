@@ -2,16 +2,19 @@ import currency from 'currency.js'
 
 export default (currency_code, amount) => {
     currency_code = currency_code.toUpperCase()
-
-    if (! currencies[currency_code]) {
-        return `${currency_code}${(amount / 100).toFixed(2)}`
+    let decimal_digits = currencies[currency_code] ? currencies[currency_code].decimal_digits : 2
+    let currency_divisor = '1'.padEnd(decimal_digits + 1, '0')
+    let currency_options = {
+        precision: decimal_digits
     }
 
-    let currency_divisor = '1'.padEnd(currencies[currency_code].decimal_digits + 1, '0');
+    if (! currencies[currency_code]) {
+        return currency(amount / currency_divisor, currency_options).format() + ' ' + currency_code
+    }
 
-    return currency((amount / currency_divisor), {
-        precision: currencies[currency_code].decimal_digits,
-        symbol: currencies[currency_code].symbol_native,
+    return currency(amount / currency_divisor, {
+        ...currency_options,
+        symbol: currencies[currency_code].symbol_native
     }).format(true)
 }
 

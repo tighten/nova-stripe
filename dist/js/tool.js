@@ -489,21 +489,25 @@ function applyToTag (styleElement, obj) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_currency_js__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_currency_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_currency_js__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = (function (currency_code, amount) {
     currency_code = currency_code.toUpperCase();
+    var decimal_digits = currencies[currency_code] ? currencies[currency_code].decimal_digits : 2;
+    var currency_divisor = '1'.padEnd(decimal_digits + 1, '0');
+    var currency_options = {
+        precision: decimal_digits
+    };
 
     if (!currencies[currency_code]) {
-        return '' + currency_code + (amount / 100).toFixed(2);
+        return __WEBPACK_IMPORTED_MODULE_0_currency_js___default()(amount / currency_divisor, currency_options).format() + ' ' + currency_code;
     }
 
-    var currency_divisor = '1'.padEnd(currencies[currency_code].decimal_digits + 1, '0');
-
-    return __WEBPACK_IMPORTED_MODULE_0_currency_js___default()(amount / currency_divisor, {
-        precision: currencies[currency_code].decimal_digits,
+    return __WEBPACK_IMPORTED_MODULE_0_currency_js___default()(amount / currency_divisor, _extends({}, currency_options, {
         symbol: currencies[currency_code].symbol_native
-    }).format(true);
+    })).format(true);
 });
 
 var currencies = {
