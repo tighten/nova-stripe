@@ -17,7 +17,7 @@ If you are interested in managing your users' Stripe subscriptions with [Laravel
 You can install this package via [Composer](https://getcomposer.org/):
 
 ```bash
-$ composer require tightenco/nova-stripe`
+$ composer require tightenco/nova-stripe
 ```
 
 ## Usage
