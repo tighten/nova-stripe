@@ -7,5 +7,6 @@ composer.lock
 phpunit.xml
 .phpunit.result.cache
 .DS_Store
+.env.testing
 Thumbs.db
 auth.json

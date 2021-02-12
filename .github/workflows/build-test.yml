@@ -1,0 +1,55 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [7.3, 7.4, 8.0]
+        laravel: [6.*, 7.*, 8.*]
+        include:
+          - laravel: 6.*
+            testbench: 4.*
+            phpunit: 9.*
+          - laravel: 7.*
+            testbench: 5.*
+            phpunit: 9.*
+          - laravel: 8.*
+            testbench: 6.*
+            phpunit: 9.*
+          - php: 8.0
+            laravel: 8.*
+            testbench: 6.*
+            phpunit: 9.*
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
+          composer update --prefer-dist --no-interaction --no-progress --no-suggest
+
+      - name: Copy .env.example to .env
+        run: cp .env.testing.example .env.testing
+
+      - name: Run PHP tests
+        run: vendor/bin/phpunit
+        env:
+          STRIPE_SECRET: "${{ secrets.STRIPE_SECRET }}"
