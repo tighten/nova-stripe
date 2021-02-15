@@ -52,4 +52,4 @@ jobs:
       - name: Run PHP tests
         run: vendor/bin/phpunit
         env:
-          STRIPE_SECRET: "${{ secrets.STRIPE_SECRET }}"
+          STRIPE_TEST_SECRET: "${{ secrets.STRIPE_SECRET }}"
