@@ -14,8 +14,6 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Config::set('services.stripe.test_secret', getenv('STRIPE_TEST_SECRET'));
-
         Route::middlewareGroup('nova', []);
     }
 
@@ -23,6 +21,7 @@ abstract class TestCase extends Orchestra
     {
         $app->useEnvironmentPath(__DIR__ . '/..');
         $app->bootstrapWith([LoadEnvironmentVariables::class]);
+        $app->config->set('services.stripe.secret', getenv('STRIPE_TEST_SECRET'));
         parent::getEnvironmentSetUp($app);
     }
 

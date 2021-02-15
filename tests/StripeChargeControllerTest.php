@@ -20,7 +20,7 @@ class StripeChargeControllerTest extends TestCase
         $this->get('nova-vendor/nova-stripe/stripe/balance')
             ->assertSuccessful();
 
-        $stripe = new StripeClient(Config::get('services.stripe.test_secret'));
+        $stripe = new StripeClient(Config::get('services.stripe.secret'));
         $charge = $stripe->charges->create([
             'amount' => $this->faker->numberBetween(50, 1000),
             'currency' => 'usd',
@@ -35,7 +35,7 @@ class StripeChargeControllerTest extends TestCase
     /** @test */
     public function it_returns_a_list_of_charges()
     {
-        $stripe = new StripeClient(Config::get('services.stripe.test_secret'));
+        $stripe = new StripeClient(Config::get('services.stripe.secret'));
         $charge = $stripe->charges->create([
             'amount' => $this->faker->numberBetween(50, 1000),
             'currency' => 'usd',
