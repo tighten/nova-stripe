@@ -14,7 +14,7 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Config::set('services.stripe.secret', getenv('STRIPE_SECRET'));
+        Config::set('services.stripe.test_secret', getenv('STRIPE_TEST_SECRET'));
 
         Route::middlewareGroup('nova', []);
     }

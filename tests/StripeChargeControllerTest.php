@@ -5,6 +5,7 @@ namespace Tightenco\NovaStripe\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
+use Stripe\StripeClient;
 
 class StripeChargeControllerTest extends TestCase
 {
@@ -19,15 +20,13 @@ class StripeChargeControllerTest extends TestCase
         $this->get('nova-vendor/nova-stripe/stripe/balance')
             ->assertSuccessful();
 
-        $stripe = new \Stripe\StripeClient(Config::get('services.stripe.secret'));
-        $charge = $stripe->charges->create(
-            [
+        $stripe = new StripeClient(Config::get('services.stripe.test_secret'));
+        $charge = $stripe->charges->create([
             'amount' => $this->faker->numberBetween(50, 1000),
             'currency' => 'usd',
             'source' => 'tok_mastercard',
             'description' => $this->faker->sentence,
-            ]
-        );
+        ]);
 
         $this->get('nova-vendor/nova-stripe/stripe/charges/' . $charge->id)
             ->assertSuccessful();
@@ -36,15 +35,13 @@ class StripeChargeControllerTest extends TestCase
     /** @test */
     public function it_returns_a_list_of_charges()
     {
-        $stripe = new \Stripe\StripeClient(Config::get('services.stripe.secret'));
-        $charge = $stripe->charges->create(
-            [
+        $stripe = new StripeClient(Config::get('services.stripe.test_secret'));
+        $charge = $stripe->charges->create([
             'amount' => $this->faker->numberBetween(50, 1000),
             'currency' => 'usd',
             'source' => 'tok_mastercard',
             'description' => $this->faker->sentence,
-            ]
-        );
+        ]);
 
         $this->get('nova-vendor/nova-stripe/stripe/charges')
             ->assertJsonFragment(['description' => $charge->description])

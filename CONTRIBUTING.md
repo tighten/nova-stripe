@@ -29,7 +29,7 @@ Before submitting a pull request:
 To run the test suite locally: 
 
 - Run `cp .env.testing.example .env.testing` in the terminal
-- Update `.env.testing` with your Stripe test API keys
+- Update `.env.testing` with your Stripe **test** API keys
 - Run `vendor/bin/phpunit` in the terminal
 
 ## Requirements
