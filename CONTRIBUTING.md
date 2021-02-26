@@ -26,6 +26,12 @@ Before submitting a pull request:
 - Check the codebase to ensure that your feature doesn't already exist.
 - Check the pull requests to ensure that another person hasn't already submitted the feature or fix.
 
+To run the test suite locally: 
+
+- Run `cp .env.testing.example .env.testing` in the terminal
+- Update `.env.testing` with your Stripe **test** API keys
+- Run `vendor/bin/phpunit` in the terminal
+
 ## Requirements
 
 If the project maintainer has any additional requirements, you will find them listed here.
