@@ -53,3 +53,25 @@ jobs:
         run: vendor/bin/phpunit
         env:
           STRIPE_TEST_SECRET: "${{ secrets.STRIPE_SECRET }}"
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v2
+        if: failure()
+        with:
+          status: ${{ job.status }}
+          author_name: ${{ github.actor }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        if: failure()
+        with:
+          status: ${{ job.status }}
+          author_name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
+          fields: repo,message,commit,author,eventName,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
