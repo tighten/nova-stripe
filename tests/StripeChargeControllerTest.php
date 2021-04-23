@@ -19,9 +19,9 @@ class StripeChargeControllerTest extends TestCase
         parent::setUp();
         $this->stripe = new StripeClient(Config::get('services.stripe.secret'));
 
-        $this->stripe->charges->all()->count()
-            ? $this->charge = $this->stripe->charges->all(['limit' => 1])->first()
-            : $this->charge = $this->stripe->charges->create([
+        $this->charge = $this->stripe->charges->all()->count()
+            ? $this->stripe->charges->all(['limit' => 1])->first()
+            : $this->stripe->charges->create([
                 'amount' => $this->faker->numberBetween(50, 1000),
                 'currency' => 'usd',
                 'source' => 'tok_mastercard',
