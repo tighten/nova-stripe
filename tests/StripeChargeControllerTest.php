@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tightenco\NovaStripe\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,11 +12,21 @@ class StripeChargeControllerTest extends TestCase
     use WithFaker;
 
     protected $stripe;
+    protected $charge;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->stripe = new StripeClient(Config::get('services.stripe.secret'));
+
+        $this->stripe->charges->all()->count()
+            ? $this->charge = $this->stripe->charges->all(['limit' => 1])->first()
+            : $this->charge = $this->stripe->charges->create([
+                'amount' => $this->faker->numberBetween(50, 1000),
+                'currency' => 'usd',
+                'source' => 'tok_mastercard',
+                'description' => $this->faker->sentence,
+            ]);
     }
 
     /** @test */
@@ -29,44 +38,23 @@ class StripeChargeControllerTest extends TestCase
         $this->get('nova-vendor/nova-stripe/stripe/balance')
             ->assertSuccessful();
 
-        $charge = $this->stripe->charges->create([
-            'amount' => $this->faker->numberBetween(50, 1000),
-            'currency' => 'usd',
-            'source' => 'tok_mastercard',
-            'description' => $this->faker->sentence,
-        ]);
-
-        $this->get('nova-vendor/nova-stripe/stripe/charges/' . $charge->id)
+        $this->get('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id)
             ->assertSuccessful();
     }
 
     /** @test */
     public function it_returns_a_list_of_charges()
     {
-        $charge = $this->stripe->charges->create([
-            'amount' => $this->faker->numberBetween(50, 1000),
-            'currency' => 'usd',
-            'source' => 'tok_mastercard',
-            'description' => $this->faker->sentence,
-        ]);
-
         $this->get('nova-vendor/nova-stripe/stripe/charges')
-            ->assertJsonFragment(['description' => $charge->description])
-            ->assertJsonFragment(['amount' => $charge->amount]);
+            ->assertJsonFragment(['description' => $this->charge->description])
+            ->assertJsonFragment(['amount' => $this->charge->amount]);
     }
 
     /** @test */
     public function it_returns_charge_details()
     {
-        $charge = $this->stripe->charges->create([
-            'amount' => 51,
-            'currency' => 'usd',
-            'source' => 'tok_mastercard',
-            'description' => 'charge details test description',
-        ]);
-
-        $response = $this->get('nova-vendor/nova-stripe/stripe/charges/' . $charge->id);
-        $stripeCharge = Charge::retrieve(['id' => $charge->id, 'expand' => ['balance_transaction']], ['api_key' => Config::get('services.stripe.secret')]);
+        $response = $this->get('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id);
+        $stripeCharge = Charge::retrieve(['id' => $this->charge->id, 'expand' => ['balance_transaction']], ['api_key' => Config::get('services.stripe.secret')]);
 
         $response->assertJsonFragment([
             'id' => $stripeCharge->id,
