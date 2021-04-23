@@ -1,9 +1,9 @@
 <?php
 
-namespace Tightenco\NovaStripe\Http;
+namespace Tighten\NovaStripe\Http;
 
 use Illuminate\Routing\Controller;
-use Tightenco\NovaStripe\Clients\StripeClient;
+use Tighten\NovaStripe\Clients\StripeClient;
 
 class StripeChargesController extends Controller
 {

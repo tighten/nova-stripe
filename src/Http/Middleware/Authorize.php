@@ -1,8 +1,8 @@
 <?php
 
-namespace Tightenco\NovaStripe\Http\Middleware;
+namespace Tighten\NovaStripe\Http\Middleware;
 
-use Tightenco\NovaStripe\NovaStripe;
+use Tighten\NovaStripe\NovaStripe;
 
 class Authorize
 {

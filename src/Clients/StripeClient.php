@@ -1,6 +1,6 @@
 <?php
 
-namespace Tightenco\NovaStripe\Clients;
+namespace Tighten\NovaStripe\Clients;
 
 use Exception;
 use Stripe\Balance;

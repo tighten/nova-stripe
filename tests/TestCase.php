@@ -1,12 +1,12 @@
 <?php
 
-namespace Tightenco\NovaStripe\Tests;
+namespace Tighten\NovaStripe\Tests;
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Tightenco\NovaStripe\ToolServiceProvider;
+use Tighten\NovaStripe\ToolServiceProvider;
 
 abstract class TestCase extends Orchestra
 {

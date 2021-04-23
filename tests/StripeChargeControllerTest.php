@@ -1,6 +1,6 @@
 <?php
 
-namespace Tightenco\NovaStripe\Tests;
+namespace Tighten\NovaStripe\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
