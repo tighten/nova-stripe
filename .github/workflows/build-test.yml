@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      max-parallel: 1
       matrix:
         php: [7.3, 7.4, 8.0]
         laravel: [6.*, 7.*, 8.*]
