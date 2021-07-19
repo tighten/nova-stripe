@@ -38,16 +38,18 @@
                 <tr>
                     <td>
                         {{ charge.id }}
-                        <span v-if="charge.refunded" class="ml-3 text-70">
-                            <span class="sr-only">Refunded</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span v-if="charge.refunded" class="text-70">
+                            <span class="hidden sr-only">Refunded</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
                             </svg>
                         </span>
                     </td>
                     <td>{{ charge.currency | money(charge.amount) }}</td>
                     <td>{{ charge.created | date }}</td>
-                    <td>{{ charge.status }}</td>
+                    <td>
+                        <span class="rounded-lg px-3 py-1 capitalize text-xs font-black" :class="statusClass(charge.status)">{{ charge.status }}</span>
+                    </td>
                     <td>
                         <span>
                             <router-link
@@ -84,7 +86,6 @@ export default {
     components: {
         'charges-pagination-links': ChargesPaginationLinks
     },
-
     data() {
         return {
             charges: {},
@@ -92,12 +93,20 @@ export default {
             loading: false,
             hasMore: false,
             page: 1,
+            statusClassList: {
+                'succeeded' : 'bg-success-light text-success-dark',
+                'pending' : 'bg-warning-light text-warning-dark',
+                'failed' : 'bg-danger-light text-danger-dark',
+            }
         }
     },
-
+    computed: {
+        hasPrevious() {
+            return this.page > 1
+        }
+    },
     methods: {
         moment: moment,
-
         listCharges(params) {
             Nova.request().get('/nova-vendor/nova-stripe/stripe/charges', { params })
                 .then((response) => {
@@ -107,7 +116,6 @@ export default {
                     this.loading = false
                 })
         },
-
         nextPage() {
             this.loading = true
 
@@ -115,7 +123,6 @@ export default {
 
             this.page++
         },
-
         previousPage() {
             this.loading = true
 
@@ -124,15 +131,11 @@ export default {
             if (this.hasPrevious) {
                 this.page--
             }
-        }
+        },
+        statusClass(status) {
+            return this.statusClassList[status];
+        },
     },
-
-    computed: {
-        hasPrevious() {
-            return this.page > 1
-        }
-    },
-
     filters: {
         date(date) {
             return moment.unix(date).format('YYYY/MM/DD h:mm:ss a')
@@ -140,7 +143,6 @@ export default {
 
         money
     },
-
     created() {
         this.listCharges()
     },

@@ -2236,7 +2236,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -2320,6 +2320,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2328,21 +2338,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'charges-pagination-links': __WEBPACK_IMPORTED_MODULE_0__ChargesPaginationLinks_vue___default.a
     },
-
     data: function data() {
         return {
             charges: {},
             initialLoading: true,
             loading: false,
             hasMore: false,
-            page: 1
+            page: 1,
+            statusClassList: {
+                'succeeded': 'bg-success-light text-success-dark',
+                'pending': 'bg-warning-light text-warning-dark',
+                'failed': 'bg-danger-light text-danger-dark'
+            }
         };
     },
 
-
+    computed: {
+        hasPrevious: function hasPrevious() {
+            return this.page > 1;
+        }
+    },
     methods: {
         moment: moment,
-
         listCharges: function listCharges(params) {
             var _this = this;
 
@@ -2368,15 +2385,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.hasPrevious) {
                 this.page--;
             }
+        },
+        statusClass: function statusClass(status) {
+            return this.statusClassList[status];
         }
     },
-
-    computed: {
-        hasPrevious: function hasPrevious() {
-            return this.page > 1;
-        }
-    },
-
     filters: {
         date: function date(_date) {
             return moment.unix(_date).format('YYYY/MM/DD h:mm:ss a');
@@ -2385,7 +2398,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         money: __WEBPACK_IMPORTED_MODULE_1__utils_moneyFormat__["a" /* default */]
     },
-
     created: function created() {
         this.listCharges();
     }
@@ -2657,7 +2669,44 @@ var render = function() {
                   _vm._l(_vm.charges, function(charge) {
                     return _c("tbody", [
                       _c("tr", [
-                        _c("td", [_vm._v(_vm._s(charge.id))]),
+                        _c("td", [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(charge.id) +
+                              "\n                    "
+                          ),
+                          charge.refunded
+                            ? _c("span", { staticClass: "text-70" }, [
+                                _c("span", { staticClass: "hidden sr-only" }, [
+                                  _vm._v("Refunded")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "h-5 w-5 ml-3",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      fill: "none",
+                                      viewBox: "0 0 24 24",
+                                      stroke: "currentColor"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "stroke-linecap": "round",
+                                        "stroke-linejoin": "round",
+                                        "stroke-width": "2",
+                                        d:
+                                          "M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
@@ -2671,7 +2720,17 @@ var render = function() {
                           _vm._v(_vm._s(_vm._f("date")(charge.created)))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(charge.status))]),
+                        _c("td", [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "rounded-lg px-3 py-1 capitalize text-xs font-black",
+                              class: _vm.statusClass(charge.status)
+                            },
+                            [_vm._v(_vm._s(charge.status))]
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           _c(
