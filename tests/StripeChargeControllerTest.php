@@ -59,8 +59,6 @@ class StripeChargeControllerTest extends TestCase
         $response->assertJsonFragment([
             'id' => $stripeCharge->id,
             'amount' => $stripeCharge->amount,
-            'fee' => $stripeCharge->balance_transaction->fee,
-            'net' => $stripeCharge->balance_transaction->net,
             'status' => $stripeCharge->status,
             'created' => $stripeCharge->created,
             'metadata' => $stripeCharge->metadata,
@@ -75,8 +73,6 @@ class StripeChargeControllerTest extends TestCase
 
         $response->assertSee($stripeCharge->id)
             ->assertSee($stripeCharge->amount)
-            ->assertSee($stripeCharge->balance_transaction->fee)
-            ->assertSee($stripeCharge->balance_transaction->net)
             ->assertSee($stripeCharge->status)
             ->assertSee($stripeCharge->created)
             ->assertSee($stripeCharge->livemode)

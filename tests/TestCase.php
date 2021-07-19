@@ -3,7 +3,6 @@
 namespace Tighten\NovaStripe\Tests;
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Tighten\NovaStripe\ToolServiceProvider;
