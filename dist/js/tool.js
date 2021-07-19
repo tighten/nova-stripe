@@ -2236,7 +2236,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -2250,14 +2250,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChargesPaginationLinks_vue__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChargesPaginationLinks_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChargesPaginationLinks_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_moneyFormat__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2665,44 +2657,7 @@ var render = function() {
                   _vm._l(_vm.charges, function(charge) {
                     return _c("tbody", [
                       _c("tr", [
-                        _c("td", [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(charge.id) +
-                              "\n                    "
-                          ),
-                          charge.refunded
-                            ? _c("span", { staticClass: "ml-3 text-70" }, [
-                                _c("span", { staticClass: "sr-only" }, [
-                                  _vm._v("Refunded")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "svg",
-                                  {
-                                    staticClass: "h-6 w-6",
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      fill: "none",
-                                      viewBox: "0 0 24 24",
-                                      stroke: "currentColor"
-                                    }
-                                  },
-                                  [
-                                    _c("path", {
-                                      attrs: {
-                                        "stroke-linecap": "round",
-                                        "stroke-linejoin": "round",
-                                        "stroke-width": "2",
-                                        d:
-                                          "M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"
-                                      }
-                                    })
-                                  ]
-                                )
-                              ])
-                            : _vm._e()
-                        ]),
+                        _c("td", [_vm._v(_vm._s(charge.id))]),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(
