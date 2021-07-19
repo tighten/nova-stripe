@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Tightenco\NovaStripe\Http\StripeBalanceController;
-use Tightenco\NovaStripe\Http\StripeChargesController;
+use Tighten\NovaStripe\Http\StripeBalanceController;
+use Tighten\NovaStripe\Http\StripeChargesController;
 
 /*
 |--------------------------------------------------------------------------

@@ -32,18 +32,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Tightenco\\NovaStripe\\": "src/"
+            "Tighten\\NovaStripe\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tightenco\\NovaStripe\\Tests\\": "tests"
+            "Tighten\\NovaStripe\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Tightenco\\NovaStripe\\ToolServiceProvider"
+                "Tighten\\NovaStripe\\ToolServiceProvider"
             ]
         }
     },

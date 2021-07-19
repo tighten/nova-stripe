@@ -1,6 +1,6 @@
 <?php
 
-namespace Tightenco\NovaStripe;
+namespace Tighten\NovaStripe;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
