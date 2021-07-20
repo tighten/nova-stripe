@@ -24,6 +24,6 @@ class StripeChargesController extends Controller
 
     public function refund($id)
     {
-        return (new StripeClient)->refundCharge($id);
+        return response()->json((new StripeClient)->refundCharge($id));
     }
 }
