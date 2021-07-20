@@ -2871,6 +2871,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.deleting = true;
 
             Nova.request().post('/nova-vendor/nova-stripe/stripe/charges/' + this.chargeId + '/refund').then(function (response) {
+                Nova.success('Charge Successfully Refunded!');
                 _this.$refs.detail.getCharge();
             });
 

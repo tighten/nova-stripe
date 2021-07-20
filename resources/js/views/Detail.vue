@@ -46,6 +46,7 @@ export default {
                         '/refund'
                 )
                 .then((response) => {
+                    Nova.success('Charge Successfully Refunded!');
                     this.$refs.detail.getCharge();
                 });
 
