@@ -8,10 +8,13 @@
                 class="btn-primary px-4 py-2 rounded"
                 @click="refund(charge.id)"
                 :disabled="deleting"
-            >Refund</button>
+            >
+                Refund
+            </button>
         </div>
 
         <charge-detail-card
+            ref="detail"
             :charge-id="chargeId"
             @charge-loaded="charge = $event"
         />
@@ -19,28 +22,35 @@
 </template>
 
 <script>
-    import ChargeDetailCard from '../components/ChargeDetailCard.vue'
+import ChargeDetailCard from '../components/ChargeDetailCard.vue';
 
-    export default {
-        props: ['chargeId'],
-        components: {
-            'charge-detail-card': ChargeDetailCard,
+export default {
+    props: ['chargeId'],
+    components: {
+        'charge-detail-card': ChargeDetailCard,
+    },
+    data() {
+        return {
+            charge: undefined,
+            deleting: false,
+        };
+    },
+    methods: {
+        refund(chargeId) {
+            this.deleting = true;
+
+            Nova.request()
+                .post(
+                    '/nova-vendor/nova-stripe/stripe/charges/' +
+                        this.chargeId +
+                        '/refund'
+                )
+                .then((response) => {
+                    this.$refs.detail.getCharge();
+                });
+
+            this.deleting = false;
         },
-        data() {
-            return {
-                charge: undefined,
-                deleting: false,
-            }
-        },
-        methods: {
-            refund(chargeId) {
-                this.deleting = !this.deleting;
-
-                // axios call here
-
-
-                this.deleting = !this.deleting;
-            },
-        },
-    }
+    },
+};
 </script>

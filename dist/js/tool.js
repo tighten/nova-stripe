@@ -2846,6 +2846,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2863,12 +2866,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         refund: function refund(chargeId) {
-            this.deleting = !this.deleting;
+            var _this = this;
 
-            // axios call here
+            this.deleting = true;
 
+            Nova.request().post('/nova-vendor/nova-stripe/stripe/charges/' + this.chargeId + '/refund').then(function (response) {
+                _this.$refs.detail.getCharge();
+            });
 
-            this.deleting = !this.deleting;
+            this.deleting = false;
         }
     }
 });
@@ -3116,12 +3122,13 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Refund")]
+              [_vm._v("\n            Refund\n        ")]
             )
           : _vm._e()
       ]),
       _vm._v(" "),
       _c("charge-detail-card", {
+        ref: "detail",
         attrs: { "charge-id": _vm.chargeId },
         on: {
           "charge-loaded": function($event) {

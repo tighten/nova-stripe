@@ -3,9 +3,7 @@
 namespace Tighten\NovaStripe\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Config;
-use Stripe\Charge;
-use Stripe\StripeClient;
+use Tighten\NovaStripe\Clients\StripeClient;
 
 class StripeChargeControllerTest extends TestCase
 {
@@ -17,11 +15,10 @@ class StripeChargeControllerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->stripe = new StripeClient(Config::get('services.stripe.secret'));
+        $this->stripe = new StripeClient;
 
-        $this->charge = $this->stripe->charges->all()->count()
-            ? $this->stripe->charges->all(['limit' => 1])->first()
-            : $this->stripe->charges->create([
+        $this->charge = $this->findSuccessfulNonRefundedCharge()
+            ?: $this->stripe->createCharge([
                 'amount' => $this->faker->numberBetween(50, 1000),
                 'currency' => 'usd',
                 'source' => 'tok_mastercard',
@@ -54,13 +51,11 @@ class StripeChargeControllerTest extends TestCase
     public function it_returns_charge_details()
     {
         $response = $this->get('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id);
-        $stripeCharge = Charge::retrieve(['id' => $this->charge->id, 'expand' => ['balance_transaction']], ['api_key' => Config::get('services.stripe.secret')]);
+        $stripeCharge = $this->stripe->getCharge($this->charge->id);
 
         $response->assertJsonFragment([
             'id' => $stripeCharge->id,
             'amount' => $stripeCharge->amount,
-            'fee' => $stripeCharge->balance_transaction->fee,
-            'net' => $stripeCharge->balance_transaction->net,
             'status' => $stripeCharge->status,
             'created' => $stripeCharge->created,
             'metadata' => $stripeCharge->metadata,
@@ -75,8 +70,6 @@ class StripeChargeControllerTest extends TestCase
 
         $response->assertSee($stripeCharge->id)
             ->assertSee($stripeCharge->amount)
-            ->assertSee($stripeCharge->balance_transaction->fee)
-            ->assertSee($stripeCharge->balance_transaction->net)
             ->assertSee($stripeCharge->status)
             ->assertSee($stripeCharge->created)
             ->assertSee($stripeCharge->livemode)
@@ -90,12 +83,38 @@ class StripeChargeControllerTest extends TestCase
     /** @test */
     public function it_shows_the_current_balance()
     {
-        $balance = $this->stripe->balance->retrieve();
+        $balance = $this->stripe->getBalance();
 
         $this->get('nova-vendor/nova-stripe/stripe/balance')
             ->assertJsonFragment([
                 'available' => $balance->available,
                 'pending' => $balance->pending,
             ]);
+    }
+
+    /** @test */
+    public function it_can_refund_a_charge_successfully()
+    {
+        $this->post('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id . '/refund')
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'charge' => $this->charge->id,
+                'status' => 'succeeded',
+            ]);
+
+        $this->assertTrue($this->stripe->getCharge($this->charge->id)->refunded);
+    }
+
+    public function findSuccessfulNonRefundedCharge()
+    {
+        $charges = $this->stripe->listCharges();
+
+        foreach ($charges as $charge) {
+            if (! $charge->refunded && $charge->status === 'succeeded') {
+                return $charge;
+            }
+        }
+
+        return null;
     }
 }
