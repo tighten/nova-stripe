@@ -11,9 +11,4 @@ class StripeCustomersController extends Controller
     {
         return response()->json(['customers' => (new StripeClient)->listCustomers()]);
     }
-
-//    public function show($id)
-//    {
-//        return response()->json(['customer' => (new StripeClient)->getCustomer($id)]);
-//    }
 }
