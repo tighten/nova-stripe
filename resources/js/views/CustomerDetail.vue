@@ -1,7 +1,9 @@
 <template>
+    <div>
+        <heading class="mb-6">Customer Details</heading>
 
-    <customer-detail-card :customer-id="customerId"/>
-
+        <customer-detail-card :customer-id="customerId"/>
+    </div>
 </template>
 
 <script>

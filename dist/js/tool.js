@@ -3746,6 +3746,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -3765,9 +3767,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("customer-detail-card", {
-    attrs: { "customer-id": _vm.customerId }
-  })
+  return _c(
+    "div",
+    [
+      _c("heading", { staticClass: "mb-6" }, [_vm._v("Customer Details")]),
+      _vm._v(" "),
+      _c("customer-detail-card", { attrs: { "customer-id": _vm.customerId } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3834,6 +3842,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_moneyFormat__ = __webpack_require__(3);
 //
 //
 //
@@ -3907,21 +3916,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ["customerId"],
     data: function data() {
         return {
             customer: {},
-            initialLoading: true
+            initialLoading: true,
+            money: __WEBPACK_IMPORTED_MODULE_0__utils_moneyFormat__["a" /* default */]
         };
     },
 
+    computed: {
+        formattedShipping: function formattedShipping() {
+            return this.customer.shipping.address.line1 + " " + this.customer.shipping.address.line2 + " <br/>\n                    " + this.customer.shipping.address.city + ", " + this.customer.shipping.address.state + " " + this.customer.shipping.address.postal_code;
+        }
+    },
     methods: {
+        date: function date(_date) {
+            return moment.unix(_date).format("YYYY/MM/DD h:mm:ss a");
+        },
         loadCustomer: function loadCustomer(id) {
             var _this = this;
 
@@ -3950,108 +3966,122 @@ var render = function() {
     { staticClass: "mb-6 py-3 px-6", attrs: { loading: _vm.initialLoading } },
     [
       _c("detail-text-field", {
-        attrs: { field: { name: "address", value: _vm.customer.address } }
+        attrs: { field: { name: "ID", value: _vm.customer.id } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "balance", value: _vm.customer.balance } }
+        attrs: { field: { name: "Name", value: _vm.customer.name } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "created", value: _vm.customer.created } }
+        attrs: { field: { name: "Address", value: _vm.customer.address } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "currency", value: _vm.customer.currency } }
+        attrs: { field: { name: "Email", value: _vm.customer.email } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: {
-          field: { name: "default_source", value: _vm.customer.default_source }
-        }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: { field: { name: "delinquent", value: _vm.customer.delinquent } }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: {
-          field: { name: "description", value: _vm.customer.description }
-        }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: { field: { name: "discount", value: _vm.customer.discount } }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: { field: { name: "email", value: _vm.customer.email } }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: { field: { name: "id", value: _vm.customer.id } }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: {
-          field: { name: "invoice_prefix", value: _vm.customer.invoice_prefix }
-        }
+        attrs: { field: { name: "Phone", value: _vm.customer.phone } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
         attrs: {
           field: {
-            name: "invoice_settings",
-            value: _vm.customer.invoice_settings
+            name: "Balance",
+            value: _vm.money(_vm.customer.currency, _vm.customer.balance)
           }
         }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "livemode", value: _vm.customer.livemode } }
+        attrs: {
+          field: { name: "Created", value: _vm.date(_vm.customer.created) }
+        }
+      }),
+      _vm._v(" "),
+      _vm.customer.shipping.address.line1 !== ""
+        ? _c("detail-text-field", {
+            attrs: {
+              field: {
+                name: "Shipping Address",
+                value:
+                  this.customer.shipping.address.line1 +
+                  " " +
+                  this.customer.shipping.address.line2 +
+                  ", " +
+                  this.customer.shipping.address.city +
+                  ", " +
+                  this.customer.shipping.address.state +
+                  " " +
+                  this.customer.shipping.address.postal_code
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Currency", value: _vm.customer.currency } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "metadata", value: _vm.customer.metadata } }
+        attrs: {
+          field: { name: "Default Source", value: _vm.customer.default_source }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-boolean-field", {
+        attrs: { field: { name: "Delinquent", value: _vm.customer.delinquent } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "name", value: _vm.customer.name } }
+        attrs: {
+          field: { name: "Description", value: _vm.customer.description }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Discount", value: _vm.customer.discount } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: { name: "Invoice Prefix", value: _vm.customer.invoice_prefix }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-boolean-field", {
+        attrs: { field: { name: "Livemode", value: _vm.customer.livemode } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "Metadata", value: _vm.customer.metadata } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
         attrs: {
           field: {
-            name: "next_invoice_sequence",
+            name: "Next Invoice Sequence",
             value: _vm.customer.next_invoice_sequence
           }
         }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "object", value: _vm.customer.object } }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: { field: { name: "phone", value: _vm.customer.phone } }
+        attrs: { field: { name: "Object", value: _vm.customer.object } }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
         attrs: {
           field: {
-            name: "preferred_locales",
+            name: "Preferred Locales",
             value: _vm.customer.preferred_locales
           }
         }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
-        attrs: { field: { name: "shipping", value: _vm.customer.shipping } }
-      }),
-      _vm._v(" "),
-      _c("detail-text-field", {
-        attrs: { field: { name: "tax_exempt", value: _vm.customer.tax_exempt } }
+        attrs: { field: { name: "Tax Exempt", value: _vm.customer.tax_exempt } }
       })
     ],
     1
