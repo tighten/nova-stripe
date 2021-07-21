@@ -83,7 +83,6 @@ export default {
             Nova.request()
                 .get("/nova-vendor/nova-stripe/stripe/customers", { params })
                 .then((response) => {
-                    console.log(response);
                     this.customers = response.data.customers.data;
                     this.hasMore = response.data.customers.has_more;
                     this.initialLoading = false;
