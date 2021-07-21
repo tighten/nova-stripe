@@ -2,7 +2,7 @@
     <loading-view :loading="initialLoading">
         <loading-card :loading="loading" class="card relative">
             <table
-                v-if="charges.length > 0"
+                v-if="customers.length > 0"
                 class="table w-full"
                 cellpadding="0"
                 cellspacing="0"
@@ -12,82 +12,63 @@
                     <tr>
                         <th class="text-left">
                             <span class="inline-flex items-center">
-                                Charge ID
+                                Customer ID
+                            </span>
+                        </th>
+                        <th class="text-left">
+                            <span class="inline-flex items-center"> Name </span>
+                        </th>
+                        <th class="text-left">
+                            <span class="inline-flex items-center">
+                                Email
                             </span>
                         </th>
                         <th class="text-left">
                             <span class="inline-flex items-center">
-                                Amount
+                                Balance
                             </span>
                         </th>
-                        <th class="text-left">
-                            <span class="inline-flex items-center">
-                                Created
-                            </span>
-                        </th>
-                        <th class="text-left">
-                            <span class="inline-flex items-center">
-                                Status
-                            </span>
-                        </th>
-                        <th>&nbsp;<!-- View --></th>
                     </tr>
                 </thead>
 
-                <tbody v-for="charge in charges">
+                <tbody v-for="customer in customers">
                     <tr>
-                        <td>{{ charge.id }}</td>
-                        <td>{{ charge.currency | money(charge.amount) }}</td>
-                        <td>{{ charge.created | date }}</td>
-                        <td>{{ charge.status }}</td>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.email }}</td>
                         <td>
-                            <span>
-                                <router-link
-                                    class="cursor-pointer text-70 hover:text-primary mr-3"
-                                    :to="{
-                                        name: 'charge-detail',
-                                        params: {
-                                            chargeId: charge.id,
-                                        },
-                                    }"
-                                    :title="__('View')"
-                                >
-                                    <icon
-                                        type="view"
-                                        width="22"
-                                        height="18"
-                                        view-box="0 0 22 16"
-                                    />
-                                </router-link>
+                            <span v-if="customer.currency">
+                                {{ customer.currency | money(customer.balance) }}
                             </span>
+                            <span v-else>-</span>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <charges-pagination-links
-                :resource="charges"
+            <customers-pagination-links
+                :resource="customers"
                 :hasMore="hasMore"
                 :hasPrevious="hasPrevious"
                 @previous="previousPage"
                 @next="nextPage"
-            ></charges-pagination-links>
+            ></customers-pagination-links>
         </loading-card>
     </loading-view>
 </template>
 
 <script>
-import ChargesPaginationLinks from "./PaginationLinks.vue";
+import CustomersPaginationLinks from "./PaginationLinks.vue";
 import money from "../utils/moneyFormat";
 
 export default {
     components: {
-        "charges-pagination-links": ChargesPaginationLinks,
+        "customers-pagination-links": CustomersPaginationLinks,
     },
 
     data() {
         return {
-            charges: {},
+            customers: {},
             initialLoading: true,
             loading: false,
             hasMore: false,
@@ -98,12 +79,13 @@ export default {
     methods: {
         moment: moment,
 
-        listCharges(params) {
+        listCustomers(params) {
             Nova.request()
-                .get("/nova-vendor/nova-stripe/stripe/charges", { params })
+                .get("/nova-vendor/nova-stripe/stripe/customers", { params })
                 .then((response) => {
-                    this.charges = response.data.charges.data;
-                    this.hasMore = response.data.charges.has_more;
+                    console.log(response);
+                    this.customers = response.data.customers.data;
+                    this.hasMore = response.data.customers.has_more;
                     this.initialLoading = false;
                     this.loading = false;
                 });
@@ -112,8 +94,8 @@ export default {
         nextPage() {
             this.loading = true;
 
-            this.listCharges({
-                starting_after: this.charges[this.charges.length - 1].id,
+            this.listCustomers({
+                starting_after: this.customers[this.customers.length - 1].id,
             });
 
             this.page++;
@@ -122,7 +104,7 @@ export default {
         previousPage() {
             this.loading = true;
 
-            this.listCharges({ ending_before: this.charges[0].id });
+            this.listCustomers({ ending_before: this.customers[0].id });
 
             if (this.hasPrevious) {
                 this.page--;
@@ -145,7 +127,7 @@ export default {
     },
 
     created() {
-        this.listCharges();
+        this.listCustomers();
     },
 };
 </script>
