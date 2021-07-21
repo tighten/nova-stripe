@@ -62,4 +62,13 @@ class StripeClient
 
         }
     }
+
+    public function getCustomer($id)
+    {
+        try {
+            return Customer::retrieve($id, ['api_key' => $this->apiKey]);
+        } catch (Exception $e) {
+
+        }
+    }
 }

@@ -19,5 +19,11 @@ Nova.booting((Vue, router) => {
             component: require("./views/Customers"),
             props: true,
         },
+        {
+            name: "customer-detail",
+            path: "/nova-stripe/customers/:customerId",
+            component: require("./views/CustomerDetail"),
+            props: true,
+        },
     ]);
 });

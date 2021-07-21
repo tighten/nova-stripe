@@ -1793,6 +1793,11 @@ Nova.booting(function (Vue, router) {
         path: "/nova-stripe/customers",
         component: __webpack_require__(37),
         props: true
+    }, {
+        name: "customer-detail",
+        path: "/nova-stripe/customers/:customerId",
+        component: __webpack_require__(55),
+        props: true
     }]);
 });
 
@@ -3124,7 +3129,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -3138,6 +3143,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_moneyFormat__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3224,7 +3251,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             Nova.request().get("/nova-vendor/nova-stripe/stripe/customers", { params: params }).then(function (response) {
-                console.log(response);
                 _this.customers = response.data.customers.data;
                 _this.hasMore = response.data.customers.has_more;
                 _this.initialLoading = false;
@@ -3343,7 +3369,9 @@ var render = function() {
                             )
                           ]
                         )
-                      ])
+                      ]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v(" ")])
                     ])
                   ]),
                   _vm._v(" "),
@@ -3371,6 +3399,42 @@ var render = function() {
                                 )
                               ])
                             : _c("span", [_vm._v("-")])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "span",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "cursor-pointer text-70 hover:text-primary mr-3",
+                                  attrs: {
+                                    to: {
+                                      name: "customer-detail",
+                                      params: {
+                                        customerId: customer.id
+                                      }
+                                    },
+                                    title: _vm.__("View")
+                                  }
+                                },
+                                [
+                                  _c("icon", {
+                                    attrs: {
+                                      type: "view",
+                                      width: "22",
+                                      height: "18",
+                                      "view-box": "0 0 22 16"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3583,6 +3647,127 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-2963ad24", module.exports)
+  }
+}
+
+/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/views/CustomerDetail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-416fa92e", Component.options)
+  } else {
+    hotAPI.reload("data-v-416fa92e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['customerId'],
+    data: function data() {
+        return {
+            customer: {},
+            initialLoading: true
+        };
+    },
+
+    methods: {
+        loadCustomer: function loadCustomer(id) {
+            var _this = this;
+
+            Nova.request().get('/nova-vendor/nova-stripe/stripe/customers/' + this.customerId).then(function (response) {
+                _this.customer = response.data.customer;
+                _this.initialLoading = false;
+            });
+        }
+    },
+    created: function created() {
+        this.loadCustomer();
+    }
+});
+
+/***/ }),
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "loading-card",
+    { staticClass: "mb-6 py-3 px-6", attrs: { loading: _vm.initialLoading } },
+    [
+      _c("div", [_vm._v("I am a customer.")]),
+      _vm._v(" "),
+      _c("div", [_vm._v(_vm._s(_vm.customer))])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-416fa92e", module.exports)
   }
 }
 
