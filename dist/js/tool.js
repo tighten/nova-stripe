@@ -2759,16 +2759,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['chargeId'],
+    props: ["chargeId"],
 
     data: function data() {
         return {
             initialLoading: true,
             charge: {
                 amount: 0,
-                currency: ''
+                currency: ""
             }
         };
     },
@@ -2793,7 +2821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.formatMoney(this.charge.amount - this.charge.balance_transaction.fee, this.charge.currency);
         },
         date: function date() {
-            return moment.unix(this.charge.created).format('YYYY/MM/DD h:mm:ss a');
+            return moment.unix(this.charge.created).format("YYYY/MM/DD h:mm:ss a");
         }
     },
 
@@ -2803,13 +2831,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getCharge: function getCharge() {
             var _this = this;
 
-            Nova.request().get('/nova-vendor/nova-stripe/stripe/charges/' + this.chargeId).then(function (response) {
+            Nova.request().get("/nova-vendor/nova-stripe/stripe/charges/" + this.chargeId).then(function (response) {
                 _this.charge = response.data.charge;
                 _this.initialLoading = false;
             });
         },
         formatMoney: function formatMoney(amount, currency) {
-            return (amount / 100).toFixed(2) + ' ' + currency.toUpperCase();
+            return (amount / 100).toFixed(2) + " " + currency.toUpperCase();
         }
     },
 
@@ -3710,36 +3738,22 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_CustomerDetailCard__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_CustomerDetailCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_CustomerDetailCard__);
 //
 //
 //
 //
 //
 //
-//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['customerId'],
-    data: function data() {
-        return {
-            customer: {},
-            initialLoading: true
-        };
+    components: {
+        "customer-detail-card": __WEBPACK_IMPORTED_MODULE_0__components_CustomerDetailCard___default.a
     },
-
-    methods: {
-        loadCustomer: function loadCustomer(id) {
-            var _this = this;
-
-            Nova.request().get('/nova-vendor/nova-stripe/stripe/customers/' + this.customerId).then(function (response) {
-                _this.customer = response.data.customer;
-                _this.initialLoading = false;
-            });
-        }
-    },
-    created: function created() {
-        this.loadCustomer();
-    }
+    props: ["customerId"]
 });
 
 /***/ }),
@@ -3751,15 +3765,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "loading-card",
-    { staticClass: "mb-6 py-3 px-6", attrs: { loading: _vm.initialLoading } },
-    [
-      _c("div", [_vm._v("I am a customer.")]),
-      _vm._v(" "),
-      _c("div", [_vm._v(_vm._s(_vm.customer))])
-    ]
-  )
+  return _c("customer-detail-card", {
+    attrs: { "customer-id": _vm.customerId }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3768,6 +3776,294 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-416fa92e", module.exports)
+  }
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(64)
+/* template */
+var __vue_template__ = __webpack_require__(66)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/CustomerDetailCard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24d3b0ac", Component.options)
+  } else {
+    hotAPI.reload("data-v-24d3b0ac", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 62 */,
+/* 63 */,
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ["customerId"],
+    data: function data() {
+        return {
+            customer: {},
+            initialLoading: true
+        };
+    },
+
+    methods: {
+        loadCustomer: function loadCustomer(id) {
+            var _this = this;
+
+            Nova.request().get("/nova-vendor/nova-stripe/stripe/customers/" + this.customerId).then(function (response) {
+                _this.customer = response.data.customer;
+                _this.initialLoading = false;
+            });
+        }
+    },
+    created: function created() {
+        this.loadCustomer();
+    }
+});
+
+/***/ }),
+/* 65 */,
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "loading-card",
+    { staticClass: "mb-6 py-3 px-6", attrs: { loading: _vm.initialLoading } },
+    [
+      _c("detail-text-field", {
+        attrs: { field: { name: "address", value: _vm.customer.address } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "balance", value: _vm.customer.balance } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "created", value: _vm.customer.created } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "currency", value: _vm.customer.currency } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: { name: "default_source", value: _vm.customer.default_source }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "delinquent", value: _vm.customer.delinquent } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: { name: "description", value: _vm.customer.description }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "discount", value: _vm.customer.discount } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "email", value: _vm.customer.email } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "id", value: _vm.customer.id } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: { name: "invoice_prefix", value: _vm.customer.invoice_prefix }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: {
+            name: "invoice_settings",
+            value: _vm.customer.invoice_settings
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "livemode", value: _vm.customer.livemode } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "metadata", value: _vm.customer.metadata } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "name", value: _vm.customer.name } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: {
+            name: "next_invoice_sequence",
+            value: _vm.customer.next_invoice_sequence
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "object", value: _vm.customer.object } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "phone", value: _vm.customer.phone } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: {
+          field: {
+            name: "preferred_locales",
+            value: _vm.customer.preferred_locales
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "shipping", value: _vm.customer.shipping } }
+      }),
+      _vm._v(" "),
+      _c("detail-text-field", {
+        attrs: { field: { name: "tax_exempt", value: _vm.customer.tax_exempt } }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-24d3b0ac", module.exports)
   }
 }
 

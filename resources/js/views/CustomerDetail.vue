@@ -1,30 +1,16 @@
 <template>
-    <loading-card :loading="initialLoading" class="mb-6 py-3 px-6">
-        <div>I am a customer.</div>
-        <div>{{customer}}</div>
-    </loading-card>
+
+    <customer-detail-card :customer-id="customerId"/>
+
 </template>
 
 <script>
+import CustomerDetailCard from "../components/CustomerDetailCard";
+
 export default {
-    props: ['customerId'],
-    data() {
-        return {
-            customer: {},
-            initialLoading: true,
-        }
+    components: {
+        "customer-detail-card" : CustomerDetailCard
     },
-    methods: {
-        loadCustomer(id) {
-            Nova.request().get('/nova-vendor/nova-stripe/stripe/customers/' + this.customerId)
-                .then((response) =>{
-                    this.customer = response.data.customer;
-                    this.initialLoading = false;
-                })
-        }
-    },
-    created() {
-        this.loadCustomer();
-    }
-}
+    props: ["customerId"],
+};
 </script>
