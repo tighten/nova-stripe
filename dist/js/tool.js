@@ -1877,7 +1877,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -1925,6 +1925,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_BalanceCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_BalanceCard_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ColumnSelect__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ColumnSelect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ColumnSelect__);
 //
 //
 //
@@ -1935,6 +1937,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -1942,7 +1951,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         'balance-card': __WEBPACK_IMPORTED_MODULE_0__components_BalanceCard_vue___default.a,
-        'charges-table': __WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue___default.a
+        'charges-table': __WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue___default.a,
+        'column-select': __WEBPACK_IMPORTED_MODULE_2__components_ColumnSelect___default.a
+    },
+    data: function data() {
+        return {
+            selectedColumns: {},
+            singleCharge: {}
+        };
     }
 });
 
@@ -2236,7 +2252,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -2309,17 +2325,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2328,6 +2333,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'charges-pagination-links': __WEBPACK_IMPORTED_MODULE_0__ChargesPaginationLinks_vue___default.a
     },
+
+    props: ['columns'],
 
     data: function data() {
         return {
@@ -2348,6 +2355,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             Nova.request().get('/nova-vendor/nova-stripe/stripe/charges', { params: params }).then(function (response) {
                 _this.charges = response.data.charges.data;
+                _this.charges.length > 0 ? _this.$emit('charge', _this.charges[0]) : '';
                 _this.hasMore = response.data.charges.has_more;
                 _this.initialLoading = false;
                 _this.loading = false;
@@ -2601,78 +2609,39 @@ var render = function() {
                 },
                 [
                   _c("thead", [
-                    _c("tr", [
-                      _c("th", { staticClass: "text-left" }, [
-                        _c(
-                          "span",
-                          { staticClass: "inline-flex items-center" },
-                          [
-                            _vm._v(
-                              "\n                     Charge ID\n                  "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-left" }, [
-                        _c(
-                          "span",
-                          { staticClass: "inline-flex items-center" },
-                          [
-                            _vm._v(
-                              "\n                     Amount\n                  "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-left" }, [
-                        _c(
-                          "span",
-                          { staticClass: "inline-flex items-center" },
-                          [
-                            _vm._v(
-                              "\n                     Created\n                  "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-left" }, [
-                        _c(
-                          "span",
-                          { staticClass: "inline-flex items-center" },
-                          [
-                            _vm._v(
-                              "\n                     Status\n                  "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v(" ")])
-                    ])
+                    _c(
+                      "tr",
+                      [
+                        _vm._l(_vm.columns, function(column) {
+                          return _vm.columns
+                            ? _c("th", { staticClass: "text-left" }, [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "inline-flex items-center capitalize"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                         " +
+                                        _vm._s(_vm.key.replaceAll("_", " ")) +
+                                        "\n                      "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
+                        }),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(" ")])
+                      ],
+                      2
+                    )
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.charges, function(charge) {
                     return _c("tbody", [
                       _c("tr", [
-                        _c("td", [_vm._v(_vm._s(charge.id))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("money")(charge.currency, charge.amount)
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(_vm._f("date")(charge.created)))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(charge.status))]),
-                        _vm._v(" "),
                         _c("td", [
                           _c(
                             "span",
@@ -2756,7 +2725,30 @@ var render = function() {
       _vm._v(" "),
       _c("balance-card"),
       _vm._v(" "),
-      _c("charges-table")
+      _c("column-select", {
+        attrs: { resource: _vm.singleCharge },
+        on: {
+          checkedColumns: function($event) {
+            _vm.selectedColumns = $event
+          }
+        },
+        model: {
+          value: _vm.selectedColumns,
+          callback: function($$v) {
+            _vm.selectedColumns = $$v
+          },
+          expression: "selectedColumns"
+        }
+      }),
+      _vm._v(" "),
+      _c("charges-table", {
+        attrs: { columns: _vm.selectedColumns },
+        on: {
+          charge: function($event) {
+            _vm.singleCharge = $event
+          }
+        }
+      })
     ],
     1
   )
@@ -3094,6 +3086,258 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(51)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3cd0c6dd"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ColumnSelect.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3cd0c6dd", Component.options)
+  } else {
+    hotAPI.reload("data-v-3cd0c6dd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(52);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("ab2c79e8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3cd0c6dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ColumnSelect.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3cd0c6dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ColumnSelect.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['resource'],
+    data: function data() {
+        return {
+            checkedColumns: []
+        };
+    }
+});
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "flex justify-end" },
+    [
+      _c("span", [_vm._v("Checked names: " + _vm._s(_vm.checkedColumns))]),
+      _vm._v(" "),
+      _c(
+        "dropdown",
+        { attrs: { offset: "-467" } },
+        [
+          _c("dropdown-trigger", [_vm._v("Select Columns")]),
+          _vm._v(" "),
+          _c(
+            "dropdown-menu",
+            {
+              staticClass: "p-3",
+              staticStyle: { width: "100%", columns: "30vw 3" },
+              attrs: { slot: "menu", direction: "rtl" },
+              slot: "menu"
+            },
+            _vm._l(_vm.resource, function(value, key) {
+              return _vm.resource
+                ? _c("div", { staticClass: "mb-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.checkedColumns,
+                          expression: "checkedColumns"
+                        }
+                      ],
+                      attrs: { type: "checkbox", id: key },
+                      domProps: {
+                        value: key,
+                        checked: Array.isArray(_vm.checkedColumns)
+                          ? _vm._i(_vm.checkedColumns, key) > -1
+                          : _vm.checkedColumns
+                      },
+                      on: {
+                        input: function($event) {
+                          return _vm.$emit("checkedColumns", _vm.checkedColumns)
+                        },
+                        change: function($event) {
+                          var $$a = _vm.checkedColumns,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = key,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.checkedColumns = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.checkedColumns = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.checkedColumns = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "capitalize", attrs: { for: key } },
+                      [_vm._v(_vm._s(key.replaceAll("_", " ")))]
+                    )
+                  ])
+                : _vm._e()
+            }),
+            0
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3cd0c6dd", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

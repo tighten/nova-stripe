@@ -10,24 +10,10 @@
             >
                 <thead>
                 <tr>
-                    <th class="text-left">
-                      <span class="inline-flex items-center">
-                         Charge ID
-                      </span>
-                    </th>
-                    <th class="text-left">
-                      <span class="inline-flex items-center">
-                         Amount
-                      </span>
-                    </th>
-                    <th class="text-left">
-                      <span class="inline-flex items-center">
-                         Created
-                      </span>
-                    </th>
-                    <th class="text-left">
-                      <span class="inline-flex items-center">
-                         Status
+                    <!-- Id, Amount, Created date, Status-->
+                    <th v-if="columns" v-for="column in columns" class="text-left">
+                      <span class="inline-flex items-center capitalize">
+                         {{ key.replaceAll('_', ' ') }}
                       </span>
                     </th>
                     <th>&nbsp;<!-- View --></th>
@@ -35,25 +21,28 @@
                 </thead>
 
                 <tbody v-for="charge in charges">
-                <tr>
-                    <td>{{ charge.id }}</td>
-                    <td>{{ charge.currency | money(charge.amount) }}</td>
-                    <td>{{ charge.created | date }}</td>
-                    <td>{{ charge.status }}</td>
-                    <td>
-                        <span>
-                            <router-link
-                                    class="cursor-pointer text-70 hover:text-primary mr-3"
-                                    :to="{ name: 'charge-detail', params: {
-                                        chargeId: charge.id
-                                    }}"
-                                    :title="__('View')"
-                            >
-                                <icon type="view" width="22" height="18" view-box="0 0 22 16" />
-                            </router-link>
-                        </span>
-                    </td>
-                </tr>
+                    <tr>
+<!--                        <td v-for="column in columns">-->
+<!--                            {{ charge[column] }}-->
+<!--                        </td>-->
+    <!--                    <td>{{ charge.id }}</td>-->
+    <!--                    <td>{{ charge.currency | money(charge.amount) }}</td>-->
+    <!--                    <td>{{ charge.created | date }}</td>-->
+    <!--                    <td>{{ charge.status }}</td>-->
+                        <td>
+                            <span>
+                                <router-link
+                                        class="cursor-pointer text-70 hover:text-primary mr-3"
+                                        :to="{ name: 'charge-detail', params: {
+                                            chargeId: charge.id
+                                        }}"
+                                        :title="__('View')"
+                                >
+                                    <icon type="view" width="22" height="18" view-box="0 0 22 16" />
+                                </router-link>
+                            </span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -77,6 +66,8 @@ export default {
         'charges-pagination-links': ChargesPaginationLinks
     },
 
+    props: ['columns'],
+
     data() {
         return {
             charges: {},
@@ -94,6 +85,7 @@ export default {
             Nova.request().get('/nova-vendor/nova-stripe/stripe/charges', { params })
                 .then((response) => {
                     this.charges = response.data.charges.data
+                    this.charges.length > 0 ? this.$emit('charge', this.charges[0]) : '';
                     this.hasMore = response.data.charges.has_more
                     this.initialLoading = false
                     this.loading = false
