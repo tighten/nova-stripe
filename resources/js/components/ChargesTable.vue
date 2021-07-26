@@ -42,8 +42,7 @@
                     <td>{{ charge.currency | money(charge.amount) }}</td>
                     <td>{{ charge.created | date }}</td>
                     <td>
-                        <span v-if="! charge.refunded" class="rounded-lg px-3 py-1 capitalize text-xs font-black" :class="statusClass(charge.status)">{{ charge.status }}</span>
-                        <span v-else class="rounded-lg px-3 py-1 capitalize text-xs font-black bg-40 text-80">Refunded</span>
+                        <span class="rounded-lg px-3 py-1 capitalize text-xs font-black" :class="statusClass(charge.status)">{{ charge.refunded ? 'Refunded' : charge.status }}</span>
                     </td>
                     <td>
                         <span>
