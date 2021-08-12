@@ -46,7 +46,7 @@ Register the `NovaStripe` tool in `app/Providers/NovaServiceProvider`:
 public function tools()
 {
     return [
-        new \Tighten\NovaStripe\NovaStripe,
+           new \Tighten\NovaStripe\NovaStripe,
     ];
 }
 ```
