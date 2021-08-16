@@ -27,13 +27,9 @@
         },
         data() {
             return {
-                selectedColumns: {},
+                selectedColumns: ['id', 'amount', 'created', 'status'],
                 singleCharge: {},
             }
-        }
+        },
     }
 </script>
-
-<style>
-    /* Scoped Styles */
-</style>

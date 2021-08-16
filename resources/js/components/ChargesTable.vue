@@ -11,7 +11,7 @@
                 <thead>
                 <tr>
                     <!-- Id, Amount, Created date, Status-->
-                    <th v-if="columns" v-for="column in columns" class="text-left">
+                    <th v-if="columns" v-for="(key, value) in columns" class="text-left">
                       <span class="inline-flex items-center capitalize">
                          {{ key.replaceAll('_', ' ') }}
                       </span>
@@ -22,13 +22,11 @@
 
                 <tbody v-for="charge in charges">
                     <tr>
-<!--                        <td v-for="column in columns">-->
-<!--                            {{ charge[column] }}-->
-<!--                        </td>-->
-    <!--                    <td>{{ charge.id }}</td>-->
-    <!--                    <td>{{ charge.currency | money(charge.amount) }}</td>-->
-    <!--                    <td>{{ charge.created | date }}</td>-->
-    <!--                    <td>{{ charge.status }}</td>-->
+                        <td v-for="column in columns">
+                            <span v-if="moneyColumns.find(moneyColumn => moneyColumn === column)">{{ charge.currency | money(charge[column]) }}</span>
+                            <span v-else-if="dateColumns.find(dateColumn => dateColumn === column)">{{ charge[column] | date }}</span>
+                            <span v-else>{{ charge[column] }}</span>
+                        </td>
                         <td>
                             <span>
                                 <router-link
@@ -75,6 +73,8 @@ export default {
             loading: false,
             hasMore: false,
             page: 1,
+            moneyColumns: ['amount', 'amount_captured', 'amount_refunded', 'application_fee_amount', ],
+            dateColumns: ['created'],
         }
     },
 
@@ -130,7 +130,3 @@ export default {
     },
 }
 </script>
-
-<style>
-    /* Scoped Styles */
-</style>

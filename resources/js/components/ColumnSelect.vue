@@ -11,11 +11,11 @@
             >
                 <div
                     v-if="resource"
-                    v-for="(value, key) in resource"
+                    v-for="(key, value) in resource"
                     class="mb-2"
                 >
-                    <input class="" type="checkbox" :id="key" :value="key" v-model="checkedColumns" @input="$emit('checkedColumns', checkedColumns)">
-                    <label :for="key" class="capitalize">{{ key.replaceAll('_', ' ') }}</label>
+                    <input class="" type="checkbox" :id="value" :value="value" v-model="checkedColumns" @change="$emit('checkedColumns', checkedColumns)">
+                    <label :for="value" class="capitalize">{{ value.replaceAll('_', ' ') }}</label>
                 </div>
             </dropdown-menu>
 
@@ -28,12 +28,8 @@ export default {
     props: ['resource'],
     data() {
         return {
-            checkedColumns: [],
+            checkedColumns: this.$attrs.value,
         }
     },
 }
 </script>
-
-<style scoped>
-
-</style>
