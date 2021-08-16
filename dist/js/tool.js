@@ -1902,6 +1902,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -2176,143 +2178,145 @@ var render = function() {
         "loading-card",
         { staticClass: "card relative", attrs: { loading: _vm.loading } },
         [
-          _vm.charges.length > 0
-            ? _c(
-                "table",
-                {
-                  staticClass: "table w-full",
-                  attrs: {
-                    cellpadding: "0",
-                    cellspacing: "0",
-                    "data-testid": "resource-table"
-                  }
-                },
-                [
-                  _c("thead", [
-                    _c(
-                      "tr",
-                      [
-                        _vm._l(_vm.columns, function(column) {
-                          return _vm.columns
-                            ? _c("th", { staticClass: "text-left" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "inline-flex items-center capitalize"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                     " +
-                                        _vm._s(column.replaceAll("_", " ")) +
-                                        "\n                  "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _vm._e()
-                        }),
-                        _vm._v(" "),
-                        _c("th", [_vm._v(" ")])
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.charges, function(charge) {
-                    return _c("tbody", [
+          _c("div", { staticClass: "overflow-x-auto" }, [
+            _vm.charges.length > 0
+              ? _c(
+                  "table",
+                  {
+                    staticClass: "table w-full",
+                    attrs: {
+                      cellpadding: "0",
+                      cellspacing: "0",
+                      "data-testid": "resource-table"
+                    }
+                  },
+                  [
+                    _c("thead", [
                       _c(
                         "tr",
                         [
                           _vm._l(_vm.columns, function(column) {
-                            return _c("td", [
-                              _vm.moneyColumns.find(function(moneyColumn) {
-                                return moneyColumn === column
-                              })
-                                ? _c("span", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm._f("money")(
-                                          charge.currency,
-                                          charge[column]
-                                        )
-                                      )
-                                    )
-                                  ])
-                                : _vm.dateColumns.find(function(dateColumn) {
-                                    return dateColumn === column
-                                  })
-                                ? _c("span", [
-                                    _vm._v(
-                                      _vm._s(_vm._f("date")(charge[column]))
-                                    )
-                                  ])
-                                : column === "status"
-                                ? _c(
+                            return _vm.columns
+                              ? _c("th", { staticClass: "text-left" }, [
+                                  _c(
                                     "span",
                                     {
                                       staticClass:
-                                        "rounded-lg px-3 py-1 capitalize text-xs font-black",
-                                      class: _vm.statusClass(charge.status)
+                                        "inline-flex items-center capitalize"
                                     },
                                     [
                                       _vm._v(
-                                        _vm._s(
-                                          charge.refunded
-                                            ? "Refunded"
-                                            : charge.status
-                                        )
+                                        "\n                         " +
+                                          _vm._s(column.replaceAll("_", " ")) +
+                                          "\n                      "
                                       )
                                     ]
                                   )
-                                : _c("span", [_vm._v(_vm._s(charge[column]))])
-                            ])
+                                ])
+                              : _vm._e()
                           }),
                           _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "span",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass:
-                                      "cursor-pointer text-70 hover:text-primary mr-3",
-                                    attrs: {
-                                      to: {
-                                        name: "charge-detail",
-                                        params: {
-                                          chargeId: charge.id
-                                        }
-                                      },
-                                      title: _vm.__("View")
-                                    }
-                                  },
-                                  [
-                                    _c("icon", {
-                                      attrs: {
-                                        type: "view",
-                                        width: "22",
-                                        height: "18",
-                                        "view-box": "0 0 22 16"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ])
+                          _c("th", [_vm._v(" ")])
                         ],
                         2
                       )
-                    ])
-                  })
-                ],
-                2
-              )
-            : _vm._e(),
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.charges, function(charge) {
+                      return _c("tbody", [
+                        _c(
+                          "tr",
+                          [
+                            _vm._l(_vm.columns, function(column) {
+                              return _c("td", [
+                                _vm.moneyColumns.find(function(moneyColumn) {
+                                  return moneyColumn === column
+                                })
+                                  ? _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("money")(
+                                            charge.currency,
+                                            charge[column]
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  : _vm.dateColumns.find(function(dateColumn) {
+                                      return dateColumn === column
+                                    })
+                                  ? _c("span", [
+                                      _vm._v(
+                                        _vm._s(_vm._f("date")(charge[column]))
+                                      )
+                                    ])
+                                  : column === "status"
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "rounded-lg px-3 py-1 capitalize text-xs font-black",
+                                        class: _vm.statusClass(charge.status)
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            charge.refunded
+                                              ? "Refunded"
+                                              : charge.status
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  : _c("span", [_vm._v(_vm._s(charge[column]))])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "span",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer text-70 hover:text-primary mr-3",
+                                      attrs: {
+                                        to: {
+                                          name: "charge-detail",
+                                          params: {
+                                            chargeId: charge.id
+                                          }
+                                        },
+                                        title: _vm.__("View")
+                                      }
+                                    },
+                                    [
+                                      _c("icon", {
+                                        attrs: {
+                                          type: "view",
+                                          width: "22",
+                                          height: "18",
+                                          "view-box": "0 0 22 16"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          ],
+                          2
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              : _vm._e()
+          ]),
           _vm._v(" "),
           _c("charges-pagination-links", {
             attrs: {
