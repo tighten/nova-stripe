@@ -25,6 +25,7 @@
                         <td v-for="column in columns">
                             <span v-if="moneyColumns.find(moneyColumn => moneyColumn === column)">{{ charge.currency | money(charge[column]) }}</span>
                             <span v-else-if="dateColumns.find(dateColumn => dateColumn === column)">{{ charge[column] | date }}</span>
+                            <span v-else-if="column === 'status'" class="rounded-lg px-3 py-1 capitalize text-xs font-black" :class="statusClass(charge.status)">{{ charge.refunded ? 'Refunded' : charge.status }}</span>
                             <span v-else>{{ charge[column] }}</span>
                         </td>
                         <td>
@@ -63,9 +64,7 @@ export default {
     components: {
         'charges-pagination-links': ChargesPaginationLinks
     },
-
     props: ['columns'],
-
     data() {
         return {
             charges: {},
@@ -75,12 +74,20 @@ export default {
             page: 1,
             moneyColumns: ['amount', 'amount_captured', 'amount_refunded', 'application_fee_amount', ],
             dateColumns: ['created'],
+            statusClassList: {
+                'succeeded' : 'bg-success-light text-success-dark',
+                'pending' : 'bg-warning-light text-warning-dark',
+                'failed' : 'bg-danger-light text-danger-dark',
+            }
         }
     },
-
+    computed: {
+        hasPrevious() {
+            return this.page > 1
+        }
+    },
     methods: {
         moment: moment,
-
         listCharges(params) {
             Nova.request().get('/nova-vendor/nova-stripe/stripe/charges', { params })
                 .then((response) => {
@@ -91,7 +98,6 @@ export default {
                     this.loading = false
                 })
         },
-
         nextPage() {
             this.loading = true
 
@@ -99,7 +105,6 @@ export default {
 
             this.page++
         },
-
         previousPage() {
             this.loading = true
 
@@ -108,15 +113,11 @@ export default {
             if (this.hasPrevious) {
                 this.page--
             }
-        }
+        },
+        statusClass(status) {
+            return this.statusClassList[status];
+        },
     },
-
-    computed: {
-        hasPrevious() {
-            return this.page > 1
-        }
-    },
-
     filters: {
         date(date) {
             return moment.unix(date).format('YYYY/MM/DD h:mm:ss a')
@@ -124,7 +125,6 @@ export default {
 
         money
     },
-
     created() {
         this.listCharges()
     },

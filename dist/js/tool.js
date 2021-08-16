@@ -1899,6 +1899,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -1907,9 +1908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'charges-pagination-links': __WEBPACK_IMPORTED_MODULE_0__ChargesPaginationLinks_vue___default.a
     },
-
     props: ['columns'],
-
     data: function data() {
         return {
             charges: {},
@@ -1918,14 +1917,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             hasMore: false,
             page: 1,
             moneyColumns: ['amount', 'amount_captured', 'amount_refunded', 'application_fee_amount'],
-            dateColumns: ['created']
+            dateColumns: ['created'],
+            statusClassList: {
+                'succeeded': 'bg-success-light text-success-dark',
+                'pending': 'bg-warning-light text-warning-dark',
+                'failed': 'bg-danger-light text-danger-dark'
+            }
         };
     },
 
-
+    computed: {
+        hasPrevious: function hasPrevious() {
+            return this.page > 1;
+        }
+    },
     methods: {
         moment: moment,
-
         listCharges: function listCharges(params) {
             var _this = this;
 
@@ -1952,15 +1959,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.hasPrevious) {
                 this.page--;
             }
+        },
+        statusClass: function statusClass(status) {
+            return this.statusClassList[status];
         }
     },
-
-    computed: {
-        hasPrevious: function hasPrevious() {
-            return this.page > 1;
-        }
-    },
-
     filters: {
         date: function date(_date) {
             return moment.unix(_date).format('YYYY/MM/DD h:mm:ss a');
@@ -1969,7 +1972,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         money: __WEBPACK_IMPORTED_MODULE_1__utils_moneyFormat__["a" /* default */]
     },
-
     created: function created() {
         this.listCharges();
     }
@@ -2243,6 +2245,24 @@ var render = function() {
                                       _vm._s(_vm._f("date")(charge[column]))
                                     )
                                   ])
+                                : column === "status"
+                                ? _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "rounded-lg px-3 py-1 capitalize text-xs font-black",
+                                      class: _vm.statusClass(charge.status)
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          charge.refunded
+                                            ? "Refunded"
+                                            : charge.status
+                                        )
+                                      )
+                                    ]
+                                  )
                                 : _c("span", [_vm._v(_vm._s(charge[column]))])
                             ])
                           }),
