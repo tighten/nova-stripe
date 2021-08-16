@@ -1561,6 +1561,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -2190,7 +2192,7 @@ var render = function() {
                     _c(
                       "tr",
                       [
-                        _vm._l(_vm.columns, function(key, value) {
+                        _vm._l(_vm.columns, function(column) {
                           return _vm.columns
                             ? _c("th", { staticClass: "text-left" }, [
                                 _c(
@@ -2202,7 +2204,7 @@ var render = function() {
                                   [
                                     _vm._v(
                                       "\n                     " +
-                                        _vm._s(key.replaceAll("_", " ")) +
+                                        _vm._s(column.replaceAll("_", " ")) +
                                         "\n                  "
                                     )
                                   ]
@@ -2416,7 +2418,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resource'],
@@ -2443,30 +2444,36 @@ var render = function() {
       _vm._v(" "),
       _c("balance-card"),
       _vm._v(" "),
-      _c("column-select", {
-        attrs: { resource: _vm.singleCharge },
-        on: {
-          checkedColumns: function($event) {
-            _vm.selectedColumns = $event
-          }
-        },
-        model: {
-          value: _vm.selectedColumns,
-          callback: function($$v) {
-            _vm.selectedColumns = $$v
-          },
-          expression: "selectedColumns"
-        }
-      }),
-      _vm._v(" "),
-      _c("charges-table", {
-        attrs: { columns: _vm.selectedColumns },
-        on: {
-          charge: function($event) {
-            _vm.singleCharge = $event
-          }
-        }
-      })
+      _c(
+        "card",
+        [
+          _c("column-select", {
+            attrs: { resource: _vm.singleCharge },
+            on: {
+              checkedColumns: function($event) {
+                _vm.selectedColumns = $event
+              }
+            },
+            model: {
+              value: _vm.selectedColumns,
+              callback: function($$v) {
+                _vm.selectedColumns = $$v
+              },
+              expression: "selectedColumns"
+            }
+          }),
+          _vm._v(" "),
+          _c("charges-table", {
+            attrs: { columns: _vm.selectedColumns },
+            on: {
+              charge: function($event) {
+                _vm.singleCharge = $event
+              }
+            }
+          })
+        ],
+        1
+      )
     ],
     1
   )
@@ -2818,21 +2825,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex justify-end" },
+    { staticClass: "flex justify-end p-2" },
     [
-      _c("span", [_vm._v("Checked names: " + _vm._s(_vm.checkedColumns))]),
-      _vm._v(" "),
       _c(
         "dropdown",
-        { attrs: { offset: "-467" } },
+        { attrs: { offset: "-480" } },
         [
-          _c("dropdown-trigger", [_vm._v("Select Columns")]),
+          _c(
+            "dropdown-trigger",
+            { staticClass: "text-90 bg-30 px-3 border-2 border-30 rounded" },
+            [_vm._v("Select Columns")]
+          ),
           _vm._v(" "),
           _c(
             "dropdown-menu",
             {
-              staticClass: "p-3",
-              staticStyle: { width: "100%", columns: "30vw 3" },
+              staticClass: "p-3 text-90",
+              staticStyle: { width: "100%", columns: "25vw 3" },
               attrs: { slot: "menu", direction: "rtl" },
               slot: "menu"
             },

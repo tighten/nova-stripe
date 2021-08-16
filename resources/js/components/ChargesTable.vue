@@ -11,9 +11,9 @@
                 <thead>
                 <tr>
                     <!-- Id, Amount, Created date, Status-->
-                    <th v-if="columns" v-for="(key, value) in columns" class="text-left">
+                    <th v-if="columns" v-for="column in columns" class="text-left">
                       <span class="inline-flex items-center capitalize">
-                         {{ key.replaceAll('_', ' ') }}
+                         {{ column.replaceAll('_', ' ') }}
                       </span>
                     </th>
                     <th>&nbsp;<!-- View --></th>

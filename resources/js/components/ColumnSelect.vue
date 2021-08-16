@@ -1,13 +1,12 @@
 <template>
-    <div class="flex justify-end">
-        <span>Checked names: {{ checkedColumns }}</span>
-        <dropdown offset="-467">
-            <dropdown-trigger>Select Columns</dropdown-trigger>
+    <div class="flex justify-end p-2">
+        <dropdown offset="-480">
+            <dropdown-trigger class="text-90 bg-30 px-3 border-2 border-30 rounded">Select Columns</dropdown-trigger>
             <dropdown-menu
                slot="menu"
                direction="rtl"
-               style="width: 100%; columns: 30vw 3"
-               class="p-3"
+               style="width: 100%; columns: 25vw 3"
+               class="p-3 text-90"
             >
                 <div
                     v-if="resource"

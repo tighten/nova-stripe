@@ -4,13 +4,15 @@
 
         <balance-card />
 
-        <column-select
-            v-model="selectedColumns"
-            :resource="singleCharge"
-            @checkedColumns="selectedColumns = $event"
-        />
+        <card>
+            <column-select
+                v-model="selectedColumns"
+                :resource="singleCharge"
+                @checkedColumns="selectedColumns = $event"
+            />
 
-        <charges-table @charge="singleCharge = $event" :columns="selectedColumns"/>
+            <charges-table @charge="singleCharge = $event" :columns="selectedColumns"/>
+        </card>
     </div>
 </template>
 
