@@ -65,6 +65,7 @@ export default {
                 .then((response) => {
                     this.charge = response.data.charge
                     this.initialLoading = false
+                    this.$emit('charge-loaded', response.data.charge);
                 })
         },
 

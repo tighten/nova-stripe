@@ -3,6 +3,7 @@
 namespace Tighten\NovaStripe\Http;
 
 use Illuminate\Routing\Controller;
+use Stripe\Charge;
 use Tighten\NovaStripe\Clients\StripeClient;
 
 class StripeChargesController extends Controller
@@ -19,5 +20,10 @@ class StripeChargesController extends Controller
     public function show($id)
     {
         return response()->json(['charge' => (new StripeClient)->getCharge($id)]);
+    }
+
+    public function refund($id)
+    {
+        return response()->json((new StripeClient)->refundCharge($id));
     }
 }

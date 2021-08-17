@@ -2866,14 +2866,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['chargeId'],
-
     components: {
         'charge-detail-card': __WEBPACK_IMPORTED_MODULE_0__components_ChargeDetailCard_vue___default.a
+    },
+    data: function data() {
+        return {
+            charge: undefined,
+            deleting: false
+        };
+    },
+
+    methods: {
+        refund: function refund(chargeId) {
+            var _this = this;
+
+            this.deleting = true;
+
+            Nova.request().post('/nova-vendor/nova-stripe/stripe/charges/' + this.chargeId + '/refund').then(function (response) {
+                Nova.success('Charge Successfully Refunded!');
+                _this.$refs.detail.getCharge();
+            });
+
+            this.deleting = false;
+        }
     }
 });
 
@@ -2996,6 +3031,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Nova.request().get('/nova-vendor/nova-stripe/stripe/charges/' + this.chargeId).then(function (response) {
                 _this.charge = response.data.charge;
                 _this.initialLoading = false;
+                _this.$emit('charge-loaded', response.data.charge);
             });
         },
         formatMoney: function formatMoney(amount, currency) {
@@ -3106,7 +3142,33 @@ var render = function() {
     [
       _c("heading", { staticClass: "mb-6" }, [_vm._v("Charge Details")]),
       _vm._v(" "),
-      _c("charge-detail-card", { attrs: { "charge-id": _vm.chargeId } })
+      _c("div", { staticClass: "flex flex-row-reverse mb-3" }, [
+        _vm.charge && !_vm.charge.refunded
+          ? _c(
+              "button",
+              {
+                staticClass: "btn-primary px-4 py-2 rounded",
+                attrs: { disabled: _vm.deleting },
+                on: {
+                  click: function($event) {
+                    return _vm.refund(_vm.charge.id)
+                  }
+                }
+              },
+              [_vm._v("\n            Refund\n        ")]
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("charge-detail-card", {
+        ref: "detail",
+        attrs: { "charge-id": _vm.chargeId },
+        on: {
+          "charge-loaded": function($event) {
+            _vm.charge = $event
+          }
+        }
+      })
     ],
     1
   )

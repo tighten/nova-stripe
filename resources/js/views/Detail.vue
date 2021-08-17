@@ -2,18 +2,56 @@
     <div>
         <heading class="mb-6">Charge Details</heading>
 
-        <charge-detail-card :charge-id="chargeId"></charge-detail-card>
+        <div class="flex flex-row-reverse mb-3">
+            <button
+                v-if="charge && !charge.refunded"
+                class="btn-primary px-4 py-2 rounded"
+                @click="refund(charge.id)"
+                :disabled="deleting"
+            >
+                Refund
+            </button>
+        </div>
+
+        <charge-detail-card
+            ref="detail"
+            :charge-id="chargeId"
+            @charge-loaded="charge = $event"
+        />
     </div>
 </template>
 
 <script>
-    import ChargeDetailCard from '../components/ChargeDetailCard.vue'
+import ChargeDetailCard from '../components/ChargeDetailCard.vue';
 
-    export default {
-        props: ['chargeId'],
+export default {
+    props: ['chargeId'],
+    components: {
+        'charge-detail-card': ChargeDetailCard,
+    },
+    data() {
+        return {
+            charge: undefined,
+            deleting: false,
+        };
+    },
+    methods: {
+        refund(chargeId) {
+            this.deleting = true;
 
-        components: {
-            'charge-detail-card': ChargeDetailCard,
-        }
-    }
+            Nova.request()
+                .post(
+                    '/nova-vendor/nova-stripe/stripe/charges/' +
+                        this.chargeId +
+                        '/refund'
+                )
+                .then((response) => {
+                    Nova.success('Charge Successfully Refunded!');
+                    this.$refs.detail.getCharge();
+                });
+
+            this.deleting = false;
+        },
+    },
+};
 </script>
