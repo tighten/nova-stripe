@@ -6,6 +6,7 @@ use Exception;
 use Stripe\Balance;
 use Stripe\Charge;
 use Stripe\Customer;
+use Stripe\Refund;
 
 class StripeClient
 {
@@ -58,6 +59,24 @@ class StripeClient
     {
         try {
             return Customer::all($options, ['api_key' => $this->apiKey]);
+        } catch (Exception $e) {
+
+        }
+    }
+
+    public function refundCharge($chargeId)
+    {
+        try {
+            return Refund::create(['charge' => $chargeId], ['api_key' => $this->apiKey]);
+        } catch (Exception $e) {
+
+        }
+    }
+
+    public function createCharge(array $params)
+    {
+        try {
+            return Charge::create($params, ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
 
         }

@@ -19,5 +19,6 @@ use Tighten\NovaStripe\Http\StripeCustomersController;
 
 Route::get('/stripe/charges', StripeChargesController::class . '@index');
 Route::get('/stripe/charges/{id}', StripeChargesController::class . '@show');
+Route::post('/stripe/charges/{id}/refund', StripeChargesController::class . '@refund');
 Route::get('/stripe/balance', StripeBalanceController::class . '@index');
 Route::get('/stripe/customers', StripeCustomersController::class . '@index');
