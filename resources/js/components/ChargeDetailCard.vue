@@ -100,9 +100,10 @@ export default {
             Nova.request()
                 .get("/nova-vendor/nova-stripe/stripe/charges/" + this.chargeId)
                 .then((response) => {
-                    this.charge = response.data.charge;
-                    this.initialLoading = false;
-                });
+                    this.charge = response.data.charge
+                    this.initialLoading = false
+                    this.$emit('charge-loaded', response.data.charge);
+                })
         },
 
         formatMoney(amount, currency) {

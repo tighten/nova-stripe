@@ -72,6 +72,7 @@ If you discover any security related issues, please email hello@tighten.co inste
 ## Credits
 
 - [Samantha Geitz](https://github.com/samanthamichele7)
+- [Alison Kirk](https://github.com/faxblaster)
 - [All Contributors](https://github.com/tightenco/nova-stripe/graphs/contributors)
 
 ## Support us

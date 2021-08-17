@@ -16,5 +16,11 @@
     "dependencies": {
         "currency.js": "^1.2.1",
         "vue": "^2.5.0"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "printWidth": 80
     }
 }
