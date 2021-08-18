@@ -28,6 +28,7 @@
                                 Balance
                             </span>
                         </th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
 
@@ -41,6 +42,27 @@
                                 {{ customer.currency | money(customer.balance) }}
                             </span>
                             <span v-else>-</span>
+                        </td>
+                        <td>
+                            <span>
+                                <router-link
+                                    class="cursor-pointer text-70 hover:text-primary mr-3"
+                                    :to="{
+                                        name: 'customer-detail',
+                                        params: {
+                                            customerId: customer.id,
+                                        },
+                                    }"
+                                    :title="__('View')"
+                                >
+                                    <icon
+                                        type="view"
+                                        width="22"
+                                        height="18"
+                                        view-box="0 0 22 16"
+                                    />
+                                </router-link>
+                            </span>
                         </td>
                     </tr>
                 </tbody>

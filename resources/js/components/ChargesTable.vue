@@ -10,17 +10,16 @@
                         data-testid="resource-table"
                 >
                     <thead>
-                    <tr>
-                        <!-- Id, Amount, Created date, Status-->
-                        <th v-if="columns" v-for="column in columns" class="text-left">
-                          <span class="inline-flex items-center capitalize">
-                             {{ column.replaceAll('_', ' ') }}
-                          </span>
-                        </th>
-                        <th>&nbsp;<!-- View --></th>
-                    </tr>
+                        <tr>
+                            <!-- Id, Amount, Created date, Status-->
+                            <th v-if="columns" v-for="column in columns" class="text-left">
+                              <span class="inline-flex items-center capitalize">
+                                 {{ column.replaceAll('_', ' ') }}
+                              </span>
+                            </th>
+                            <th>&nbsp;<!-- View --></th>
+                        </tr>
                     </thead>
-
                     <tbody v-for="charge in charges">
                         <tr>
                             <td v-for="column in columns">
@@ -87,9 +86,6 @@ export default {
         hasPrevious() {
             return this.page > 1
         },
-        statusClass(status) {
-            return this.statusClassList[status];
-        }
     },
     methods: {
         moment: moment,
@@ -121,6 +117,9 @@ export default {
             if (this.hasPrevious) {
                 this.page--;
             }
+        },
+        statusClass(status) {
+            return this.statusClassList[status];
         },
     },
     filters: {
