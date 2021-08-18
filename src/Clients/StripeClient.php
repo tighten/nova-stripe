@@ -5,6 +5,7 @@ namespace Tighten\NovaStripe\Clients;
 use Exception;
 use Stripe\Balance;
 use Stripe\Charge;
+use Stripe\Customer;
 use Stripe\Refund;
 
 class StripeClient
@@ -49,6 +50,15 @@ class StripeClient
     {
         try {
             return Balance::retrieve(['api_key' => $this->apiKey]);
+        } catch (Exception $e) {
+
+        }
+    }
+
+    public function listCustomers($options = [])
+    {
+        try {
+            return Customer::all($options, ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
 
         }

@@ -48,23 +48,23 @@
             </div>
 
             <charges-pagination-links
-                    :charges="charges"
-                    :hasMore="hasMore"
-                    :hasPrevious="hasPrevious"
-                    @previous="previousPage"
-                    @next="nextPage"
+                :resource="charges"
+                :hasMore="hasMore"
+                :hasPrevious="hasPrevious"
+                @previous="previousPage"
+                @next="nextPage"
             ></charges-pagination-links>
         </loading-card>
     </loading-view>
 </template>
 
 <script>
-import ChargesPaginationLinks from './ChargesPaginationLinks.vue';
-import money from '../utils/moneyFormat';
+import ChargesPaginationLinks from "./PaginationLinks.vue";
+import money from "../utils/moneyFormat";
 
 export default {
     components: {
-        'charges-pagination-links': ChargesPaginationLinks
+        "charges-pagination-links": ChargesPaginationLinks,
     },
     props: ['columns'],
     data() {
@@ -86,12 +86,16 @@ export default {
     computed: {
         hasPrevious() {
             return this.page > 1
+        },
+        statusClass(status) {
+            return this.statusClassList[status];
         }
     },
     methods: {
         moment: moment,
         listCharges(params) {
-            Nova.request().get('/nova-vendor/nova-stripe/stripe/charges', { params })
+            Nova.request()
+                .get("/nova-vendor/nova-stripe/stripe/charges", { params })
                 .then((response) => {
                     this.charges = response.data.charges.data
                     this.charges.length > 0 ? this.$emit('charge', this.charges[0]) : '';
@@ -101,34 +105,33 @@ export default {
                 })
         },
         nextPage() {
-            this.loading = true
+            this.loading = true;
 
-            this.listCharges({ 'starting_after': this.charges[this.charges.length - 1].id })
+            this.listCharges({
+                starting_after: this.charges[this.charges.length - 1].id,
+            });
 
-            this.page++
+            this.page++;
         },
         previousPage() {
-            this.loading = true
+            this.loading = true;
 
-            this.listCharges({ 'ending_before': this.charges[0].id })
+            this.listCharges({ ending_before: this.charges[0].id });
 
             if (this.hasPrevious) {
-                this.page--
+                this.page--;
             }
-        },
-        statusClass(status) {
-            return this.statusClassList[status];
         },
     },
     filters: {
         date(date) {
-            return moment.unix(date).format('YYYY/MM/DD h:mm:ss a')
+            return moment.unix(date).format("YYYY/MM/DD h:mm:ss a");
         },
 
-        money
+        money,
     },
     created() {
-        this.listCharges()
+        this.listCharges();
     },
-}
+};
 </script>

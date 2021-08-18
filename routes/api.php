@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Tighten\NovaStripe\Http\StripeBalanceController;
 use Tighten\NovaStripe\Http\StripeChargesController;
+use Tighten\NovaStripe\Http\StripeCustomersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::get('/stripe/charges', StripeChargesController::class . '@index');
 Route::get('/stripe/charges/{id}', StripeChargesController::class . '@show');
 Route::post('/stripe/charges/{id}/refund', StripeChargesController::class . '@refund');
 Route::get('/stripe/balance', StripeBalanceController::class . '@index');
+Route::get('/stripe/customers', StripeCustomersController::class . '@index');

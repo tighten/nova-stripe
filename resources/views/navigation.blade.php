@@ -14,3 +14,9 @@
         Stripe
     </span>
 </router-link>
+
+<router-link tag="h4" :to="{name: 'customer-list'}" class="cursor-pointer flex items-center font-normal dim text-white text-sm no-underline leading-tight mb-4 ml-8 text-sm">
+    <span class="sidebar-label">
+        Customers
+    </span>
+</router-link>
