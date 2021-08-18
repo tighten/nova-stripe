@@ -30,6 +30,12 @@ jobs:
             testbench: 6.*
             phpunit: 9.*
 
+    services:
+      stripemock:
+        image: stripemock/stripe-mock:latest
+        ports:
+          - 12111
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -54,6 +60,7 @@ jobs:
         run: vendor/bin/phpunit
         env:
           STRIPE_TEST_SECRET: "${{ secrets.STRIPE_SECRET }}"
+          STRIPE_API_BASE: "127.0.0.1:${{ job.services.stripemock.ports[12111] }}"
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
