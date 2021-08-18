@@ -3,6 +3,7 @@
     "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
     "keywords": [
         "tightenco",
+        "tighten",
         "laravel",
         "nova",
         "stripe"
@@ -12,6 +13,10 @@
         {
             "name": "Samantha Geitz",
             "email": "samantha@tighten.co"
+        },
+        {
+            "name": "Alison Kirk",
+            "email": "alison.kirk@tighten.co"
         }
     ],
     "repositories": [
