@@ -32,11 +32,11 @@
             :field="{ name: 'Default Source', value: customer.default_source }"
         ></detail-text-field>
         <detail-boolean-field
-            :field="{ name: 'Delinquent', value: customer.delinquent }"
+            :field="{ name: 'Delinquent', value: !customer.delinquent }"
         ></detail-boolean-field>
         <detail-text-field
             :field="{ name: 'Description', value: customer.description }"
-        ></detail-text-field>
+        ></detail-text-field>g
         <detail-text-field
             :field="{ name: 'Discount', value: customer.discount }"
         ></detail-text-field>

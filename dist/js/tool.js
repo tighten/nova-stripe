@@ -4208,7 +4208,9 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("detail-boolean-field", {
-        attrs: { field: { name: "Delinquent", value: _vm.customer.delinquent } }
+        attrs: {
+          field: { name: "Delinquent", value: !_vm.customer.delinquent }
+        }
       }),
       _vm._v(" "),
       _c("detail-text-field", {
@@ -4216,7 +4218,7 @@ var render = function() {
           field: { name: "Description", value: _vm.customer.description }
         }
       }),
-      _vm._v(" "),
+      _vm._v("g\n    "),
       _c("detail-text-field", {
         attrs: { field: { name: "Discount", value: _vm.customer.discount } }
       }),
