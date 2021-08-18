@@ -10,7 +10,7 @@ class StripeChargesController extends Controller
 {
     public function index()
     {
-        $charges = (new StripeClient)->listCharges(
+        $charges = (new StripeClient())->listCharges(
             request()->only('created', 'customer', 'ending_before', 'limit', 'source', 'starting_after', 'transfer_group')
         );
 
@@ -19,7 +19,7 @@ class StripeChargesController extends Controller
 
     public function show($id)
     {
-        return response()->json(['charge' => (new StripeClient)->getCharge($id)]);
+        return response()->json(['charge' => (new StripeClient())->getCharge($id)]);
     }
 
     public function refund($id)
