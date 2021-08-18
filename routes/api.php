@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Tighten\NovaStripe\Http\StripeBalanceController;
 use Tighten\NovaStripe\Http\StripeChargesController;
