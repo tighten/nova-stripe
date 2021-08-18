@@ -68,6 +68,8 @@
                 </tbody>
             </table>
 
+            <div v-else class="text-90">No customers</div>
+
             <customers-pagination-links
                 :resource="customers"
                 :hasMore="hasMore"
