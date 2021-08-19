@@ -36,7 +36,7 @@
         ></detail-boolean-field>
         <detail-text-field
             :field="{ name: 'Description', value: customer.description }"
-        ></detail-text-field>g
+        ></detail-text-field>
         <detail-text-field
             :field="{ name: 'Discount', value: customer.discount }"
         ></detail-text-field>
