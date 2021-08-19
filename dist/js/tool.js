@@ -4218,7 +4218,7 @@ var render = function() {
           field: { name: "Description", value: _vm.customer.description }
         }
       }),
-      _vm._v("g\n    "),
+      _vm._v(" "),
       _c("detail-text-field", {
         attrs: { field: { name: "Discount", value: _vm.customer.discount } }
       }),

@@ -23,6 +23,10 @@ class ToolServiceProvider extends ServiceProvider
             $this->routes();
         });
 
+        if ($stripeApiBase = config('services.stripe.api_base')) {
+            \Stripe\Stripe::$apiBase = $stripeApiBase;
+        }
+
         Nova::serving(function (ServingNova $event) {
             //
         });
