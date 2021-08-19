@@ -27,7 +27,6 @@ Add your Stripe key and secret values to your `.env` file:
 ```
 STRIPE_KEY=
 STRIPE_SECRET=
-STRIPE_API_BASE=
 ```
 
 * https://stripe.com/docs/keys#obtain-api-keys
@@ -38,7 +37,6 @@ Add a `stripe` element to your `config/services.php` configuration file:
 'stripe' => [
     'key' => env('STRIPE_KEY'),
     'secret' => env('STRIPE_SECRET'),
-    'api_base' => env('STRIPE_API_BASE'),
 ],
 ```
 
