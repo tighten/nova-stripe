@@ -46,13 +46,13 @@
                 </table>
             </div>
 
-            <charges-pagination-links
+            <ChargesPaginationLinks
                 :resource="charges"
                 :hasMore="hasMore"
                 :hasPrevious="hasPrevious"
                 @previous="previousPage"
                 @next="nextPage"
-            ></charges-pagination-links>
+            ></ChargesPaginationLinks>
         </loading-card>
     </loading-view>
 </template>
@@ -63,7 +63,7 @@ import money from "../utils/moneyFormat";
 
 export default {
     components: {
-        "charges-pagination-links": ChargesPaginationLinks,
+        "ChargesPaginationLinks": ChargesPaginationLinks,
     },
     props: ['columns'],
     data() {

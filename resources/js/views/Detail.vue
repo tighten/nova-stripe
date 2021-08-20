@@ -13,7 +13,7 @@
             </button>
         </div>
 
-        <charge-detail-card
+        <ChargeDetailCard
             ref="detail"
             :charge-id="chargeId"
             @charge-loaded="charge = $event"
@@ -27,7 +27,7 @@ import ChargeDetailCard from '../components/ChargeDetailCard.vue';
 export default {
     props: ['chargeId'],
     components: {
-        'charge-detail-card': ChargeDetailCard,
+        'ChargeDetailCard': ChargeDetailCard,
     },
     data() {
         return {
