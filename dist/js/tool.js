@@ -1621,11 +1621,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        'BalanceCard': __WEBPACK_IMPORTED_MODULE_0__components_BalanceCard_vue___default.a,
-        'ChargesTable': __WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue___default.a,
-        'ColumnSelect': __WEBPACK_IMPORTED_MODULE_2__components_ColumnSelect___default.a
-    },
+    components: { BalanceCard: __WEBPACK_IMPORTED_MODULE_0__components_BalanceCard_vue___default.a, ChargesTable: __WEBPACK_IMPORTED_MODULE_1__components_ChargesTable_vue___default.a, ColumnSelect: __WEBPACK_IMPORTED_MODULE_2__components_ColumnSelect___default.a },
     data: function data() {
         return {
             selectedColumns: ['id', 'amount', 'created', 'status'],
@@ -1958,9 +1954,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        "ChargesPaginationLinks": __WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue___default.a
-    },
+    components: { ChargesPaginationLinks: __WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue___default.a },
     props: ['columns'],
     data: function data() {
         return {
@@ -2684,9 +2678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['chargeId'],
-    components: {
-        'ChargeDetailCard': __WEBPACK_IMPORTED_MODULE_0__components_ChargeDetailCard_vue___default.a
-    },
+    components: { ChargeDetailCard: __WEBPACK_IMPORTED_MODULE_0__components_ChargeDetailCard_vue___default.a },
     data: function data() {
         return {
             charge: undefined,
@@ -3165,7 +3157,7 @@ exports = module.exports = __webpack_require__(31)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -3610,9 +3602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        "customers-pagination-links": __WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue___default.a
-    },
+    components: { CustomersPaginationLinks: __WEBPACK_IMPORTED_MODULE_0__PaginationLinks_vue___default.a },
 
     data: function data() {
         return {
@@ -3945,9 +3935,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        "customer-detail-card": __WEBPACK_IMPORTED_MODULE_0__components_CustomerDetailCard___default.a
-    },
+    components: { CustomerDetailCard: __WEBPACK_IMPORTED_MODULE_0__components_CustomerDetailCard___default.a },
     props: ["customerId"]
 });
 

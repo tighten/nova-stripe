@@ -62,9 +62,7 @@ import ChargesPaginationLinks from "./PaginationLinks.vue";
 import money from "../utils/moneyFormat";
 
 export default {
-    components: {
-        "ChargesPaginationLinks": ChargesPaginationLinks,
-    },
+    components: { ChargesPaginationLinks, },
     props: ['columns'],
     data() {
         return {

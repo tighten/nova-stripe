@@ -10,9 +10,7 @@
 import CustomerDetailCard from "../components/CustomerDetailCard";
 
 export default {
-    components: {
-        "customer-detail-card" : CustomerDetailCard
-    },
+    components: { CustomerDetailCard, },
     props: ["customerId"],
 };
 </script>

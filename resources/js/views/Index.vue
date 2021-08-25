@@ -17,21 +17,17 @@
 </template>
 
 <script>
-    import BalanceCard from '../components/BalanceCard.vue';
-    import ChargesTable from '../components/ChargesTable.vue';
-    import ColumnSelect from "../components/ColumnSelect";
+import BalanceCard from '../components/BalanceCard.vue';
+import ChargesTable from '../components/ChargesTable.vue';
+import ColumnSelect from "../components/ColumnSelect";
 
-    export default {
-        components: {
-            'BalanceCard': BalanceCard,
-            'ChargesTable': ChargesTable,
-            'ColumnSelect': ColumnSelect,
-        },
-        data() {
-            return {
-                selectedColumns: ['id', 'amount', 'created', 'status'],
-                singleCharge: {},
-            }
-        },
-    }
+export default {
+    components: { BalanceCard, ChargesTable, ColumnSelect, },
+    data() {
+        return {
+            selectedColumns: ['id', 'amount', 'created', 'status'],
+            singleCharge: {},
+        }
+    },
+}
 </script>
