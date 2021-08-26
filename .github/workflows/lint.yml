@@ -22,7 +22,9 @@ jobs:
                   coverage: none
 
             - name: Install dependencies
-              run: composer install --no-interaction --no-suggest --ignore-platform-reqs
+              run: |
+                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+                composer install --no-interaction --no-suggest --ignore-platform-reqs
 
             - name: PHPCS lint
               uses: chekalsky/phpcs-action@v1
@@ -47,7 +49,9 @@ jobs:
                   coverage: none
 
             - name: Install dependencies
-              run: composer install --no-interaction --no-suggest --ignore-platform-reqs
+              run: |
+                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+                composer install --no-interaction --no-suggest --ignore-platform-reqs
 
             - name: Tlint Lint
               run: vendor/bin/tlint

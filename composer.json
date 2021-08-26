@@ -34,7 +34,7 @@
         "laravel/nova": "*@dev",
         "orchestra/testbench": ">=3.6.x-dev",
         "phpunit/phpunit": "9.5.*",
-        "tightenco/duster": "^0.3.1"
+        "tightenco/duster": "^0.3.2"
     },
     "autoload": {
         "psr-4": {
