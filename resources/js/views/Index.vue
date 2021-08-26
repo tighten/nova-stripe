@@ -2,36 +2,32 @@
     <div>
         <heading class="mb-6">Stripe Dashboard</heading>
 
-        <balance-card />
+        <BalanceCard />
 
         <card>
-            <column-select
+            <ColumnSelect
                 v-model="selectedColumns"
                 :resource="singleCharge"
                 @checkedColumns="selectedColumns = $event"
             />
 
-            <charges-table @charge="singleCharge = $event" :columns="selectedColumns"/>
+            <ChargesTable @charge="singleCharge = $event" :columns="selectedColumns"/>
         </card>
     </div>
 </template>
 
 <script>
-    import BalanceCard from '../components/BalanceCard.vue';
-    import ChargesTable from '../components/ChargesTable.vue';
-    import ColumnSelect from "../components/ColumnSelect";
+import BalanceCard from '../components/BalanceCard.vue';
+import ChargesTable from '../components/ChargesTable.vue';
+import ColumnSelect from "../components/ColumnSelect";
 
-    export default {
-        components: {
-            'balance-card': BalanceCard,
-            'charges-table': ChargesTable,
-            'column-select': ColumnSelect,
-        },
-        data() {
-            return {
-                selectedColumns: ['id', 'amount', 'created', 'status'],
-                singleCharge: {},
-            }
-        },
-    }
+export default {
+    components: { BalanceCard, ChargesTable, ColumnSelect },
+    data() {
+        return {
+            selectedColumns: ['id', 'amount', 'created', 'status'],
+            singleCharge: {},
+        }
+    },
+}
 </script>
