@@ -57,7 +57,6 @@ class StripeClient
         try {
             return Customer::all($options, ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
-
         }
     }
 
@@ -66,7 +65,6 @@ class StripeClient
         try {
             return Refund::create(['charge' => $chargeId], ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
-
         }
     }
 
@@ -75,7 +73,6 @@ class StripeClient
         try {
             return Customer::retrieve($id, ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
-
         }
     }
 
@@ -84,7 +81,6 @@ class StripeClient
         try {
             return Charge::create($params, ['api_key' => $this->apiKey]);
         } catch (Exception $e) {
-
         }
     }
 }

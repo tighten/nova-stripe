@@ -3,7 +3,6 @@
 namespace Tighten\NovaStripe\Http;
 
 use Illuminate\Routing\Controller;
-use Stripe\Charge;
 use Tighten\NovaStripe\Clients\StripeClient;
 
 class StripeChargesController extends Controller
