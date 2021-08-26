@@ -22,7 +22,7 @@ import ChargesTable from '../components/ChargesTable.vue';
 import ColumnSelect from "../components/ColumnSelect";
 
 export default {
-    components: { BalanceCard, ChargesTable, ColumnSelect, },
+    components: { BalanceCard, ChargesTable, ColumnSelect },
     data() {
         return {
             selectedColumns: ['id', 'amount', 'created', 'status'],

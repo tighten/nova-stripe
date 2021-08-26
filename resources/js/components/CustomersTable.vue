@@ -86,7 +86,7 @@ import CustomersPaginationLinks from "./PaginationLinks.vue";
 import money from "../utils/moneyFormat";
 
 export default {
-    components: { CustomersPaginationLinks, },
+    components: { CustomersPaginationLinks },
 
     data() {
         return {

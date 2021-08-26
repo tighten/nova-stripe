@@ -10,6 +10,6 @@
 import CustomersTable from "../components/CustomersTable";
 
 export default {
-    components: { CustomersTable, },
+    components: { CustomersTable },
 };
 </script>

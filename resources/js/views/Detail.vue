@@ -26,7 +26,7 @@ import ChargeDetailCard from '../components/ChargeDetailCard.vue';
 
 export default {
     props: ['chargeId'],
-    components: { ChargeDetailCard, },
+    components: { ChargeDetailCard },
     data() {
         return {
             charge: undefined,
