@@ -13,23 +13,8 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 8.0
-                  extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-                  coverage: none
-
-            - name: Install dependencies
-              run: |
-                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
-                composer upgrade --no-interaction --no-suggest
-
             - name: PHPCS lint
               uses: chekalsky/phpcs-action@v1
-              with:
-                phpcs_bin_path: './vendor/bin/phpcs'
 
     tlint:
         name: TLint
