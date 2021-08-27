@@ -2,10 +2,10 @@
 
 namespace Tighten\NovaStripe;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
 use Tighten\NovaStripe\Http\Middleware\Authorize;
 
 class ToolServiceProvider extends ServiceProvider
@@ -17,7 +17,7 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova-stripe');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-stripe');
 
         $this->app->booted(function () {
             $this->routes();
@@ -41,7 +41,7 @@ class ToolServiceProvider extends ServiceProvider
 
         Route::middleware(['nova', Authorize::class])
                 ->prefix('nova-vendor/nova-stripe')
-                ->group(__DIR__.'/../routes/api.php');
+                ->group(__DIR__ . '/../routes/api.php');
     }
 
     /**

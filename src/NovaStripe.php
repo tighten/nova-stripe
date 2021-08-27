@@ -14,8 +14,8 @@ class NovaStripe extends Tool
      */
     public function boot()
     {
-        Nova::script('nova-stripe', __DIR__.'/../dist/js/tool.js');
-        Nova::style('nova-stripe', __DIR__.'/../dist/css/tool.css');
+        Nova::script('nova-stripe', __DIR__ . '/../dist/js/tool.js');
+        Nova::style('nova-stripe', __DIR__ . '/../dist/css/tool.css');
     }
 
     /**
