@@ -61,6 +61,14 @@ public function tools()
 
 ![Charge detail page](charges-detail.png)
 
+#### View Stripe customers dashboard
+
+![Customers index page](customers-index.png)
+
+#### View Stripe customers details
+
+![Customers detail page](customers-detail.png)
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
