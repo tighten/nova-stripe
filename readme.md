@@ -65,7 +65,7 @@ public function tools()
 
 ![Customers index page](customers-index.png)
 
-#### View Stripe customers details
+#### View Stripe customer details
 
 ![Customers detail page](customers-detail.png)
 
