@@ -10,20 +10,12 @@ class StripeChargeControllerTest extends TestCase
     use WithFaker;
 
     protected $stripe;
-    protected $charge;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->stripe = new StripeClient;
 
-        $this->charge = $this->findSuccessfulNonRefundedCharge()
-            ?: $this->stripe->createCharge([
-                'amount' => $this->faker->numberBetween(50, 1000),
-                'currency' => 'usd',
-                'source' => 'tok_mastercard',
-                'description' => $this->faker->sentence,
-            ]);
+        $this->stripe = new StripeClient;
     }
 
     /** @test */
@@ -35,7 +27,13 @@ class StripeChargeControllerTest extends TestCase
         $this->get('nova-vendor/nova-stripe/stripe/balance')
             ->assertSuccessful();
 
-        $this->get('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id)
+        $this->get('nova-vendor/nova-stripe/stripe/charges/' . 1)
+            ->assertSuccessful();
+
+        $this->get('nova-vendor/nova-stripe/stripe/customers')
+            ->assertSuccessful();
+
+        $this->get('nova-vendor/nova-stripe/stripe/customers/' . 1)
             ->assertSuccessful();
     }
 
@@ -43,78 +41,109 @@ class StripeChargeControllerTest extends TestCase
     public function it_returns_a_list_of_charges()
     {
         $this->get('nova-vendor/nova-stripe/stripe/charges')
-            ->assertJsonFragment(['description' => $this->charge->description])
-            ->assertJsonFragment(['amount' => $this->charge->amount]);
+            ->assertJsonStructure([
+                'charges' => [
+                    'data' => [
+                        '*' => [],
+                    ],
+                ],
+            ]);
     }
 
     /** @test */
     public function it_returns_charge_details()
     {
-        $response = $this->get('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id);
-        $stripeCharge = $this->stripe->getCharge($this->charge->id);
-
-        $response->assertJsonFragment([
-            'id' => $stripeCharge->id,
-            'amount' => $stripeCharge->amount,
-            'status' => $stripeCharge->status,
-            'created' => $stripeCharge->created,
-            'metadata' => $stripeCharge->metadata,
-            'livemode' => $stripeCharge->livemode,
-            'captured' => $stripeCharge->captured,
-            'paid' => $stripeCharge->paid,
-            'refunded' => $stripeCharge->refunded,
-            'dispute' => $stripeCharge->dispute,
-            'fraud_details' => $stripeCharge->fraud_details,
-            'transfer_group' => $stripeCharge->transfer_group,
+        $this->get('nova-vendor/nova-stripe/stripe/charges/' . 1)
+            ->assertJsonStructure([
+            'charge' => [
+                'id',
+                'amount',
+                'status',
+                'created',
+                'metadata',
+                'livemode',
+                'captured',
+                'paid',
+                'refunded',
+                'disputed',
+                'fraud_details',
+                'transfer_group',
+            ],
         ]);
-
-        $response->assertSee($stripeCharge->id)
-            ->assertSee($stripeCharge->amount)
-            ->assertSee($stripeCharge->status)
-            ->assertSee($stripeCharge->created)
-            ->assertSee($stripeCharge->livemode)
-            ->assertSee($stripeCharge->captured)
-            ->assertSee($stripeCharge->paid)
-            ->assertSee($stripeCharge->refunded)
-            ->assertSee($stripeCharge->dispute)
-            ->assertSee($stripeCharge->transfer_group);
     }
 
     /** @test */
     public function it_shows_the_current_balance()
     {
-        $balance = $this->stripe->getBalance();
-
         $this->get('nova-vendor/nova-stripe/stripe/balance')
-            ->assertJsonFragment([
-                'available' => $balance->available,
-                'pending' => $balance->pending,
+            ->assertJsonStructure([
+                'balance' => [
+                    'available' => [
+                        '*' => [
+                            'amount',
+                            'currency',
+                        ],
+                    ],
+                    'pending' => [
+                        '*' => [
+                            'amount',
+                            'currency',
+                        ],
+                    ],
+                ],
             ]);
     }
 
     /** @test */
     public function it_can_refund_a_charge_successfully()
     {
-        $this->post('nova-vendor/nova-stripe/stripe/charges/' . $this->charge->id . '/refund')
+        $this->post('nova-vendor/nova-stripe/stripe/charges/' . 1 . '/refund')
             ->assertSuccessful()
             ->assertJsonFragment([
-                'charge' => $this->charge->id,
                 'status' => 'succeeded',
             ]);
-
-        $this->assertTrue($this->stripe->getCharge($this->charge->id)->refunded);
     }
 
-    public function findSuccessfulNonRefundedCharge()
+    /** @test */
+    public function it_returns_a_list_of_customers()
     {
-        $charges = $this->stripe->listCharges();
+        $this->get('nova-vendor/nova-stripe/stripe/customers')
+            ->assertJsonStructure([
+                'customers' => [
+                    'data' => [
+                        '*' => [],
+                    ],
+                ],
+            ]);
+    }
 
-        foreach ($charges as $charge) {
-            if (! $charge->refunded && $charge->status === 'succeeded') {
-                return $charge;
-            }
-        }
-
-        return null;
+    /** @test */
+    public function it_returns_customer_details()
+    {
+        $this->get('nova-vendor/nova-stripe/stripe/customers/' . 1)
+            ->assertJsonStructure([
+                'customer' => [
+                    'id',
+                    'object',
+                    'address',
+                    'balance',
+                    'created',
+                    'currency',
+                    'default_source',
+                    'delinquent',
+                    'description',
+                    'discount',
+                    'email',
+                    'invoice_prefix',
+                    'livemode',
+                    'metadata',
+                    'name',
+                    'next_invoice_sequence',
+                    'phone',
+                    'preferred_locales',
+                    'shipping',
+                    'tax_exempt',
+                ],
+            ]);
     }
 }

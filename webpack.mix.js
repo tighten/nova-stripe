@@ -1,4 +1,11 @@
-let mix = require('laravel-mix')
+let mix = require('laravel-mix');
+require('./nova.mix');
 
-mix.js('resources/js/tool.js', 'dist/js')
-   .sass('resources/sass/tool.scss', 'dist/css')
+mix.setPublicPath('dist')
+    .copy('resources/lang/**/!(_lang.json)', 'dist/lang')
+    .js('resources/js/tool.js', 'js')
+    .vue({ version: 3 })
+    .postCss('resources/css/tool.css', '/css/', [
+        require("tailwindcss"),
+    ])
+    .nova('tightenco/nova-stripe');

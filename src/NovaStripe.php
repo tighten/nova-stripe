@@ -2,6 +2,9 @@
 
 namespace Tighten\NovaStripe;
 
+use Illuminate\Http\Request;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
@@ -16,15 +19,24 @@ class NovaStripe extends Tool
     {
         Nova::script('nova-stripe', __DIR__ . '/../dist/js/tool.js');
         Nova::style('nova-stripe', __DIR__ . '/../dist/css/tool.css');
+        Nova::translations(__DIR__ . '/../dist/lang/' . app()->getLocale() . '.json');
     }
 
     /**
-     * Build the view that renders the navigation links for the tool.
+     * Build the menu that renders the navigation links for the tool.
      *
-     * @return \Illuminate\View\View
+     * @param  \Illuminate\Http\Request $request
+     * @return mixed
      */
-    public function renderNavigation()
+    public function menu(Request $request)
     {
-        return view('nova-stripe::navigation');
+        return MenuSection::make(
+            'Nova Stripe',
+            [
+                MenuItem::make(__('Customers'), '/nova-stripe/customers'),
+            ],
+            'credit-card'
+        )
+            ->path('/nova-stripe');
     }
 }
