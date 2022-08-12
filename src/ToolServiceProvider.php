@@ -17,8 +17,6 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-stripe');
-
         $this->app->booted(function () {
             $this->routes();
         });
@@ -38,6 +36,9 @@ class ToolServiceProvider extends ServiceProvider
         if ($this->app->routesAreCached()) {
             return;
         }
+
+        Nova::router(['nova', Authorize::class], 'nova-stripe')
+            ->group(__DIR__ . '/../routes/inertia.php');
 
         Route::middleware(['nova', Authorize::class])
                 ->prefix('nova-vendor/nova-stripe')

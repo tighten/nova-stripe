@@ -28,9 +28,22 @@ Before submitting a pull request:
 
 To run the test suite locally: 
 
-- Run `cp .env.testing.example .env.testing` in the terminal
-- Update `.env.testing` with your Stripe **test** API keys
-- Run `vendor/bin/phpunit` in the terminal
+- Copy the test `env` file: 
+    ```
+      cp .env.testing.example .env.testing
+    ```
+- Start the stripe mock docker container:
+  ```
+    docker run -d --rm -it -p 12111-12112:12111-12112 --name nova-stripe-stripe-mock stripe/stripe-mock:v0.141.0
+  ```
+- Run tests:
+    ```
+    ./vendor/bin/phpunit
+    ```
+- When done testing your feature, be sure to stop the stripe mock container:
+  ```
+    docker stop nova-stripe-stripe-mock
+  ```
 
 ## Requirements
 

@@ -1,29 +1,27 @@
-Nova.booting((Vue, router) => {
-    Vue.config.devtools = true;
+import moneyFormat from './utils/moneyFormat.js'
 
-    router.addRoutes([
-        {
-            name: "nova-stripe",
-            path: "/nova-stripe",
-            component: require("./views/Index"),
+Nova.booting((Vue) => {
+    const files = require.context('./', true, /\.vue$/i)
+    files
+        .keys()
+        .map((key) =>
+            Vue.component(
+                key.split('/').pop().split('.')[0],
+                files(key).default
+            )
+        )
+
+    Vue.config.globalProperties.$filters = {
+        money(currency, value) {
+            return moneyFormat(currency, value)
         },
-        {
-            name: "charge-detail",
-            path: "/nova-stripe/charge/:chargeId",
-            component: require("./views/Detail"),
-            props: true,
+        date(value) {
+            return new Date(value * 1000).toLocaleString()
         },
-        {
-            name: "customer-list",
-            path: "/nova-stripe/customers",
-            component: require("./views/Customers"),
-            props: true,
-        },
-        {
-            name: "customer-detail",
-            path: "/nova-stripe/customers/:customerId",
-            component: require("./views/CustomerDetail"),
-            props: true,
-        },
-    ]);
-});
+    }
+
+    Nova.inertia('Tool', require('./pages/Tool').default)
+    Nova.inertia('Detail', require('./pages/Detail').default)
+    Nova.inertia('Customers', require('./pages/Customers').default)
+    Nova.inertia('CustomerDetail', require('./pages/CustomerDetail').default)
+})

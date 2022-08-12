@@ -5,10 +5,9 @@
 # Laravel Nova Stripe Dashboard
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tightenco/nova-stripe.svg?style=flat-square)](https://packagist.org/packages/tightenco/nova-stripe)
-[![Build Status](https://img.shields.io/travis/tightenco/nova-stripe/master.svg?style=flat-square)](https://travis-ci.org/tightenco/nova-stripe)
 [![Total Downloads](https://img.shields.io/packagist/dt/tightenco/nova-stripe.svg?style=flat-square)](https://packagist.org/packages/tightenco/nova-stripe)
 
-This package makes it easy to see high-level information about your application's [Stripe](https://stripe.com/) balance and charges in a Nova dashboard.
+This package makes it easy to see high-level information about your application's [Stripe](https://stripe.com/) balance, charges, and customers in a Nova dashboard.
 
 If you are interested in managing your users' Stripe subscriptions with [Laravel Cashier](https://github.com/laravel/cashier), check out [Nova Cashier Manager](https://novapackages.com/packages/themsaid/nova-cashier-manager) by [themsaid](https://github.com/themsaid).
 
@@ -60,6 +59,14 @@ public function tools()
 #### View Stripe charges details
 
 ![Charge detail page](charges-detail.png)
+
+#### View Stripe charges dashboard
+
+![Customers index page](customers-index.png)
+
+#### View Stripe charges details
+
+![Customer detail page](customers-detail.png)
 
 ## Contributing
 

@@ -26,12 +26,11 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
+        "php": "^8.0|^8.1",
         "stripe/stripe-php": ">=5.0"
     },
     "require-dev": {
-        "laravel/framework": ">=6.20.26",
-        "laravel/nova": "*@dev",
+        "laravel/nova": "^4.0",
         "orchestra/testbench": ">=3.6.x-dev",
         "phpunit/phpunit": "9.5.*",
         "tightenco/duster": "^0.3.2"
@@ -54,7 +53,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

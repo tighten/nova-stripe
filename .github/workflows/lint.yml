@@ -25,7 +25,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
                 composer upgrade --no-interaction --no-suggest
 
             - name: PHP-8 compatible PHPCS
@@ -50,7 +50,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
                 composer install --no-interaction --no-suggest
 
             - name: Tlint Lint
