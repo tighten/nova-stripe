@@ -24,9 +24,20 @@
                 value: $filters.date(charge.created),
             }"
         ></DetailTextField>
-        <DetailTextField
-            :field="{ name: __('Metadata'), value: charge.metadata }"
-        ></DetailTextField>
+        <DetailKeyValueField
+            v-if="!initialLoading && !!Object.keys(charge.metadata).length"
+            :field="{
+                name: __('Metadata'),
+                value: charge.metadata,
+            }"
+        ></DetailKeyValueField>
+        <DetailKeyValueField
+            v-if="!initialLoading && !!Object.keys(charge.outcome).length"
+            :field="{
+                name: __('Outcome'),
+                value: charge.outcome,
+            }"
+        ></DetailKeyValueField>
         <DetailBooleanField
             :field="{ name: __('Livemode'), value: charge.livemode }"
         ></DetailBooleanField>
@@ -39,12 +50,16 @@
         <DetailBooleanField
             :field="{ name: __('Refunded'), value: charge.refunded }"
         ></DetailBooleanField>
-        <DetailTextField
-            :field="{ name: __('Dispute'), value: charge.dispute }"
-        ></DetailTextField>
-        <DetailTextField
-            :field="{ name: __('Fraud Details'), value: charge.fraud_details }"
-        ></DetailTextField>
+        <DetailBooleanField
+            :field="{ name: __('Disputed'), value: charge.disputed }"
+        ></DetailBooleanField>
+        <DetailKeyValueField
+            v-if="!initialLoading && !!Object.keys(charge.fraud_details).length"
+            :field="{
+                name: __('Fraud Details'),
+                value: charge.fraud_details,
+            }"
+        ></DetailKeyValueField>
         <DetailTextField
             :field="{
                 name: __('Transfer Group'),
