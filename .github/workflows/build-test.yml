@@ -3,12 +3,14 @@ name: Run Tests
 on:
   push:
     branches: [ main ]
-  pull_request:
+  pull_request_target:
+    types: [ labeled ]
 
 jobs:
   test:
     name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe to test')
 
     strategy:
       max-parallel: 1
