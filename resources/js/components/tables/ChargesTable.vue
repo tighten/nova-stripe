@@ -87,10 +87,10 @@ export default {
             ],
             dateColumns: ['created'],
             statusClassList: {
-                succeeded: 'bg-green-100 text-green-600',
-                pending: 'bg-gray-100 text-gray-600',
-                disputed: 'bg-orange-100 text-orange-600',
-                failed: 'bg-red-100 text-red-600',
+                succeeded: 'ns-bg-green-100 ns-text-green-600',
+                pending: 'ns-bg-gray-100 ns-text-gray-600',
+                disputed: 'ns-bg-orange-100 ns-text-orange-600',
+                failed: 'ns-bg-red-100 ns-text-red-600',
             },
             page: 1,
         }
