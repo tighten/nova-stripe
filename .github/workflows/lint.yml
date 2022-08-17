@@ -1,62 +1,56 @@
 name: Lint
 
 on:
-    push:
-        branches: [ main ]
-    pull_request_target:
-      types: [ labeled ]
+  push:
+    branches: [main]
+  pull_request_target:
+    types: [labeled]
 
 jobs:
-    phpcs:
-        name: PHPCS
+  phpcs:
+    name: PHPCS
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe to test')
+    continue-on-error: false
 
-        continue-on-error: false
+    steps:
+      - uses: actions/checkout@v3
 
-        runs-on: ubuntu-latest
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: 8.0
+            extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+            coverage: none
 
-        if: contains(github.event.pull_request.labels.*.name, 'safe to test')
+      - name: Install dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
+          composer upgrade --no-interaction --no-suggest
 
-        steps:
-            - uses: actions/checkout@v2
+      - name: PHP-8 compatible PHPCS
+        run: vendor/bin/phpcs
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 8.0
-                  extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-                  coverage: none
+  tlint:
+    name: TLint
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe to test')
+    continue-on-error: false
 
-            - name: Install dependencies
-              run: |
-                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
-                composer upgrade --no-interaction --no-suggest
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: PHP-8 compatible PHPCS
-              run: vendor/bin/phpcs
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: 8.0
+            extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+            coverage: none
 
-    tlint:
-        name: TLint
+      - name: Install dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
+          composer install --no-interaction --no-suggest
 
-        continue-on-error: false
-
-        runs-on: ubuntu-latest
-
-        if: contains(github.event.pull_request.labels.*.name, 'safe to test')
-
-        steps:
-            - uses: actions/checkout@v1
-
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 8.0
-                  extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-                  coverage: none
-
-            - name: Install dependencies
-              run: |
-                composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
-                composer install --no-interaction --no-suggest
-
-            - name: Tlint Lint
-              run: vendor/bin/tlint
+      - name: Tlint Lint
+        run: vendor/bin/tlint

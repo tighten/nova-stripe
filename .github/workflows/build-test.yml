@@ -2,9 +2,9 @@ name: Run Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request_target:
-    types: [ labeled ]
+    types: [labeled]
 
 jobs:
   test:
@@ -15,8 +15,8 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        php: [ 8.0, 8.1 ]
-        laravel: [ 8.*, 9.* ]
+        php: [8.0, 8.1]
+        laravel: [8.*, 9.*]
         include:
           - php: 8.0
             laravel: 8.*
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
