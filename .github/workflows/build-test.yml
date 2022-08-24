@@ -36,6 +36,9 @@ jobs:
             laravel: 9.*
             testbench: 7.*
             phpunit: 9.*
+        exclude:
+          - php: 7.4
+            laravel: 9.*
     services:
       stripemock:
         image: stripe/stripe-mock:v0.141.0
