@@ -1,5 +1,5 @@
 <template>
-    <LoadingCard :loading="initialLoading" class="mb-6 px-6">
+    <LoadingCard :loading="initialLoading" class="ns-mb-6 ns-px-6">
         <DetailTextField
             :field="{ name: __('ID'), value: charge.id }"
         ></DetailTextField>

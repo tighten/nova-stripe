@@ -1,5 +1,5 @@
 <template>
-    <LoadingCard :loading="initialLoading" class="mb-6 px-6">
+    <LoadingCard :loading="initialLoading" class="ns-mb-6 ns-px-6">
         <DetailTextField
             :field="{ name: __('ID'), value: customer.id }"
         ></DetailTextField>
@@ -117,7 +117,7 @@ export default {
         formatAddress(address) {
             return address?.line1
                 ? `${address.line1}
-                    ${address.line2} 
+                    ${address.line2}
                     ${address.city},
                     ${address.state}
                     ${address.postal_code}`

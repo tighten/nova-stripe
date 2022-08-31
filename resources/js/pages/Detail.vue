@@ -3,7 +3,7 @@
         :meta="{ title: 'Charge Details' }"
         heading="Charge Details"
     >
-        <div class="flex flex-row-reverse mb-3">
+        <div class="flex ns-flex-row-reverse mb-3">
             <button
                 v-if="
                     charge && !charge.refunded && charge.status === 'succeeded'
