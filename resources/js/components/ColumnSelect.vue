@@ -12,15 +12,15 @@
             <template #menu>
                 <DropdownMenu
                     style="width: 100%; columns: 25vw 3"
-                    class="p-3 text-90"
+                    class="ns-p-3 ns-text-90"
                 >
                     <div
                         v-if="resource"
                         v-for="(value, key) in resource"
-                        class="m-2"
+                        class="ns-m-2"
                     >
                         <input
-                            class="mr-2"
+                            class="ns-mr-2"
                             type="checkbox"
                             :id="key"
                             :value="key"
