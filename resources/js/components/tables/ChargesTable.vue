@@ -1,5 +1,45 @@
 <template>
     <div>
+        <FilterRow>
+            <FilterDropdown
+                button-text="Status"
+                filter-name="status"
+                :values="[
+                        {
+                            label: 'Succeeded',
+                            value: 'succeeded'
+                        },
+                        {
+                            label: 'Failed',
+                            value: 'failed'
+                        },
+                    ]"
+                @ns-filter-updated="filter($event)"
+            />
+
+            <FilterDropdown
+                button-text="Refunded"
+                filter-name="refunded"
+                :values="[
+                        {
+                            label: 'True',
+                            value: 'true'
+                        },
+                        {
+                            label: 'All',
+                            value: null,
+                        },
+                    ]"
+                @ns-filter-updated="filter($event)"
+            />
+
+            <ColumnSelect
+                v-model="selectedColumns"
+                :resource="singleCharge"
+                @checkedColumns="selectedColumns = $event"
+            />
+        </FilterRow>
+
         <BaseTable
             :data="charges"
             model-name="charges"
@@ -12,7 +52,7 @@
             <thead class="bg-gray-50 dark:bg-gray-800">
                 <tr>
                     <!-- Id, Amount, Created date, Status-->
-                    <HeaderCell v-if="columns" v-for="column in columns">
+                    <HeaderCell v-if="selectedColumns" v-for="column in selectedColumns">
                         {{ __(column.replaceAll('_', ' ')) }}
                     </HeaderCell>
                     <HeaderCell>&nbsp;<!-- View --></HeaderCell>
@@ -20,7 +60,7 @@
             </thead>
             <tbody>
                 <tr class="group" v-for="charge in charges">
-                    <BodyCell v-for="column in columns">
+                    <BodyCell v-for="column in selectedColumns">
                         <span
                             v-if="
                                 moneyColumns.find(
@@ -68,12 +108,6 @@
 
 <script>
 export default {
-    props: {
-        columns: {
-            type: Array,
-            required: true,
-        },
-    },
     data() {
         return {
             charges: {},
@@ -93,6 +127,8 @@ export default {
                 failed: 'ns-bg-red-100 ns-text-red-600',
             },
             page: 1,
+            selectedColumns: ['id', 'amount', 'created', 'status'],
+            singleCharge: {},
         }
     },
     methods: {
@@ -103,10 +139,24 @@ export default {
                 .get('/nova-vendor/nova-stripe/stripe/charges', { params })
                 .then((response) => {
                     this.charges = response.data.charges.data
-                    this.charges.length > 0
-                        ? this.$emit('charge', this.charges[0])
+                    this.singleCharge = this.charges.length > 0
+                        ? this.charges[0]
                         : ''
                     this.hasMore = response.data.charges.has_more
+                    this.loading = false
+                })
+        },
+        filter(event) {
+            this.loading = true
+
+            Nova.request()
+                .post('/nova-vendor/nova-stripe/stripe/charges/search', {
+                    filterName: event.filterName,
+                    value: event.value,
+                })
+                .then((response) => {
+                    this.charges = response.data.data
+                    this.hasMore = response.data.has_more
                     this.loading = false
                 })
         },

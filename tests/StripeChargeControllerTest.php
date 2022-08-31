@@ -146,4 +146,38 @@ class StripeChargeControllerTest extends TestCase
                 ],
             ]);
     }
+
+    /** @test */
+    public function it_can_search_charges()
+    {
+        $this->post('nova-vendor/nova-stripe/stripe/charges/search', [
+                'filterName' => 'status',
+                'value' => 'succeeded',
+            ])
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'amount',
+                        'status',
+                        'created',
+                        'metadata',
+                        'livemode',
+                        'captured',
+                        'paid',
+                        'refunded',
+                        'disputed',
+                        'fraud_details',
+                        'transfer_group',
+                    ],
+                ],
+                'has_more',
+            ]);
+
+        $this->post('nova-vendor/nova-stripe/stripe/charges/search', [
+            'filterName' => 'refunded',
+            'value' => null,
+        ])
+            ->assertSuccessful();
+    }
 }
