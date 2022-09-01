@@ -29,14 +29,8 @@ class StripeChargesController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->value
-            ? [
-                'query' => "{$request->filterName}:'{$request->value}'",
-            ]
-            : [
-                'query' => $request->filterName . ':null',
-            ];
-
-        return response()->json((new StripeClient)->searchCharges($query));
+        return response()->json((new StripeClient)->searchCharges([
+            'query' => "{$request->filterName}:'{$request->value}'",
+        ]));
     }
 }

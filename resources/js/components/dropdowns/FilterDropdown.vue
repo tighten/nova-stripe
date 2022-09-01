@@ -4,6 +4,9 @@
             class="text-90 px-3 shadow rounded bg-gray-100 dark:bg-gray-800"
         >
             {{ __(buttonText) }}
+            <span v-if="selected.filterName === filterName" class="ns-capitalize">
+                : {{ selected.selectedValue }}
+            </span>
         </DropdownTrigger>
 
         <template #menu>
@@ -41,6 +44,7 @@ export default {
             required: true,
             type: Array,
         },
+        selected: Object,
     },
     data() {
         return {

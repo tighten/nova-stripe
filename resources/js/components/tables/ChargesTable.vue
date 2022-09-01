@@ -13,7 +13,12 @@
                             label: 'Failed',
                             value: 'failed'
                         },
+                        {
+                            label: 'All',
+                            value: null,
+                        },
                     ]"
+                :selected="selectedFilter"
                 @ns-filter-updated="filter($event)"
             />
 
@@ -30,6 +35,7 @@
                             value: null,
                         },
                     ]"
+                :selected="selectedFilter"
                 @ns-filter-updated="filter($event)"
             />
 
@@ -129,6 +135,7 @@ export default {
             page: 1,
             selectedColumns: ['id', 'amount', 'created', 'status'],
             singleCharge: {},
+            selectedFilter: {},
         }
     },
     methods: {
@@ -143,10 +150,15 @@ export default {
                         ? this.charges[0]
                         : ''
                     this.hasMore = response.data.charges.has_more
+                    this.selectedFilter = {}
                     this.loading = false
                 })
         },
         filter(event) {
+            if (! event.value) {
+                return this.listCharges()
+            }
+
             this.loading = true
 
             Nova.request()
@@ -158,6 +170,10 @@ export default {
                     this.charges = response.data.data
                     this.hasMore = response.data.has_more
                     this.loading = false
+                    this.selectedFilter = {
+                        filterName: event.filterName,
+                        selectedValue: event.value,
+                    }
                 })
         },
         nextPage() {
