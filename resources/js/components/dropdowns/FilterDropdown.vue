@@ -4,7 +4,10 @@
             class="text-90 px-3 shadow rounded bg-gray-100 dark:bg-gray-800"
         >
             {{ __(buttonText) }}
-            <span v-if="selected.filterName === filterName" class="ns-capitalize">
+            <span
+                v-if="selected.filterName === filterName"
+                class="ns-capitalize"
+            >
                 : {{ selected.selectedValue }}
             </span>
         </DropdownTrigger>
@@ -16,10 +19,12 @@
                         v-for="value in values"
                         as="button"
                         class="border-none ns-capitalize"
-                        @click.prevent="$emit('ns-filter-updated', {
-                            value: value.value,
-                            filterName: filterName,
-                        })"
+                        @click.prevent="
+                            $emit('ns-filter-updated', {
+                                value: value.value,
+                                filterName: filterName,
+                            })
+                        "
                     >
                         {{ __(value.label) }}
                     </DropdownMenuItem>

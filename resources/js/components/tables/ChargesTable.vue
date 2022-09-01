@@ -5,19 +5,19 @@
                 button-text="Status"
                 filter-name="status"
                 :values="[
-                        {
-                            label: 'Succeeded',
-                            value: 'succeeded'
-                        },
-                        {
-                            label: 'Failed',
-                            value: 'failed'
-                        },
-                        {
-                            label: 'All',
-                            value: null,
-                        },
-                    ]"
+                    {
+                        label: 'Succeeded',
+                        value: 'succeeded',
+                    },
+                    {
+                        label: 'Failed',
+                        value: 'failed',
+                    },
+                    {
+                        label: 'All',
+                        value: null,
+                    },
+                ]"
                 :selected="selectedFilter"
                 @ns-filter-updated="filter($event)"
             />
@@ -26,15 +26,15 @@
                 button-text="Refunded"
                 filter-name="refunded"
                 :values="[
-                        {
-                            label: 'True',
-                            value: 'true'
-                        },
-                        {
-                            label: 'All',
-                            value: null,
-                        },
-                    ]"
+                    {
+                        label: 'True',
+                        value: 'true',
+                    },
+                    {
+                        label: 'All',
+                        value: null,
+                    },
+                ]"
                 :selected="selectedFilter"
                 @ns-filter-updated="filter($event)"
             />
@@ -58,7 +58,10 @@
             <thead class="bg-gray-50 dark:bg-gray-800">
                 <tr>
                     <!-- Id, Amount, Created date, Status-->
-                    <HeaderCell v-if="selectedColumns" v-for="column in selectedColumns">
+                    <HeaderCell
+                        v-if="selectedColumns"
+                        v-for="column in selectedColumns"
+                    >
                         {{ __(column.replaceAll('_', ' ')) }}
                     </HeaderCell>
                     <HeaderCell>&nbsp;<!-- View --></HeaderCell>
@@ -146,16 +149,15 @@ export default {
                 .get('/nova-vendor/nova-stripe/stripe/charges', { params })
                 .then((response) => {
                     this.charges = response.data.charges.data
-                    this.singleCharge = this.charges.length > 0
-                        ? this.charges[0]
-                        : ''
+                    this.singleCharge =
+                        this.charges.length > 0 ? this.charges[0] : ''
                     this.hasMore = response.data.charges.has_more
                     this.selectedFilter = {}
                     this.loading = false
                 })
         },
         filter(event) {
-            if (! event.value) {
+            if (!event.value) {
                 return this.listCharges()
             }
 
