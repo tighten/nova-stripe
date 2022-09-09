@@ -32,5 +32,5 @@ Route::name('nova-stripe')->group(function () {
         return inertia('CustomerDetail', [
             'customerId' => $customerId,
         ]);
-    })->name('.customers');
+    })->name('.customers.show');
 });
