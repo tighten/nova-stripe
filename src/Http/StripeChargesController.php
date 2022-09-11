@@ -2,6 +2,7 @@
 
 namespace Tighten\NovaStripe\Http;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Tighten\NovaStripe\Clients\StripeClient;
 
@@ -24,5 +25,12 @@ class StripeChargesController extends Controller
     public function refund($id)
     {
         return response()->json((new StripeClient)->refundCharge($id));
+    }
+
+    public function search(Request $request)
+    {
+        return response()->json((new StripeClient)->searchCharges([
+            'query' => "{$request->filterName}:'{$request->value}'",
+        ]));
     }
 }

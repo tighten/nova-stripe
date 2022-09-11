@@ -83,4 +83,12 @@ class StripeClient
         } catch (Exception $e) {
         }
     }
+
+    public function searchCharges(array $params)
+    {
+        try {
+            return Charge::search($params, ['api_key' => $this->apiKey]);
+        } catch (Exception $e) {
+        }
+    }
 }
