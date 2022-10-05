@@ -61,6 +61,14 @@ public function tools()
 
 ![Charge detail page](charges-detail.png)
 
+#### View Stripe customers dashboard
+
+![Customers index page](customers-index.png)
+
+#### View Stripe customer details
+
+![Customers detail page](customers-detail.png)
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
@@ -72,6 +80,7 @@ If you discover any security related issues, please email hello@tighten.co inste
 ## Credits
 
 - [Samantha Geitz](https://github.com/samanthamichele7)
+- [Alison Kirk](https://github.com/faxblaster)
 - [All Contributors](https://github.com/tightenco/nova-stripe/graphs/contributors)
 
 ## Support us

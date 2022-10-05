@@ -9,6 +9,6 @@ class StripeBalanceController extends Controller
 {
     public function index()
     {
-        return response()->json(['balance' => (new StripeClient)->getBalance()]);
+        return response()->json(['balance' => (new StripeClient())->getBalance()]);
     }
 }

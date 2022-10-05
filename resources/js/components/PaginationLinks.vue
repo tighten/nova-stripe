@@ -1,6 +1,6 @@
 <template>
     <div class="bg-20 rounded-b">
-        <nav v-if="charges.length > 0" class="flex">
+        <nav v-if="resource.length > 0" class="flex">
             <!-- Previous Link -->
             <button
                     :disabled="!hasPrevious"
@@ -36,7 +36,7 @@
 
 <script>
     export default {
-        props: ['charges', 'hasMore', 'hasPrevious'],
+        props: ['resource', 'hasMore', 'hasPrevious'],
 
         methods: {
             /**

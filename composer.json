@@ -3,6 +3,7 @@
     "description": "A tool to create a quick Stripe dashboard in your Laravel Nova admin panels",
     "keywords": [
         "tightenco",
+        "tighten",
         "laravel",
         "nova",
         "stripe"
@@ -12,6 +13,10 @@
         {
             "name": "Samantha Geitz",
             "email": "samantha@tighten.co"
+        },
+        {
+            "name": "Alison Kirk",
+            "email": "alison.kirk@tighten.co"
         }
     ],
     "repositories": [
@@ -25,10 +30,11 @@
         "stripe/stripe-php": ">=5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "9.5.*",
-        "orchestra/testbench": ">=3.6.x-dev",
         "laravel/framework": ">=6.20.26",
-        "laravel/nova": "*@dev"
+        "laravel/nova": "<4",
+        "orchestra/testbench": ">=3.6.x-dev",
+        "phpunit/phpunit": "9.5.*",
+        "tightenco/duster": "^0.3.2"
     },
     "autoload": {
         "psr-4": {
@@ -48,7 +54,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
