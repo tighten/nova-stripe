@@ -53,7 +53,7 @@
                     <BodyCell>
                         <span>
                             <InertiaLink
-                                :href="`/nova/nova-stripe/charges/${charge.id}`"
+                                :href="`${novaPath}/nova-stripe/charges/${charge.id}`"
                                 :aria-label="__('View')"
                             >
                                 <HeroiconsOutlineEye />
@@ -93,6 +93,7 @@ export default {
                 failed: 'ns-bg-red-100 ns-text-red-600',
             },
             page: 1,
+            novaPath: Nova.config('path'),
         }
     },
     methods: {
