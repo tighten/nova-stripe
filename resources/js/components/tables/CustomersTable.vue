@@ -44,7 +44,7 @@
                     <BodyCell>
                         <span>
                             <InertiaLink
-                                :href="`/nova/nova-stripe/customers/${customer.id}`"
+                                :href="`${novaPath}/nova-stripe/customers/${customer.id}`"
                                 :aria-label="__('View')"
                             >
                                 <HeroiconsOutlineEye />
@@ -65,6 +65,7 @@ export default {
             loading: false,
             hasMore: false,
             page: 1,
+            novaPath: Nova.config('path'),
         }
     },
     methods: {

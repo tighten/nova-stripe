@@ -22,7 +22,9 @@ class ToolServiceProvider extends ServiceProvider
         });
 
         Nova::serving(function (ServingNova $event) {
-            //
+            Nova::provideToScript([
+                'path' => config('nova.path'),
+            ]);
         });
     }
 
