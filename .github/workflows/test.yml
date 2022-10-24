@@ -73,15 +73,3 @@ jobs:
         env:
           STRIPE_TEST_SECRET: "${{ secrets.STRIPE_SECRET }}"
           STRIPE_API_BASE: "127.0.0.1:${{ job.services.stripemock.ports[12111] }}"
-
-      - name: Send Slack notification
-        uses: 8398a7/action-slack@v3
-        if: failure()
-        with:
-          status: ${{ job.status }}
-          author_name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
-          fields: repo,message,commit,author,eventName,workflow
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
