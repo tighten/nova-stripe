@@ -65,7 +65,7 @@ export default {
             loading: false,
             hasMore: false,
             page: 1,
-            novaPath: Nova.config('path'),
+            novaPath: Nova.config('path').replace(/\/$/, ''),
         }
     },
     methods: {
