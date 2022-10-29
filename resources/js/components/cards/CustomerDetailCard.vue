@@ -49,7 +49,7 @@
             }"
         ></DetailTextField>
         <DetailBooleanField
-            :field="{ name: __('Delinquent'), value: !customer.delinquent }"
+            :field="{ name: __('Delinquent'), value: customer.delinquent }"
         ></DetailBooleanField>
         <DetailTextField
             :field="{ name: __('Description'), value: customer.description }"
@@ -66,9 +66,13 @@
         <DetailBooleanField
             :field="{ name: __('Livemode'), value: customer.livemode }"
         ></DetailBooleanField>
-        <DetailTextField
-            :field="{ name: __('Metadata'), value: customer.metadata }"
-        ></DetailTextField>
+        <DetailKeyValueField
+            v-if="!initialLoading && !!Object.keys(customer.metadata).length"
+            :field="{
+                name: __('Metadata'),
+                value: customer.metadata,
+            }"
+        ></DetailKeyValueField>
         <DetailTextField
             :field="{
                 name: __('Next Invoice Sequence'),
