@@ -9,6 +9,16 @@ class StripeBalanceController extends Controller
 {
     public function index()
     {
-        return response()->json(['balance' => (new StripeClient())->getBalance()]);
+        $balance = (new StripeClient)->getBalance();
+        $values = ['available', 'pending'];
+        $currency = config('nova.currency');
+
+        foreach ($values as $value) {
+            $balance->{$value} = collect($balance->{$value})->filter(function ($x) use($currency) {
+                return $x->__debugInfo()['currency'] === $currency;
+            })->toArray();
+        }
+
+        return response()->json(['balance' => $balance]);
     }
 }
