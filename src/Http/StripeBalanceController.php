@@ -14,8 +14,8 @@ class StripeBalanceController extends Controller
         $currency = config('nova.currency');
 
         foreach ($values as $value) {
-            $balance->{$value} = collect($balance->{$value})->filter(function ($x) use($currency) {
-                return $x->__debugInfo()['currency'] === $currency;
+            $balance->{$value} = collect($balance->{$value})->filter(function ($x) use ($currency) {
+                return $x['currency'] === strtolower($currency);
             })->toArray();
         }
 
