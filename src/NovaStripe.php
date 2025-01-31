@@ -7,36 +7,32 @@ use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
+use Tighten\NovaStripe\Resources\Charge;
+use Tighten\NovaStripe\Resources\Customer;
+use Tighten\NovaStripe\Resources\Product;
+use Tighten\NovaStripe\Resources\Subscription;
 
 class NovaStripe extends Tool
 {
-    /**
-     * Perform any tasks that need to happen when the tool is booted.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        Nova::script('nova-stripe', __DIR__ . '/../dist/js/tool.js');
-        Nova::style('nova-stripe', __DIR__ . '/../dist/css/tool.css');
-        Nova::translations(__DIR__ . '/../dist/lang/' . app()->getLocale() . '.json');
+        Nova::script('nova-stripe', __DIR__ . '/../resources/js/index.js');
+
+        Nova::resources([
+            Customer::class,
+            Product::class,
+            Charge::class,
+            Subscription::class,
+        ]);
     }
 
-    /**
-     * Build the menu that renders the navigation links for the tool.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return mixed
-     */
-    public function menu(Request $request)
+    public function menu(Request $request): MenuSection
     {
-        return MenuSection::make(
-            'Nova Stripe',
-            [
-                MenuItem::make(__('Customers'), '/nova-stripe/customers'),
-            ],
-            'credit-card'
-        )
-            ->path('/nova-stripe');
+        return MenuSection::make('Stripe', [
+            MenuItem::make('Products', '/resources/stripe-products'),
+            MenuItem::make('Customers', '/resources/stripe-customers'),
+            MenuItem::make('Charges', '/resources/stripe-charges'),
+            MenuItem::make('Subscriptions', '/resources/stripe-subscriptions'),
+        ], 'credit-card');
     }
 }

@@ -2,31 +2,11 @@
 
 namespace Tighten\NovaStripe\Tests;
 
-use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Illuminate\Support\Facades\Route;
-use Orchestra\Testbench\TestCase as Orchestra;
-use Stripe\Stripe;
 use Tighten\NovaStripe\ToolServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
-abstract class TestCase extends Orchestra
+class TestCase extends Orchestra
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Route::middlewareGroup('nova', []);
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        $app->useEnvironmentPath(__DIR__ . '/..');
-        $app->bootstrapWith([LoadEnvironmentVariables::class]);
-        $app->config->set('services.stripe.secret', getenv('STRIPE_TEST_SECRET'));
-        Stripe::$apiBase = getenv('STRIPE_API_BASE');
-
-        parent::getEnvironmentSetUp($app);
-    }
-
     protected function getPackageProviders($app)
     {
         return [
