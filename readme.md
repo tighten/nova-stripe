@@ -1,5 +1,4 @@
 
-
 ![Nova-Stripe Logo](https://raw.githubusercontent.com/tightenco/nova-stripe/master/nova-stripe-banner.png)
 
 # Laravel Nova Stripe Dashboard
@@ -52,21 +51,25 @@ public function tools()
 
 ## Features
 
-#### View Stripe charges dashboard
+#### Products
 
-![Dashboard index page](charges-index.png)
+![products](screenshots/products-index.png)
+![products](screenshots/products-details.png)
 
-#### View Stripe charges details
+#### Charges
 
-![Charge detail page](charges-detail.png)
+![charges](screenshots/charges-index.png)
+![charges](screenshots/charges-details.png)
 
-#### View Stripe charges dashboard
+#### Customers
 
-![Customers index page](customers-index.png)
+![customers](screenshots/customers-index.png)
+![customers](screenshots/customers-details.png)
 
-#### View Stripe charges details
+#### Subscriptions
 
-![Customer detail page](customers-detail.png)
+![subscriptions](screenshots/subscriptions-index.png)
+![subscriptions](screenshots/subscriptions-details.png)
 
 ## Contributing
 
@@ -78,8 +81,6 @@ If you discover any security related issues, please email hello@tighten.co inste
 
 ## Credits
 
-- [Samantha Geitz](https://github.com/samanthamichele7)
-- [Alison Kirk](https://github.com/faxblaster)
 - [All Contributors](https://github.com/tightenco/nova-stripe/graphs/contributors)
 
 ## Support us
