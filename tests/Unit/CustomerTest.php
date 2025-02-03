@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Carbon;
+use Stripe\Service\CustomerService;
 use Tighten\NovaStripe\Models\Customer;
 use Tighten\NovaStripe\Services\StripeClientService;
-use Stripe\Service\CustomerService;
 
 beforeEach(function (): void {
     $this->mockStripeClientService = Mockery::mock(StripeClientService::class);

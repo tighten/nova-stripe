@@ -2,8 +2,8 @@
 
 namespace Tighten\NovaStripe\Tests;
 
-use Tighten\NovaStripe\ToolServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Tighten\NovaStripe\ToolServiceProvider;
 
 class TestCase extends Orchestra
 {
