@@ -37,16 +37,20 @@ class Product extends BaseResource
             Text::make('Price')
                 ->sortable()
                 ->displayUsing(function () {
+                    if (empty($this->default_price['unit_amount']) || empty($this->default_price['currency'])) {
+                        return;
+                    }
+
                     $currency = Str::upper($this->default_price['currency']) ?? '';
 
                     return $currency . ' ' . number_format($this->default_price['unit_amount'] / 100, 2);
                 }),
 
             Text::make('Type')
-                ->displayUsing(fn () => Str::of($this->default_price['type'])->replace('_', ' ')->title()),
+                ->displayUsing(fn () => empty($this->default_price['type']) ? null : Str::of($this->default_price['type'])->replace('_', ' ')->title()),
 
             Text::make('Recurring Period')
-                ->displayUsing(fn () => Str::of(data_get($this->default_price, 'recurring.interval', '-'))->title()),
+                ->displayUsing(fn () => empty($this->default_price['recurring']['interval']) ? null : Str::of(data_get($this->default_price, 'recurring.interval', '-'))->title()),
 
             Boolean::make('Active')->filterable(),
 
