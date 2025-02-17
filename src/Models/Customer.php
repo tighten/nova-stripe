@@ -38,6 +38,7 @@ class Customer extends BaseModel
         'address' => 'json',
         'created' => 'datetime',
         'synced_at' => 'datetime',
+        'livemode' => 'boolean',
     ];
 
     public function charges()

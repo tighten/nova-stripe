@@ -60,7 +60,7 @@ abstract class BaseModel extends Model
     protected function stripeLink(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, array $attributes): string => 'https://dashboard.stripe.com/' . $this->service . '/' . $attributes['id'],
+            get: fn ($value, array $attributes): string => 'https://dashboard.stripe.com/' . ($attributes['livemode'] ? '' : 'test/') . $this->service . '/' . $attributes['id'],
         );
     }
 

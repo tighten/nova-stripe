@@ -22,6 +22,7 @@ beforeEach(function (): void {
             'customer' => 'cus_123',
             'payment_intent' => 'pi_123',
             'transfer_data' => ['foo' => 'bar'],
+            'livemode' => true,
         ],
         (object) [
             'id' => 'ch_2',
@@ -34,6 +35,7 @@ beforeEach(function (): void {
             'customer' => 'cus_456',
             'payment_intent' => 'pi_456',
             'transfer_data' => ['foo' => 'bar'],
+            'livemode' => false,
         ],
     ]));
 
@@ -85,6 +87,9 @@ it('queries correctly after sync operation', function (): void {
 it('builds correct stripe link attribute', function (): void {
     $this->model->sync();
 
-    $item = $this->model->where('amount', 500)->first();
-    expect($item->stripe_link)->toBe('https://dashboard.stripe.com/payments/pi_456');
+    $item = $this->model->where('id', 'ch_1')->first();
+    expect($item->stripe_link)->toBe('https://dashboard.stripe.com/payments/pi_123');
+
+    $item = $this->model->where('id', 'ch_2')->first();
+    expect($item->stripe_link)->toBe('https://dashboard.stripe.com/test/payments/pi_456');
 });

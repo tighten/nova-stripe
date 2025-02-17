@@ -25,6 +25,7 @@ class Subscription extends BaseModel
         'created' => 'datetime',
         'current_period_start' => 'datetime',
         'current_period_end' => 'datetime',
+        'livemode' => 'boolean',
         'currency' => 'string',
         'metadata' => 'json',
         'status' => 'string',
@@ -51,6 +52,7 @@ class Subscription extends BaseModel
         'default_payment_method' => 'json',
         'items' => 'json',
         'synced_at' => 'datetime',
+        'livemode' => 'boolean',
     ];
 
     public function customer(): BelongsTo

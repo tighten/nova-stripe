@@ -77,6 +77,8 @@ class Charge extends BaseResource
 
             KeyValue::make('Metadata')->rules('json'),
 
+            Boolean::make('Livemode')->hideFromIndex(),
+
             DateTime::make('Synced At')->hideFromIndex(),
 
             Panel::make('Receipt and Invoice', $this->receiptAndInvoiceFields()),
@@ -150,8 +152,6 @@ class Charge extends BaseResource
             Text::make('Failure Code')->hideFromIndex(),
 
             Text::make('Failure Message')->hideFromIndex(),
-
-            Boolean::make('Live Mode')->hideFromIndex(),
 
             Text::make('On Behalf Of')->hideFromIndex(),
 

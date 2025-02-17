@@ -79,6 +79,7 @@ class Charge extends BaseModel
         'transfer_data' => 'json',
         'created' => 'datetime',
         'synced_at' => 'datetime',
+        'livemode' => 'boolean',
     ];
 
     public function customer(): BelongsTo
@@ -89,7 +90,7 @@ class Charge extends BaseModel
     protected function stripeLink(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, array $attributes): string => 'https://dashboard.stripe.com/payments/' . $attributes['payment_intent'],
+            get: fn ($value, array $attributes): string => 'https://dashboard.stripe.com/' . ($attributes['livemode'] ? '' : 'test/') . 'payments/' . $attributes['payment_intent'],
         );
     }
 }

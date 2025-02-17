@@ -59,6 +59,8 @@ class Product extends BaseResource
                 ->asHtml()
                 ->hideFromIndex(),
 
+            Boolean::make('Livemode')->hideFromIndex(),
+
             DateTime::make('Synced At')->hideFromIndex(),
         ];
     }

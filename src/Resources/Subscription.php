@@ -3,14 +3,15 @@
 namespace Tighten\NovaStripe\Resources;
 
 use Illuminate\Support\Str;
-use Laravel\Nova\Fields\Badge;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Badge;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\BelongsTo;
 use Tighten\NovaStripe\Models\Product;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Subscription extends BaseResource
 {
@@ -70,6 +71,8 @@ class Subscription extends BaseResource
                 ->get()
                 ->map(fn ($product): string => '<a class="link-default" href="/nova/resources/stripe-products/' . $product->id . '">' . $product->name . '</a>')
                 ->join('<br>'))->asHtml()->hideFromIndex(),
+
+            Boolean::make('Livemode')->hideFromIndex(),
 
             Text::make('Details', 'stripeLink')
                 ->displayUsing(fn ($value): string => '<a href="' . $value . '" target="_blank" class="link-default">Open in Stripe Dashboard</a>')

@@ -19,6 +19,7 @@ beforeEach(function (): void {
                 'country' => 'US',
                 'city' => 'San Francisco',
             ],
+            'livemode' => true,
         ],
         (object) [
             'id' => 'cus_2',
@@ -28,6 +29,7 @@ beforeEach(function (): void {
                 'country' => 'US',
                 'city' => 'Chicago',
             ],
+            'livemode' => false,
         ],
     ]));
 
@@ -85,4 +87,7 @@ it('builds correct stripe link attribute', function (): void {
 
     $item = $this->model->find('cus_1');
     expect($item->stripe_link)->toBe('https://dashboard.stripe.com/customers/cus_1');
+
+    $item = $this->model->find('cus_2');
+    expect($item->stripe_link)->toBe('https://dashboard.stripe.com/test/customers/cus_2');
 });

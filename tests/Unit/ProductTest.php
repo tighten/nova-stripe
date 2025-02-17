@@ -24,6 +24,7 @@ beforeEach(function (): void {
                 'unit_amount' => 100,
                 'type' => 'recurring',
             ]),
+            'livemode' => true,
         ],
         (object) [
             'id' => 'prod_2',
@@ -38,6 +39,7 @@ beforeEach(function (): void {
                 'unit_amount' => 40,
                 'type' => 'one_time',
             ]),
+            'livemode' => false,
         ],
     ]));
 
@@ -102,6 +104,9 @@ it('builds correct stripe link attribute', function (): void {
 
     $item = $this->model->find('prod_1');
     expect($item->stripe_link)->toBe('https://dashboard.stripe.com/products/prod_1');
+
+    $item = $this->model->find('prod_2');
+    expect($item->stripe_link)->toBe('https://dashboard.stripe.com/test/products/prod_2');
 });
 
 function mockDefaultPrice($fields): object

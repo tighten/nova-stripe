@@ -23,6 +23,7 @@ class Product extends BaseModel
         'name' => 'string',
         'currency' => 'string',
         'active' => 'boolean',
+        'livemode' => 'boolean',
         'default_price' => 'json',
         'recurring' => 'json',
         'synced_at' => 'datetime',
@@ -33,5 +34,6 @@ class Product extends BaseModel
         'default_price' => 'json',
         'recurring' => 'json',
         'synced_at' => 'datetime',
+        'livemode' => 'boolean',
     ];
 }

@@ -21,6 +21,7 @@ beforeEach(function (): void {
                     ['price' => ['product' => 'prod_123']],
                 ],
             ],
+            'livemode' => true,
         ],
         (object) [
             'id' => 'sub_2',
@@ -32,6 +33,7 @@ beforeEach(function (): void {
                     ['price' => ['product' => 'prod_456']],
                 ],
             ],
+            'livemode' => false,
         ],
     ]));
 
@@ -91,4 +93,7 @@ it('builds correct stripe link attribute', function (): void {
 
     $item = $this->model->find('sub_1');
     expect($item->stripe_link)->toBe('https://dashboard.stripe.com/subscriptions/sub_1');
+
+    $item = $this->model->find('sub_2');
+    expect($item->stripe_link)->toBe('https://dashboard.stripe.com/test/subscriptions/sub_2');
 });
