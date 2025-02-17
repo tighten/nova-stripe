@@ -3,18 +3,9 @@
 namespace Tighten\NovaStripe\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Sushi\Sushi;
 
 class Customer extends BaseModel
 {
-    use Sushi;
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
-    protected $rows = [];
-
     protected $service = 'customers';
 
     protected $expand = ['data.default_source'];

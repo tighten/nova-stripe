@@ -4,18 +4,9 @@ namespace Tighten\NovaStripe\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Sushi\Sushi;
 
 class Charge extends BaseModel
 {
-    use Sushi;
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
-    protected $rows = [];
-
     protected $service = 'charges';
 
     protected $schema = [

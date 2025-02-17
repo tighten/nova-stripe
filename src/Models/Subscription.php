@@ -3,18 +3,9 @@
 namespace Tighten\NovaStripe\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Sushi\Sushi;
 
 class Subscription extends BaseModel
 {
-    use Sushi;
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
-    protected $rows = [];
-
     protected $service = 'subscriptions';
 
     protected $expand = ['data.default_payment_method'];

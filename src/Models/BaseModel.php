@@ -7,9 +7,24 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Tighten\NovaStripe\Services\StripeClientService;
+use Sushi\Sushi;
 
 abstract class BaseModel extends Model
 {
+    use Sushi;
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
+    protected $rows = [];
+
+    protected $schema = [];
+
+    protected $service = '';
+
+    protected $expand = [];
+
     protected $guarded = [];
 
     public function sync(): array
@@ -19,10 +34,9 @@ abstract class BaseModel extends Model
             'expand' => $this->expand ?? [],
         ]);
 
-        $records = [];
-        foreach ($items->autoPagingIterator() as $item) {
-            $records[] = $this->prepareForInsert($item);
-        }
+        $records = collect($items->autoPagingIterator())->map(function ($item) {
+            return $this->prepareForInsert($item);
+        })->toArray();
 
         $this->query()->delete();
         $this->insert($records);
@@ -34,21 +48,21 @@ abstract class BaseModel extends Model
     {
         $record = [];
 
-        foreach ($this->schema as $key => $value) {
-            $fieldValue = $item->{$key} ?? null;
+        foreach ($this->schema as $column => $type) {
+            $fieldValue = $item->{$column} ?? null;
 
-            if ($value === 'json') {
+            if ($type === 'json') {
                 if (is_object($fieldValue) && method_exists($fieldValue, 'toArray')) {
-                    $record[$key] = json_encode($fieldValue->toArray());
+                    $record[$column] = json_encode($fieldValue->toArray());
                 } elseif (is_array($fieldValue)) {
-                    $record[$key] = json_encode($fieldValue);
+                    $record[$column] = json_encode($fieldValue);
                 } else {
-                    $record[$key] = $fieldValue;
+                    $record[$column] = $fieldValue;
                 }
-            } elseif ($value === 'datetime') {
-                $record[$key] = $fieldValue ? Carbon::createFromTimestamp($fieldValue)->toDateTimeString() : null;
+            } elseif ($type === 'datetime') {
+                $record[$column] = $fieldValue ? Carbon::createFromTimestamp($fieldValue)->toDateTimeString() : null;
             } else {
-                $record[$key] = $key === 'customer_id' ? $item->customer : $fieldValue;
+                $record[$column] = $column === 'customer_id' ? $item->customer : $fieldValue;
             }
         }
 
