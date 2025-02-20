@@ -1,9 +1,12 @@
 <?php
 
 namespace Tighten\NovaStripe\Models;
+use Sushi\Sushi;
 
 class Product extends BaseModel
 {
+    use Sushi;
+
     protected $service = 'products';
 
     protected $expand = ['data.default_price'];
