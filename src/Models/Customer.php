@@ -47,6 +47,11 @@ class Customer extends BaseModel
         return Attribute::make(
             get: function ($value, array $attributes) {
                 $address = json_decode((string) $attributes['address'], true);
+
+                if (empty($address) || !is_array($address)) {
+                    return;
+                }
+
                 $address = array_map('trim', $address);
 
                 return $address['line1'] . ' ' .

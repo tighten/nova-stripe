@@ -35,6 +35,13 @@ beforeEach(function (): void {
             ],
             'livemode' => false,
         ],
+        (object) [
+            'id' => 'cus_3',
+            'created' => now()->timestamp,
+            'name' => 'Mr. Baz',
+            'address' => null,
+            'livemode' => false,
+        ],
     ]));
 
     $this->mockCustomerService->shouldReceive('all')
@@ -55,7 +62,7 @@ beforeEach(function (): void {
 it('performs sync operation', function (): void {
     $result = $this->model->sync();
 
-    expect($result)->toHaveCount(2);
+    expect($result)->toHaveCount(3);
 
     expect($result[0]['id'])->toBe('cus_1');
     expect($result[0]['name'])->toBe('Mr. Foo');
@@ -82,7 +89,7 @@ it('queries correctly after sync operation', function (): void {
     $this->model->sync();
 
     $items = $this->model->all();
-    expect($items)->toHaveCount(2);
+    expect($items)->toHaveCount(3);
 
     $item = $this->model->find('cus_1');
     expect($item->name)->toBe('Mr. Foo');
@@ -108,4 +115,7 @@ it('builds correct full address attribute', function (): void {
 
     $item = $this->model->find('cus_2');
     expect($item->full_address)->toBe('456 Fake St. Chicago, US 94016');
+
+    $item = $this->model->find('cus_3');
+    expect($item->full_address)->toBe(null);
 });
