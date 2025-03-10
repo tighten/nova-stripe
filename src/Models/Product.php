@@ -1,6 +1,7 @@
 <?php
 
 namespace Tighten\NovaStripe\Models;
+
 use Sushi\Sushi;
 
 class Product extends BaseModel

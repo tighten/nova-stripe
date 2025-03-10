@@ -3,15 +3,15 @@
 namespace Tighten\NovaStripe\Resources;
 
 use Illuminate\Support\Str;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Badge;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
-use Tighten\NovaStripe\Models\Product;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Tighten\NovaStripe\Models\Product;
 
 class Subscription extends BaseResource
 {

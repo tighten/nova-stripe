@@ -6,8 +6,8 @@ use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use Tighten\NovaStripe\Services\StripeClientService;
 use Sushi\Sushi;
+use Tighten\NovaStripe\Services\StripeClientService;
 
 abstract class BaseModel extends Model
 {

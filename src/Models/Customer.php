@@ -51,7 +51,7 @@ class Customer extends BaseModel
             get: function ($value, array $attributes) {
                 $address = json_decode((string) $attributes['address'], true);
 
-                if (empty($address) || !is_array($address)) {
+                if (empty($address) || ! is_array($address)) {
                     return;
                 }
 
@@ -59,7 +59,7 @@ class Customer extends BaseModel
 
                 return $address['line1'] . ' ' .
                     (empty($address['line2']) ? '' : $address['line2'] . ' ') .
-                    $address['city'] . ', ' .
+                    $address['city'] . ', ' . $address['state'] . ', ' .
                     $address['country'] . ' ' .
                     $address['postal_code'];
             }
