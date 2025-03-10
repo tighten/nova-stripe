@@ -57,9 +57,9 @@ class Customer extends BaseModel
 
                 $address = array_map('trim', $address);
 
-                return $address['line1'] . ' ' .
-                    (empty($address['line2']) ? '' : $address['line2'] . ' ') .
-                    $address['city'] . ', ' . $address['state'] . ', ' .
+                return $address['line1'] .
+                    (empty($address['line2']) ? '' : ' ' . $address['line2']) .
+                    ', ' . $address['city'] . ', ' . $address['state'] . ', ' .
                     $address['country'] . ' ' .
                     $address['postal_code'];
             }

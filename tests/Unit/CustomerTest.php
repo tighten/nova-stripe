@@ -115,10 +115,10 @@ it('builds correct full address attribute', function (): void {
     $this->model->sync();
 
     $item = $this->model->find('cus_1');
-    expect($item->full_address)->toBe('123 Fake St. San Francisco, CA, US 60007');
+    expect($item->full_address)->toBe('123 Fake St., San Francisco, CA, US 60007');
 
     $item = $this->model->find('cus_2');
-    expect($item->full_address)->toBe('456 Fake St. Chicago, IL, US 94016');
+    expect($item->full_address)->toBe('456 Fake St., Chicago, IL, US 94016');
 
     $item = $this->model->find('cus_3');
     expect($item->full_address)->toBe(null);
