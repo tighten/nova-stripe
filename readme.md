@@ -50,36 +50,35 @@ public function tools()
 ```
 
 ## What's New in Version 3
-
 #### 🛍️ Products and Subscriptions
-Previously, only **Charges** and **Customers** were supported. Now, two new resources are available: **Products** and **Subscriptions.**
+Previously, only **Charges** and **Customers** were supported. Now, two new resources are available: **Products** and **Subscriptions**.
 
 #### 🔄 Sync with Stripe
-Easily sync your Stripe data! Select one or more resources—**Products, Customers, Charges, and Subscriptions**—and let the tool fetch all records in batches of 100 until the sync is complete. You can choose to run the sync in the background or immediately.
+Select one or more resources—**Products, Customers, Charges, and Subscriptions**—and Nova Stripe will fetch all records in batches of 100 until the sync is complete. You can choose to run the sync in the background or immediately.
 
 #### 📃 Enhanced Pagination
-With all records synced, pagination works with your Nova settings. Choose from **25, 50, or 100 records per page**.
+Once all records are synced, pagination works with your Nova settings. Choose to show **25, 50, or 100 records per page**.
 
 #### 🔍 Search
-Quickly find what you need with built-in search for key fields like **ID, Name, and Email** in Customers.
+Quickly find what you need with built-in search for key fields like **ID, Name, Email**, and more.
 
 #### ↕️ Sorting
 Sort your data by column—**Charges by amount, Customers by email, and more**.
 
 #### 🎯 Filters
-Filter your data to focus on what matters, like **products** by active or inactive and **charges** by date.
+Filter your data to focus on what matters. Filter **Products** by active or inactive, **Charges** by date, and more.
 
 #### 📑 Improved List & Detail Views
-Your data is displayed just like in Stripe’s Dashboard—clear and easy to read (no raw JSON dumps!).
+Your data is displayed to emulate Stripe’s Dashboard—clear and easy to read (no raw JSON dumps!).
 
 #### 🔗 Relationships
-Seamlessly navigate between related records: view a **Customer’s Charges and Subscriptions** directly on their detail page, and jump from a **Charge to its associated Customer** with one click.
+Seamlessly navigate between related records: view a **Customer’s Charges and Subscriptions** directly on their detail page, and jump from a **Charge** to its associated **Customer** with one click.
 
 #### 🎨 White Label Friendly
 We keep branding flexible—**no "Nova" mentions** in the UI (the menu reads "Stripe" instead). Perfect for those who customize the dashboard for clients.
 
 #### 🚀 Welcome Dialog
-The first time you visit the tool, a welcome message explains how to use the **"Sync With Stripe"** action. Once you close it, we save a key in localStorage, so you won’t see it again.
+The first time a user visits the tool, a welcome message explains how to use the **"Sync With Stripe"** action. Upon closing, we save a key in localStorage so the user won’t see it again.
 
 ## Screenshots
 
