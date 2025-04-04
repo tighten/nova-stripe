@@ -1,0 +1,67 @@
+name: Run Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request_target:
+    types: [labeled]
+    branches: [main]
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe to test') || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'main')
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        php: [8.0, 8.1, 8.2, 8.3]
+        laravel: [8.*, 9.*, 10.*, 11.*]
+        exclude:
+          - php: 8.2
+            laravel: 8.*
+          - php: 8.2
+            laravel: 9.*
+          - php: 8.3
+            laravel: 8.*
+          - php: 8.3
+            laravel: 9.*
+          - php: 8.0
+            laravel: 10.*
+          - php: 8.0
+            laravel: 11.*
+          - php: 8.1
+            laravel: 11.*
+    services:
+      stripemock:
+        image: stripe/stripe-mock:v0.141.0
+        ports:
+          - 12111
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench" "phpunit/phpunit" --no-interaction --no-update
+          composer update --prefer-dist --no-interaction --no-progress --no-suggest
+
+      - name: Copy .env.example to .env
+        run: cp .env.testing.example .env.testing
+
+      - name: Run PHP tests
+        run: vendor/bin/phpunit
+        env:
+          STRIPE_TEST_SECRET: "${{ secrets.STRIPE_SECRET }}"
+          STRIPE_API_BASE: "127.0.0.1:${{ job.services.stripemock.ports[12111] }}"

@@ -1,5 +1,4 @@
 
-
 ![Nova-Stripe Logo](https://raw.githubusercontent.com/tightenco/nova-stripe/master/nova-stripe-banner.png)
 
 # Laravel Nova Stripe Dashboard
@@ -7,7 +6,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tightenco/nova-stripe.svg?style=flat-square)](https://packagist.org/packages/tightenco/nova-stripe)
 [![Total Downloads](https://img.shields.io/packagist/dt/tightenco/nova-stripe.svg?style=flat-square)](https://packagist.org/packages/tightenco/nova-stripe)
 
-This package makes it easy to see high-level information about your application's [Stripe](https://stripe.com/) balance, charges, and customers in a Nova dashboard.
+This package makes it easy to see high-level information about your application's [Stripe](https://stripe.com/) balance, charges, subscriptions and customers in a Nova dashboard.
 
 If you are interested in managing your users' Stripe subscriptions with [Laravel Cashier](https://github.com/laravel/cashier), check out [Nova Cashier Manager](https://novapackages.com/packages/themsaid/nova-cashier-manager) by [themsaid](https://github.com/themsaid).
 
@@ -50,23 +49,59 @@ public function tools()
 }
 ```
 
-## Features
+## What's New in Version 3
 
-#### View Stripe charges dashboard
+#### 🛍️ Products and Subscriptions
+Previously, only **Charges** and **Customers** were supported. Now, two new resources are available: **Products** and **Subscriptions.**
 
-![Dashboard index page](charges-index.png)
+#### 🔄 Sync with Stripe
+Easily sync your Stripe data! Select one or more resources—**Products, Customers, Charges, and Subscriptions**—and let the tool fetch all records in batches of 100 until the sync is complete. You can choose to run the sync in the background or immediately.
 
-#### View Stripe charges details
+#### 📃 Enhanced Pagination
+With all records synced, pagination works with your Nova settings. Choose from **25, 50, or 100 records per page**.
 
-![Charge detail page](charges-detail.png)
+#### 🔍 Search
+Quickly find what you need with built-in search for key fields like **ID, Name, and Email** in Customers.
 
-#### View Stripe charges dashboard
+#### ↕️ Sorting
+Sort your data by column—**Charges by amount, Customers by email, and more**.
 
-![Customers index page](customers-index.png)
+#### 🎯 Filters
+Filter your data to focus on what matters, like **products** by active or inactive and **charges** by date.
 
-#### View Stripe charges details
+#### 📑 Improved List & Detail Views
+Your data is displayed just like in Stripe’s Dashboard—clear and easy to read (no raw JSON dumps!).
 
-![Customer detail page](customers-detail.png)
+#### 🔗 Relationships
+Seamlessly navigate between related records: view a **Customer’s Charges and Subscriptions** directly on their detail page, and jump from a **Charge to its associated Customer** with one click.
+
+#### 🎨 White Label Friendly
+We keep branding flexible—**no "Nova" mentions** in the UI (the menu reads "Stripe" instead). Perfect for those who customize the dashboard for clients.
+
+#### 🚀 Welcome Dialog
+The first time you visit the tool, a welcome message explains how to use the **"Sync With Stripe"** action. Once you close it, we save a key in localStorage, so you won’t see it again.
+
+## Screenshots
+
+#### Products
+
+![products](screenshots/products-index.png)
+![products](screenshots/products-details.png)
+
+#### Charges
+
+![charges](screenshots/charges-index.png)
+![charges](screenshots/charges-details.png)
+
+#### Customers
+
+![customers](screenshots/customers-index.png)
+![customers](screenshots/customers-details.png)
+
+#### Subscriptions
+
+![subscriptions](screenshots/subscriptions-index.png)
+![subscriptions](screenshots/subscriptions-details.png)
 
 ## Contributing
 
@@ -78,8 +113,6 @@ If you discover any security related issues, please email hello@tighten.co inste
 
 ## Credits
 
-- [Samantha Geitz](https://github.com/samanthamichele7)
-- [Alison Kirk](https://github.com/faxblaster)
 - [All Contributors](https://github.com/tightenco/nova-stripe/graphs/contributors)
 
 ## Support us
