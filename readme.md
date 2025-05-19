@@ -102,6 +102,21 @@ The first time a user visits the tool, a welcome message explains how to use the
 ![subscriptions](screenshots/subscriptions-index.png)
 ![subscriptions](screenshots/subscriptions-details.png)
 
+## Laravel Vapor and Other Serverless Environments
+
+This package uses [Laravel Sushi](https://github.com/calebporzio/sushi) by [Caleb Porzio](https://github.com/calebporzio) to store Stripe data in SQLite databases, meaning it writes to the file system.
+
+In [Laravel Vapor](https://vapor.laravel.com/) and other environments where the file system isn’t available by default, Sushi falls back to using in-memory databases. To avoid this, [mount a persistent file system](https://docs.vapor.build/resources/storage#mounting-a-persistent-file-system) and create a Sushi configuration file to specify the storage path:
+
+```php
+// config/sushi.php
+<?php
+
+return [
+    'cache-path' => '/your/storage/path',
+];
+```
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
